@@ -1,0 +1,28 @@
+.btn-principal{
+width: 200px;
+height: 150px;
+margin: 30px;
+font-size: 18px;
+font-style: bold;
+background-color:#EB6296;
+color: white;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+
+
+a{
+    background-color:#EB6296;
+    color: white;
+    
+}
+
+.btn:hover{
+    background-color: #FF9BC2;
+    color: white;
+}
+
+

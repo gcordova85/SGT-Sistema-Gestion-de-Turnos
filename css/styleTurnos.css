@@ -1,0 +1,23 @@
+input:focus, input[type]:focus {
+    border-color: #a93957;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px #a93957;
+    outline: 0 none;
+}
+.btn-buscar{
+    background:#a93957;
+    color:#FFFFFF;
+    border: solid 1px;
+}
+.table{
+    margin: center;
+    background:#F1F0F0;
+    color:#0E0C0C;
+    border: solid 1px; 
+}
+
+.panel-loginhf{
+    color: white;
+    background:#a93957;
+    border-color: #FA58D0;
+    border: solid 1px;
+}

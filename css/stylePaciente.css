@@ -1,0 +1,18 @@
+#lblId, #lblEstado{
+    font-size: 20px;
+}
+#lblEstado{
+    text-align: right;
+}
+
+.btnModal{
+    background-color:#EB6296;
+    color: white;
+    font-style: bold;
+    
+}
+
+.oculto{
+    display: none;
+}
+

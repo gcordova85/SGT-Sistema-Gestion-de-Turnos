@@ -1,0 +1,59 @@
+.fondoLogin{
+
+    background-image: url(image/fondoLogin.jpg);
+    background-position: right bottom, left top;
+    background-size: cover;
+    padding: 100px;
+}
+
+.hLogin{
+    border: solid 2px;
+    background: #a93957; 
+    opacity:0.9;
+    color:white;
+
+}
+.btn-login{
+    background:#a93957;
+    color:#FFFFFF;
+    border: solid 1px;
+}
+.panel-loginBody{
+    background: #F8E0F7;
+}
+.panel-loginhf{
+    color: white;
+    background:#a93957;
+    border-color: #FA58D0;
+    border: solid 1px;
+}
+
+.login-header{
+    background: #EBCED3;
+}
+.contactoLogin{
+    background: white;
+    align-items: left;
+}
+.item {
+    width: 100%;
+    height: 270px;
+  }
+input:focus, input[type]:focus {
+      border-color: #a93957;
+      box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px #a93957;
+      outline: 0 none;
+  }
+
+.divError{
+    -webkit-boxshadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(14, 12, 12, 0.3);
+    display: none;
+    font-size: 12px;
+    margin-top: -50px;
+    margin-left: 350px;
+    padding: 10px;
+    position: absolute;
+}
