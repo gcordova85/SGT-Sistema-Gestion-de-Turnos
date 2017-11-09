@@ -1,25 +1,20 @@
 "use strict";
 
 $(document).ready(function(){
-validarNom();
+/*validarNom();
 validarApe();
 validarDni();
 validarDir();
-validarTel();
+validarTel();*/
+validarCampos();
 
-validarNomEmer();
-validarApeEmer();
-validarDniEmer();
-validarDirEmer();
-validarTelEmer();
+mostrarOcultarPaciente();
 
-validarNomPersona();
-validarApePersona();
-validarDniPersona();
-validarDirPersona();
-validarTelPersona();
+removerErroresTodos();
 
-$('#grid').DataTable();
+ocultarMsjError();
+
+$('#tablaTurnos').DataTable();    
 })
 
 
@@ -41,7 +36,7 @@ function esValidoNomApe(valor,texto,div) {
             if (div.hasClass("has-error")) {
                 div.removeClass("has-error");       
             }  
-            texto.fadeOut(700); 
+            //texto.fadeOut(700); 
             return true;            
             }                    
         }
@@ -90,10 +85,90 @@ function esValidoTel(valor,texto,div){
         }                    
 }
 
+function esValidoSelect(valor,texto,div) {
+    if (valor == 0) {
+        texto.fadeIn(700);
+        div.addClass("has-error");
+        return false;
+    }else{           
+        if (div.hasClass("has-error")) {
+            div.removeClass("has-error");       
+        }  
+        texto.fadeOut(700); 
+        return true;            
+        } 
+    
+}
 
-/********************** fin de las funciones generales***************************/    
+
+/********************** fin de las funciones generales***************************/  
+
+//remocion de mensajes de errores
+
+function ocultarMsjError(){ //remueve el mensaje al posicionarse en el campo, solo los mensajes sin remover el error del div
+    $("#nom").on("click",function() {
+        $("#errorNom").fadeOut(700); 
+    })
+        
+    $("#ape").on("click",function() {
+        $("#errorApe").fadeOut(700); 
+    })
+ 
+    $("#dni").on("click",function() {
+        $("#errorDni").fadeOut(700); 
+    })
+
+    $("#dir").on("click",function() {
+        $("#errorDir").fadeOut(700); 
+    })
+
+    $("#tel").on("click",function() {
+        $("#errorTel").fadeOut(700); 
+    })
+
+    $("#os").on("click",function() {
+        $("#errorOs").fadeOut(700); 
+    })
+              
+}
+
+
+
+function removerErroresTodos(){ //remueve todos los mensajes de errores al cancelar la edicion
+    $("#btnCancelar").on("click",function() {
+        $(".divInput").each(function() {
+            if($(this).hasClass("has-error")){
+                $(this).removeClass("has-error");
+            }
+        })
+        $(".divError").each(function(){
+            $(this).fadeOut(700);
+        })
+    })
+}
+
+//**************************** */
+
 
 /*********************************Validacion de paciente**************************** */
+
+function validarCampos(){
+    $("#btnGuardar").on("click",function(){
+        esValidoNomApe($("#nom").val(),$("#errorNom"),$("#divNom"));       
+        
+        esValidoNomApe($("#ape").val(),$("#errorApe"),$("#divApe"));
+         
+        esValidoDni($("#dni").val(),$("#errorDni"),$("#divDni"));
+          
+        esValidaDireccion($("#dir").val(),$("#errorDir"),$("#divDir"));
+          
+        esValidoTel($("#tel").val(),$("#errorTel"),$("#divTel"));
+
+        esValidoSelect($("#os").val(),$("#errorOs"),$("#divOs"));
+
+    })      
+}
+/*
 function validarNom() {
     $("#nom").on("blur",function(){
         esValidoNomApe($(this).val(),$("#errorNom"),$("#divNom"))       
@@ -123,80 +198,79 @@ function validarTel() {
         esValidoTel($(this).val(),$("#errorTel"),$("#divTel"))
     })
 }
-
+*/
 
 /*********************************fin de validacion de paciente**************************** */
 
 
 
-/*********************************inicio de validacion contacto de emergencia**************************** */
+//***************************comienzo de configuracion de botones*********************************
 
-function validarNomEmer() {
-    $("#nombreEmergencia").on("blur",function(){
-        esValidoNomApe($(this).val(),$("#errorNombreEmergencia"),$("#divNombreEmergencia"))       
+function habilitarEdicion() { //habilita la edicion del formulario
+
+    $(".btn-paciente").each(function(){
+        if($(this).hasClass("oculto")){
+            $(this).removeClass("oculto");
+            $(this).addClass("visible");
+        }else{
+            if($(this).hasClass("visible")){
+                $(this).removeClass("visible");
+                $(this).addClass("oculto");
+            }
+        }
+    });
+    
+    $(".inp-paciente").each(function(){
+        $(this).removeAttr("disabled");
+    });
+    $(".file-paciente").each(function(){
+        $(this).removeClass("oculto");
+        $(this).addClass("visible");      
+    })
+    $(".cert-paciente").each(function(){
+        $(this).removeClass("visible");
+        $(this).addClass("oculto");      
     })
 }
 
-function validarApeEmer() {
-    $("#apellidoEmergencia").on("blur",function(){
-        esValidoNomApe($(this).val(),$("#errorApellidoEmergencia"),$("#divApellidoEmergencia"))
+function deshabilitarEdicion() {
+
+    $(".btn-paciente").each(function(){
+        if($(this).hasClass("visible")){
+            $(this).removeClass("visible");
+            $(this).addClass("oculto");
+        }else{
+            if($(this).hasClass("oculto")){
+                $(this).removeClass("oculto");
+                $(this).addClass("visible");
+            }
+        }
+    });
+    $(".alert").each(function(){
+        $(this).addClass("oculto");            
+    }) 
+    $(".inp-paciente").each(function(){
+        $(this).attr("disabled","true");
+    });
+    $(".file-paciente").each(function(){
+        $(this).removeClass("visible");
+        $(this).addClass("oculto");      
+    })
+    $(".cert-paciente").each(function(){
+        $(this).removeClass("oculto");
+        $(this).addClass("visible");      
+    })
+    
+}
+
+function mostrarOcultarPaciente() {
+    $("#btnEditarPaciente").click(function() {
+        habilitarEdicion();
+    })
+
+    $("#btnCancelar").click(function(){
+      deshabilitarEdicion();        
     })
 }
 
-function validarDniEmer() {
-    $("#dniEmergencia").on("blur",function(){
-        esValidoDni($(this).val(),$("#errorDniEmergencia"),$("#divDniEmergencia"))
-    })
-}
-
-function validarDirEmer() {
-    $("#direccionEmergencia").on("blur",function(){
-        esValidaDireccion($(this).val(),$("#errorDireccionEmergencia"),$("#divDireccionEmergencia"))
-    })
-}
-
-function validarTelEmer() {
-    $("#telEmergencia").on("blur",function(){
-        esValidoTel($(this).val(),$("#errorTelEmergencia"),$("#divTelEmergencia"))
-    })
-}
-
-
-/*********************************fin de validacion contacto de emergencia**************************** */
-
-
-
-
-
-/*********************************inicio de validacion de persona a cargo**************************** */
-function validarNomPersona() {
-    $("#nombrePersona").on("blur",function(){
-        esValidoNomApe($(this).val(),$("#errorNombrePersona"),$("#divNombrePersona"))       
-    })
-}
-
-function validarApePersona() {
-    $("#apellidoPersona").on("blur",function(){
-        esValidoNomApe($(this).val(),$("#errorApellidoPersona"),$("#divApellidoPersona"))
-    })
-}
-
-function validarDniPersona() {
-    $("#dniPersona").on("blur",function(){
-        esValidoDni($(this).val(),$("#errorDniPersona"),$("#divDniPersona"))
-    })
-}
-
-function validarDirPersona() {
-    $("#direccionPersona").on("blur",function(){
-        esValidaDireccion($(this).val(),$("#errorDireccionPersona"),$("#divDireccionPersona"))
-    })
-}
-
-function validarTelPersona() {
-    $("#telPersona").on("blur",function(){
-        esValidoTel($(this).val(),$("#errorTelPersona"),$("#divTelPersona"))
-    })
-}
-/*********************************fin de validacion de persona a cargo*****************************/
 
