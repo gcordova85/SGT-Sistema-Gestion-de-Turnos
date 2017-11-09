@@ -3,8 +3,7 @@ session_start();
  require_once 'conexion.php';
 
  $clave = trim($_REQUEST['clave']);
-  try
-  { 
+
    $sql="SELECT * FROM usuarios WHERE usuario=:usuario";
    $query = $db_con->prepare($sql);
    $query->bindParam(":usuario",$_REQUEST["usuario"]);
@@ -12,15 +11,12 @@ session_start();
    $row = $query->fetch(PDO::FETCH_ASSOC); 
    if($row['clave']== $clave){
     
-      echo true; // log in
+      echo trim(1); // log in
       $_SESSION['usuario'] = $row['usuario'];
    }
-   else{
-    
-    echo false; 
+   else{    
+    echo 0; 
    }
-  }
-  catch(PDOException $e){
-    echo $e->getMessage();
-  }
+ 
+
 ?>

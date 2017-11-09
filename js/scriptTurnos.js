@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $('#tablePacienteTurno').DataTable({
         ajax: {
-            url: 'getPaciente.php'
+            url: '../inc/getPaciente.php'
           },
           columns: [
             { data: 'nombre' },

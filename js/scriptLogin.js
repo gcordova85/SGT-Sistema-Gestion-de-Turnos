@@ -55,22 +55,22 @@ function ValidarUsuario() {
 function ValidarUsuarioLogin(){
     var usuario=$("#usuario").val();
     var clave=$("#clave").val();
-        $.ajax({
-            type : 'POST',
-            url  : 'inc/getUsuario.php',
-            data : {
-                    "usuario":usuario,
-                    "clave"  :clave,
-            },
-            success :  function(response){         
-                if(response == true){
-                    $("#error").fadeOut();
-                    setTimeout(' window.location.assign ("mod/menu.php"); ',1000);
-                    }
-                else{
-                    $(".divError").fadeOut();
-                    $("#error").fadeIn("slow");
-                };
-            },
-        });
+    $.ajax({
+        type : 'POST',
+        url  : 'inc/getUsuario.php',
+        data : {
+                "usuario":usuario,
+                "clave"  :clave,
+        },
+        success :  function(response){         
+            if(response == "1"){
+                $("#error").fadeOut();
+                setTimeout(' window.location.assign ("mod/menu.php"); ',1000);
+                }
+            else{
+                $(".divError").fadeOut();
+                $("#error").fadeIn("slow");
+            };
+        },
+    });
 };
