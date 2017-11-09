@@ -1,0 +1,22 @@
+.img-asignar{
+    width: 60px;
+    height: 60px;
+}
+
+.btn-asignar{
+    width: 83px;
+    height: 65px;
+    margin: 0px;
+    font-size: 15px;
+    font-style: bold;
+    background-color:#EB6296;
+    color: white; 
+}
+
+.oculto{
+    display: none;
+}
+
+.visible{
+    display: block;
+}

@@ -1,0 +1,59 @@
+.btn-barra{
+    background-color:#EB6296;
+    color: white;
+    margin-right: 15px;
+    
+}
+.btn:hover{
+    background-color: #FF9BC2;
+    color: white;
+}
+body{
+    background: #F8E0F7;
+    padding-top:77px;  
+    padding-bottom: 40px  
+}
+
+footer,.navbar, #titulo{
+    background: #a93957;
+    color: #FFFFFF;
+    left:0px;
+    width:100%;
+    
+}
+footer{
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:30px;
+    width:100%;
+}
+
+.btn{
+    background-color:#EB6296;
+    color: white;
+}
+
+.boton-lista{
+    font-size: 10px;
+}
+
+th{
+    background: #a93957;
+    color: #FFFFFF;
+}
+
+
+select:focus, select[name]:focus {
+    border-color: #a93957;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px #a93957;
+    outline: 0 none;
+}
+
+button:focus, button[type]:focus,input:focus, input[type]:focus{
+    background-color: #FF9BC2;
+    color: white;
+    border-color: #a93957;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px #a93957;
+    outline: 0 none;
+}
