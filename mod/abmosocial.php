@@ -8,7 +8,8 @@
     <title>Consultorios Francoise Dolto</title>
     <link rel="stylesheet" href="css/bootstrap.min.css"> 
     <script src="js/jquery-3.2.1.js"></script>   
-    <script src="js/bootstrap.min.js"></script>  
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scriptabms.js"></script> 
     <link rel="stylesheet" href="css/styleBase.css">
 </head>
 <body >
@@ -38,7 +39,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-8 offset-md-1">
-            <button type="button" id="botonNuevo" class="btn btn-abm">Nuevo</button>
+            <button type="button" id="botonNuevo" class="btn btn-abm" data-toggle="modal" data-target="#modalAbmOsocial">Nuevo</button>
             <label>Mostrar <select class="inline-form">
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -54,7 +55,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-10 offset-md-1">
             <div class="table-responsive">
-                <table id="user_data" class="table table-bordered table-condensed">
+                <table id="tablaOsocial" class="table table-bordered table-condensed">
                     <tr>
                         <th class="navbar" width=10%>N° Obra Social</th>
                         <th class="navbar">Nombre</th>
@@ -62,38 +63,49 @@
                         <th class="navbar">Telefono</th>
                         <th class="navbar" width = "10%">Opciones</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Osde</td>
-                        <td>algun@mail.com</td>
-                        <td>11111111</td>
-                        <td><button type="button" id="botonNuevo" class="btn btn-abm">Ver mas...</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Galeno</td>
-                        <td>algun@mail.com</td>
-                        <td>11111111</td>
-                        <td><button type="button" id="botonNuevo" class="btn btn-abm">Ver mas...</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Osmedica</td>
-                        <td>algun@mail.com</td>
-                        <td>11111111</td>
-                        <td><button type="button" id="botonNuevo" class="btn btn-abm">Ver mas...</button></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Medife</td>
-                        <td>algun@mail.com</td>
-                        <td>11111111</td>
-                        <td><button type="button" id="botonNuevo" class="btn btn-abm">Ver mas...</button></td>
-                    </tr>
                 </table>
             </div>
         </div>
     </div>
+    <div id="modalAbmOsocial" class="modal fade">
+        <div class="modal-dialog">
+            <form method="post" id="user_form" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header navbar">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Agregar Obra Social/Prepaga</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="div-nOsocial" class="form-group">
+                            <label for="nOsocial" class="control-label col-form-label">N° Obra Social/Prepaga:</label>
+                            <input type="number" name="nOsocial" id="nOsocial" class="form-control">
+                        </div>
+                        <div id="div-nombreOsocial" class="form-group">
+                            <label for="nombreOsocial" class="control-label col-form-label">Nombre:</label>
+                            <input type="text" name="nombreOsocial" id="nombreOsocial" class="form-control">
+                        </div>
+                        <div id="div-emailOsocial" class="form-group">
+                            <label for="emailOsocial" class="control-label col-form-label">Email:</label>
+                            <input type="email" name="emailOsocial" id="emailOsocial" class="form-control">
+                        </div>
+                        <div id="div-telefonoOsocial" class="form-group">
+                            <label for="telefonoOsocial" class="control-label col-form-label">Telefono:</label>
+                            <input type="number" name="telefonoOsocial" id="telefonoOsocial" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                            <input type="button" name="agregarNuevaOsocial" id="agregarNuevaOsocial" class="btn btn-abm" value="Agregar" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
     <footer>
             <div class="container text-right">
               <h5>Centro terapéutico Francoise Dolto</h5>
