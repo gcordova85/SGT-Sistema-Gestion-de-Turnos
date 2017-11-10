@@ -35,34 +35,33 @@
         </header>   
     </div>
     <div class="row">
-            <div class="col-md-12 navbar">
-                <h3 class="text-center">ABM de Consultorios</h3>
+        <div class="col-md-12 navbar">
+            <h3 class="text-center">ABM de Consultorios</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8 offset-md-1">
+            <button type="button" id="botonNuevo" class="btn btn-abm" data-toggle="modal" data-target="#modalABM">Nuevo</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 offset-md-1">
+            <div class="table-responsive">
+                <table id="tablaConsultorios" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="navbar">N° Consultorio</th>
+                            <th class="navbar">Ubicacion</th>
+                            <th class="navbar">Estado</th>
+                            <th class="navbar">Opciones</th>
+                        </tr>
+                    </thead>   
+                </table>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-8 offset-md-1">
-                <button type="button" id="botonNuevo" class="btn btn-abm" data-toggle="modal" data-target="#modalABM">Nuevo</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10 offset-md-1">
-                <div class="table-responsive">
-                    <table id="tablaConsultorios" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="navbar">N° Consultorio</th>
-                                <th class="navbar">Ubicacion</th>
-                                <th class="navbar">Estado</th>
-                                <th class="navbar">Opciones</th>
-                            </tr>
-                        </thead>   
-                    </table>
-                </div>
-            </div>
-        </div>
+    </div>
 
 
         <div id="modalABM" class="modal fade">
