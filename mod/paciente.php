@@ -23,6 +23,46 @@
         ?>
 <!--fin del Header-->
 
+<!-- ****************************div tabla************************ -->
+        <div id="divTabla" class="div-visible">
+
+        <div class="row" id="fila-encabezado">
+            <div class="col-md-12 navbar">
+                <h3 class="text-center">ABM de Pacientes</h3>
+            </div>
+        </div>
+        <div class="row" id="fila-botones">
+            <div class="col-md-1"></div>
+            <div class="col-md-8 offset-md-1">
+                <button type="button" id="botonNuevo" class="btn btn-abm">Nuevo</a> </button>
+            </div>
+        </div>
+        <div class="row" id="fila-tabla">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 offset-md-1">
+                <div class="table-responsive">
+                    <table id="tablaPacientes" class="table table-bordered table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="navbar">N° Paciente</th>
+                                <th class="navbar">Nombre</th>
+                                <th class="navbar">Apellido</th>
+                                <th class="navbar">Dni</th>
+                                <th class="navbar">Telefono</th>
+                                <th class="navbar">Obra social</th>
+                                <th class="navbar">Estado</th>
+                                <th class="navbar">Opciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+            <!--******************* fin div tabla****************** -->
+
+        </div>
+
+        <div id="divFormulario" class="div-oculto">
         <form id="frmPrincipal">
                 <div class="text-left col-md-6">
                     <label id="lblId">33</label>
@@ -131,7 +171,7 @@
 
                     <div class="form-group col-xs-6 col-md-6 visible btn-paciente visible">
                             <div class="">
-                                <a href="" class="acciones btn btn-block btn-success glyphicon glyphicon-ok-circle"> Aceptar</a>
+                                <button type="button" id="btnAcep" class="acciones btn btn-block btn-success glyphicon glyphicon-ok-circle"> Aceptar</button>
                             </div>
                     </div>
 
@@ -255,7 +295,7 @@
             <div class="modal-body">
              
                 <div class="text-right">
-                    <a href="personaPaciente.html" class="btn btn-info glyphicon glyphicon-plus"> Asignar</a>
+                    <a href="personaPaciente.php" class="btn btn-info glyphicon glyphicon-plus"> Asignar</a>
                 </div>
                 <table id="tablaCargo" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
@@ -303,6 +343,8 @@
 
 
              
+    </div>
+
     </div>
     <?php
     require_once '../inc/footer.php'; 

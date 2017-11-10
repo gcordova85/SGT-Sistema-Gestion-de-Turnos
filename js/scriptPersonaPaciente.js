@@ -48,7 +48,7 @@ var listar= function(){ //carga los registros en el datatable
             {data:'dni'},
             {data:'direccion'},
             {data:'telefono'},
-            {defaultContent:'<button class="btn btn-warning btn-tabla btn-editar glyphicon glyphicon-edit"></button>'} //aparecerá en todas las filas
+            {defaultContent:'<a href="#cargo" class="btn btn-warning btn-tabla btn-editar glyphicon glyphicon-edit" data-toggle="modal"></a>'} //aparecerá en todas las filas
            
         ],
 

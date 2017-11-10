@@ -14,7 +14,7 @@
         <script type="text/javascript" src="../lib/DataTables/datatables.min.js"></script>
         <link rel="stylesheet" href="../css/font-awesome.min.css">
     </head>
-    <body >
+    <body>
         <div class="container">
             <?php
                 require_once '../inc/header.php';
@@ -28,7 +28,7 @@
         <div class="row" id="fila-botones">
             <div class="col-md-1"></div>
             <div class="col-md-8 offset-md-1">
-                <button type="button" id="botonNuevo" class="btn btn-abm"><a href="personaPaciente.php">Nuevo</a> </button>
+                <button type="button" id="botonNuevo" class="btn btn-abm"><a href="paciente.php">Nuevo</a> </button>
             </div>
         </div>
         <div class="row" id="fila-tabla">

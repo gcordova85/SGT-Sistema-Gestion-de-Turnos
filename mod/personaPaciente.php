@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Centro terapéutico Francoise Dolto</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"> 
@@ -24,8 +23,8 @@
         <div class="form-group text-right">
             <a href="#cargo" id="btnCargo" class="btn btn-info btnModal" data-toggle="modal">Nueva persona</a>
         </div>
-
-        <table id="tablaPersonas" class="table table-striped table-bordered dt-responsive nowrap">
+        <div clas="table-responsive">
+        <table id="tablaPersonas" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
                     <th>Id</th>                 
@@ -37,11 +36,8 @@
                     <th></th>
                 </tr>
             </thead>
-
-  
-        
    </table>
-
+   </div>
    <div class="text-center form-group">
         <button class="btn btn-asignar btn-principal"><img class="img-asignar" src="../iconos/asignar.png" alt="asignar"></button>
    </div>
@@ -72,7 +68,6 @@
 </tbody>
 
 </table> -->
-
 
 <!--ventana modal Persona a cargo-->
 
