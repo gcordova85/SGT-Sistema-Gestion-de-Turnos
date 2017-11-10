@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css"> 
     <script src="../js/jquery-3.2.1.js"></script>   
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/abmConsultorio.js"></script>
+    <script src="../js/abmConsultorios.js"></script>
     <link rel="stylesheet" href="../css/styleBase.css">
     <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.min.css"/>
     <script type="text/javascript" src="../lib/DataTables/datatables.min.js"></script>
