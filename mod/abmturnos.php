@@ -6,9 +6,7 @@
     
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Consultorios Francoise Dolto</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css"> 
-    <script src="../js/jquery-3.2.1.js"></script>   
-    <script src="../js/bootstrap.min.js"></script>  
+    <link rel="stylesheet" href="../css/bootstrap.min.css">  
     <link rel="stylesheet" href="../css/styleBase.css">
     <link rel="stylesheet" href="../css/styleTurnos.css">
     <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.css">
@@ -31,6 +29,7 @@
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>DNI</th>
+                            <th></th>
                         </tr>
                         </thead>
                     </table>
@@ -45,6 +44,8 @@
         require_once '../inc/footer.php'; 
     ?>
 </body>
+<script src="../js/jquery-3.2.1.js"></script>   
+<script src="../js/bootstrap.min.js"></script> 
 <script src="../lib/DataTables/datatables.min.js"></script>
 <script src="../js/scriptTurnos.js"></script>
 </html>

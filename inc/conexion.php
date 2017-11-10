@@ -1,16 +1,24 @@
 
 <?php
- $db_host = "localhost";
- $db_name = "sgt";
- $db_user = "root";
- $db_pass = "";
- 
- try{
-  
-  $db_con = new PDO("mysql:host={$db_host};dbname={$db_name}",$db_user,$db_pass);
-  $db_con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
- }
- catch(PDOException $e){
-  echo $e->getMessage();
- }
-?>
+	class Conexion{
+		private $host = "localhost";
+		private $dbname = "sgt";
+		private $user = "root";
+		private $password = "";
+		private $conexion = null;
+
+		public function getConexion(){
+			try{
+				$this->conexion = new PDO(
+					"mysql:host=$this->host; dbname=$this->dbname",
+					$this->user,
+					$this->password
+					);
+			return $this->conexion;
+			}catch(Exception $e){
+				echo $e->getMessage();
+			}finally{
+				$this->conexion = null;
+			}
+		}
+	}

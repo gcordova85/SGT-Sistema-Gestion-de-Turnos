@@ -30,7 +30,7 @@
         </div>
         
         <div class="form-group col-xs-12 col-sm-6 col-md-4">
-            <a href="abmpacientes.php" class="btn-principal btn"><img src="../iconos/paciente.png" alt="Paciente"><br>Pacientes</a>
+            <a href="paciente.php" class="btn-principal btn"><img src="../iconos/paciente.png" alt="Paciente"><br>Pacientes</a>
         </div>
         <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <a href="abmturnos.php" class="btn-principal btn"><img src="../iconos/turno.png" alt="Turno"><br>Turnos</a>

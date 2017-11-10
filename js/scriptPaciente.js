@@ -19,8 +19,6 @@ alternarPantalla()
 listar_datos();
 
 
-
-
 $('#tablaTurnos').DataTable();    
 })
 
@@ -313,28 +311,25 @@ function alternarPantalla() {
 //********************************************ajax************************************* */
 
 
-var listar_datos = function(){
-    console.log("dsddfdsdf");
-    var tabla = $('#tablaPacientes').DataTable({
-        destroy: true,
+function listar_datos() {
+     $('#tablaPacientes').DataTable({
         ajax: {
-            url: '../inc/getPacientes.php'
+            url: '../inc/getPaciente.php'
           },
             columns: [
             { data: 'Id_paciente' },
             { data: 'nombre' },
             { data: 'apellido' },
             { data: 'dni' },
-            { data: 'direccion' },
             { data: 'telefono' },
             { data: 'Id_obrasocial' },
-            { data: 'certificado' },
-            { data: 'autorizacion' },
             { data: 'Id_estado'},
-            { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalABM'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>" }
-          ],
-            language : idioma_espanol
+            { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalABM'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>" },
+          ]
     });
+
+
+
     // editar_datos("#tablaPacientes tbody",tabla);
 };
 // var editar_datos = function(tbody, tabla){

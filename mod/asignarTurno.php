@@ -6,28 +6,15 @@
     
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Consultorios Francoise Dolto</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="css/styleBase.css">
-    <link rel="stylesheet" href="css/styleTurnos.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="../css/styleBase.css">
+    <link rel="stylesheet" href="../css/styleTurnos.css">
 </head>
 <body >
     <div class="container">
-        <header>
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="col-xs-4">
-                    <h3 "navbar-text">Francoise Dolto</h3>
-                </div>
-                   <div class="dropdown pull-right">
-                       <button class="btn btn-barra navbar-btn dropdown-toggle glyphicon glyphicon-user" type="button" data-toggle="dropdown"> UserName</button>
-                       <ul class="dropdown-menu">
-                          <li><a href="#">Salir</a></li>
-                      </ul>
-                   </div> 
-                <div class="pull-right">
-                    <button class="btn btn-barra navbar-btn "> Reporte de asistencia</button>
-                </div>           
-             </nav>         
-        </header>
+        <?php
+            require_once '../inc/header.php';
+        ?>
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-4">
             <div class="form-group">
@@ -104,13 +91,11 @@
                 </div>
             </div>
     </div>
-    <footer>
-            <div class="container text-right">
-              <h5>Centro terapéutico Francoise Dolto</h5>
-            </div>
-    </footer>
-    <script src="js/jquery.js"></script>   
-    <script src="js/bootstrap.min.js"></script>     
-    <script src="js/scriptTurnos.js"></script>
+    <?php
+        require_once '../inc/footer.php';
+    ?>
+    <script src="../js/jquery.js"></script>   
+    <script src="../js/bootstrap.min.js"></script>     
+    <script src="../js/scriptTurnos.js"></script>
 </body>
 </html>

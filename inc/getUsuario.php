@@ -2,10 +2,12 @@
 session_start();
  require_once 'conexion.php';
 
- $clave = trim($_REQUEST['clave']);
+  $conexion = new Conexion();
+  $cnn = $conexion->getConexion();
+  $clave = trim($_REQUEST['clave']);
 
    $sql="SELECT * FROM usuarios WHERE usuario=:usuario";
-   $query = $db_con->prepare($sql);
+   $query = $cnn->prepare($sql);
    $query->bindParam(":usuario",$_REQUEST["usuario"]);
    $query->execute();
    $row = $query->fetch(PDO::FETCH_ASSOC); 
@@ -17,6 +19,5 @@ session_start();
    else{    
     echo 0; 
    }
- 
-
-?>
+    $query->closeCursor();
+    $conexion = null;
