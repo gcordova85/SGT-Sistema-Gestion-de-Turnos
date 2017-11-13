@@ -1,6 +1,7 @@
 <?php
 
-include 'Conexion.php';
+session_start();
+require_once 'conexion.php';
 
 $personas = json_decode($_POST["json"]); // recibo json y lo decodifico
 
@@ -13,7 +14,10 @@ $respuesta=false;
 //var_dump($personas->{"data"}); //asi accedo al array var_dump es para enviar al cliente y mediante js mostrar en consola
 foreach($personas->{"data"} as $persona){
     //echo $persona->{"nombre"};
-    //echo $producto->{"precio"};
+    echo $persona->{"apellido"};
+    echo $persona->{"dni"};
+    echo $persona->{"direccion"};
+    echo $persona->{"telefono"};
     
     $statement->bindParam(1, $persona->{"nombre"},PDO::PARAM_STR); //1,2,3 hacen reperencia a los ? puestos en la consulta
     $statement->bindParam(2, $persona->{"apellido"},PDO::PARAM_STR);

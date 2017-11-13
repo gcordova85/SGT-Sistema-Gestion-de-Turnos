@@ -84,6 +84,7 @@
 
           <div class="modal-body">
                <form id="frmModal" action="" method="POST">
+
                   <div id="divNombrePersona" class="form-group  col-md-6"> 
                       <label class="sr-only" for="nombrePersona">Nombre:</label> 
                       <input type="text" class="form-control" id="nombrePersona" placeholder="Nombre:" required>
@@ -118,7 +119,7 @@
             </div>
 
             <div id="divDireccionPersona" class="form-group  col-md-12"> 
-                    <label class="sr-only" for="dniPersona">Dirección:</label> 
+                    <label class="sr-only" for="direccionPersona">Dirección:</label> 
                     <input type="text" class="form-control" id="direccionPersona" placeholder="Dirección:" required>
                     <div class="alert alert-danger oculto" id="errorDireccionPersona">
                             <p><b>Ingrese una dirección</b></p>
@@ -130,17 +131,14 @@
         </div>
             
              <div class="modal-footer">
-                    <div class="col-xs-3">
-                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>                           
+                    <div class="col-xs-6">
+                            <button type="button" class="btn btn-danger btn-block visible" data-dismiss="modal">Cancelar</button>                           
                         </div>
-                    <div class="col-xs-3">
-                        <button type="button" class="btn btn-success btn-block oculto" data-dismiss="modal">Aceptar</button>                           
+                    <div class="col-xs-6">
+                         <button type="submit" id="guardarPersona" class="btn btn-success btn-block visible">Guardar</button>
                     </div>
-                    <div class="col-xs-3">
-                         <button type="button" class="btn btn-warning btn-block  oculto">Editar</button>                           
-                    </div>
-                    <div class="col-xs-3">
-                         <button type="submit" id="guardarPersona" class="btn btn-success btn-block">Guardar</button>
+                    <div class="col-xs-6">
+                         <button type="submit" id="cambiosPersona" class="btn btn-success btn-block oculto disabled">Guardar cambios</button>
                     </div>  
             </div>
         </form>
@@ -150,6 +148,39 @@
 </div>
 
 <!--Fin modal persona a cargo-->
+
+<div class="modal fade" id="modalEliminar"> 
+    <div class="modal-dialog"> 
+        <div class="modal-content"> 
+
+            <div class="modal-header"> 
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="modal">
+                   <span class="glyphicon glyphicon-remove"></span>
+               </button> 
+               <h4 class="modal-title text-center">Eliminar</h4>
+           </div> 
+
+            <div class="modal-body">
+               
+            <h3>¿Está seguro que desea eliminar esta persona?</h3>
+                  
+               <p class="footerCenter">.</p> 
+            </div>
+            
+             <div class="modal-footer">
+                    <div class="col-xs-6">
+                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">No</button>                           
+                        </div>
+                    <div class="col-xs-6">
+                         <button type="button" id="eliminarPersona" class="btn btn-success btn-block visible">Si</button>
+                    </div>  
+            </div>
+        
+                
+        </div>
+    </div>
+</div>
+
              
     </div>
     <?php

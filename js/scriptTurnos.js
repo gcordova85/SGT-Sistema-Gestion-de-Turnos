@@ -1,5 +1,7 @@
 $(document).ready(function(){
         listarPaciente();
+        listarDias();
+        listarHorarios();
         
     });
 
@@ -37,14 +39,26 @@ function obtenerID(){
 };
 
 function listarDias(){
-    $('#tableDias').DataTable({
+    $('#tablaDias').DataTable({
         ajax: {
-            url: '../inc/getdias.php'
+            url: '../inc/getDias.php'
           },
           columns: [
-            { data: 'id_dia'},
+            { data: 'Id_dia'},
             { data: 'nombre' },
-            {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus">Asignar</button>'},
+            {defaultContent:'<button id="btnSelHora" name="btnSelHora" class="btn btn-success" data-toggle="modal" data-target="#modalAsignar"><span class="glyphicon glyphicon-plus"></span>Seleccionar horario </button>'},
           ]
         });
+}
+function listarHorarios(){
+    $('#tablaHorarios').DataTable({
+        ajax: {
+            url: '../inc/getHoras.php'
+          },
+          columns: [
+            { data: 'Id_horario'},
+            { data: 'hora' },
+            {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus">Agregar</button>'},
+          ]
+        }); 
 }

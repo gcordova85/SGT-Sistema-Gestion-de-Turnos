@@ -1,6 +1,7 @@
 
 <?php
-    include 'Conexion.php';
+    session_start();
+    require_once 'conexion.php';
 
     $conexion = new Conexion();
     $cnn = $conexion->getConexion();
@@ -18,4 +19,5 @@
     }
     $statement->closeCursor();
     $conexion = null;
-        
+
+?>

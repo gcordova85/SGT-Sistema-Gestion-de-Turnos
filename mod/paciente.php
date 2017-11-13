@@ -14,6 +14,7 @@
     <script src="../js/scriptPaciente.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.min.css"/>
     <script type="text/javascript" src="../lib/DataTables/datatables.min.js"></script>
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">
@@ -65,7 +66,7 @@
         <div id="divFormulario" class="div-oculto">
         <form id="frmPrincipal">
                 <div class="text-left col-md-6">
-                    <label id="lblId">33</label>
+                    <label id="lblId"></label>
                 </div>
                 <div  class="text-right col-md-6">
                     <label id="lblEstado">Borrador</label>
