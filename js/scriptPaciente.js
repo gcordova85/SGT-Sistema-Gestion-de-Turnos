@@ -1,11 +1,7 @@
 "use strict";
 
 $(document).ready(function(){
-/*validarNom();
-validarApe();
-validarDni();
-validarDir();
-validarTel();*/
+
 validarCampos();
 
 mostrarOcultarPaciente();
@@ -171,37 +167,7 @@ function validarCampos(){
 
     })      
 }
-/*
-function validarNom() {
-    $("#nom").on("blur",function(){
-        esValidoNomApe($(this).val(),$("#errorNom"),$("#divNom"))       
-    })
-}
 
-function validarApe() {
-    $("#ape").on("blur",function(){
-        esValidoNomApe($(this).val(),$("#errorApe"),$("#divApe"))
-    })
-}
-
-function validarDni() {
-    $("#dni").on("blur",function(){
-        esValidoDni($(this).val(),$("#errorDni"),$("#divDni"))
-    })
-}
-
-function validarDir() {
-    $("#dir").on("blur",function(){
-        esValidaDireccion($(this).val(),$("#errorDir"),$("#divDir"))
-    })
-}
-
-function validarTel() {
-    $("#tel").on("blur",function(){
-        esValidoTel($(this).val(),$("#errorTel"),$("#divTel"))
-    })
-}
-*/
 
 /*********************************fin de validacion de paciente**************************** */
 
@@ -379,7 +345,7 @@ function listar_datos() {
             { data: 'Id_estado'},
             { defaultContent : "<button type='button' class='btnVerMas btn btn-info'>Ver mas</button>" },
           ],
-          idioma_espanol
+         languaje: idioma_espanol
     });
 
     alternarPantalla(tabla);
@@ -411,3 +377,23 @@ var idioma_espanol = {
     }
 };
 
+
+///*************************carga de datos****************************** */
+
+function obtenerDatos(){   // obtengo los datos contenidos en los input
+    var id = $("#lblId").text();
+    var nombre =$("#nom").val();
+    var apellido =$("#ape").val();
+    var dni =$("#dni").val();
+    var direccion =$("#dir").val();
+    var telefono =$("#tel").val();
+    var os=$("#os").val();
+    
+      var data=[]; //creo un json con los datos
+      data.push(  
+          {id_personaCargo:id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono},
+          
+      );
+      var personas={"data":data}; //creo un array con la clave data
+      return personas; 
+}

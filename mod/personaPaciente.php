@@ -148,6 +148,39 @@
 </div>
 
 <!--Fin modal persona a cargo-->
+
+<div class="modal fade" id="modalEliminar"> 
+    <div class="modal-dialog"> 
+        <div class="modal-content"> 
+
+            <div class="modal-header"> 
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="modal">
+                   <span class="glyphicon glyphicon-remove"></span>
+               </button> 
+               <h4 class="modal-title text-center">Eliminar</h4>
+           </div> 
+
+            <div class="modal-body">
+               
+            <h3>¿Está seguro que desea eliminar esta persona?</h3>
+                  
+               <p class="footerCenter">.</p> 
+            </div>
+            
+             <div class="modal-footer">
+                    <div class="col-xs-6">
+                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">No</button>                           
+                        </div>
+                    <div class="col-xs-6">
+                         <button type="button" id="eliminarPersona" class="btn btn-success btn-block visible">Si</button>
+                    </div>  
+            </div>
+        
+                
+        </div>
+    </div>
+</div>
+
              
     </div>
     <?php

@@ -20,3 +20,10 @@
 .visible{
     display: block;
 }
+
+.btn-tabla{
+    padding: 0px;
+    width: 24px;
+    height: 24px;
+    margin: 2px;
+}

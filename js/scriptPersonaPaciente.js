@@ -42,6 +42,13 @@ function seleccionarFilas(tabla){ //selecciona las filas al hacer click
     } );
 }
 
+function eliminarRegistros(tabla){
+    $('#tablaPersonas tbody').on( 'click', 'a.btn-eliminar', function () { 
+        var data=tabla.row($(this).parents("tr")).data();
+        var id=data.id_personaCargo;
+        bajaPersona("../inc/bajaPersonaCargo.php",id);
+})
+}
 
 function editarRegistros(tabla) {        
     $('#tablaPersonas tbody').on( 'click', 'a.btn-editar', function () { //cuando hace click en el botón que tiene la clase btn-edirar
@@ -98,7 +105,7 @@ function listar(){ //carga los registros en el datatable
             {data:'dni'},
             {data:'direccion'},
             {data:'telefono'},
-            {defaultContent:'<a href="#cargo" class="btn btn-warning btn-tabla btn-editar glyphicon glyphicon-edit" data-toggle="modal"></a>'} //aparecerá en todas las filas
+            {defaultContent:'<a href="#cargo" class="btn btn-warning btn-tabla btn-editar glyphicon glyphicon-edit" data-toggle="modal"></a><a href="#modalEliminar" class="btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" ></i></a>'} //aparecerá en todas las filas
            
         ],
 
@@ -141,10 +148,7 @@ function __ajax(url,data){ //funcion general para enviar o traer datos
     var ajax = $.ajax({
         "method":"POST",
         "url":url,
-         
-
         "data":data
-
     })
     return ajax;
 }
@@ -214,6 +218,26 @@ function nuevaPersona(){
     
 }
 
+
+function bajaPersona(url,id) {
+    $("#eliminarPersona").on("click",function() {
+
+        var data=[]; //creo un json con los datos
+        data.push(  
+            {"id":id},
+        );
+        var datos={"data":data};
+        var json= JSON.stringify(datos); //convierto el array de objetos en una cadena json
+        __ajax(url,{"json":json})
+
+        // .done(function(info) {
+        //     if(info){//si hay respuesta
+        //        // console.log(info);                
+    
+        //      }});
+        
+    })
+}
 
 //*****************ajax*********************
 
