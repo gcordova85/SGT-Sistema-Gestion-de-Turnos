@@ -15,7 +15,7 @@ $respuesta=false;
 
 foreach($datos->{"data"} as $paciente){
     
-    $statement->bindParam(':id', $paciente->{"id"},PDO::PARAM_INT); //1,2,3 hacen reperencia a los ? puestos en la consulta
+    $statement->bindParam(':id', $paciente->{"id"},PDO::PARAM_INT); 
     
     $respuesta=$statement->execute();
 }

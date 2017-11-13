@@ -85,8 +85,6 @@
           <div class="modal-body">
                <form id="frmModal" action="" method="POST">
 
-                <label id="idPers"></label>
-
                   <div id="divNombrePersona" class="form-group  col-md-6"> 
                       <label class="sr-only" for="nombrePersona">Nombre:</label> 
                       <input type="text" class="form-control" id="nombrePersona" placeholder="Nombre:" required>
@@ -121,7 +119,7 @@
             </div>
 
             <div id="divDireccionPersona" class="form-group  col-md-12"> 
-                    <label class="sr-only" for="dniPersona">Dirección:</label> 
+                    <label class="sr-only" for="direccionPersona">Dirección:</label> 
                     <input type="text" class="form-control" id="direccionPersona" placeholder="Dirección:" required>
                     <div class="alert alert-danger oculto" id="errorDireccionPersona">
                             <p><b>Ingrese una dirección</b></p>
@@ -133,17 +131,14 @@
         </div>
             
              <div class="modal-footer">
-                    <div class="col-xs-3">
-                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>                           
+                    <div class="col-xs-6">
+                            <button type="button" class="btn btn-danger btn-block visible" data-dismiss="modal">Cancelar</button>                           
                         </div>
-                    <div class="col-xs-3">
-                        <button type="button" class="btn btn-success btn-block oculto" data-dismiss="modal">Aceptar</button>                           
+                    <div class="col-xs-6">
+                         <button type="submit" id="guardarPersona" class="btn btn-success btn-block visible">Guardar</button>
                     </div>
-                    <div class="col-xs-3">
-                         <button type="button" class="btn btn-warning btn-block  oculto">Editar</button>                           
-                    </div>
-                    <div class="col-xs-3">
-                         <button type="submit" id="guardarPersona" class="btn btn-success btn-block">Guardar</button>
+                    <div class="col-xs-6">
+                         <button type="submit" id="cambiosPersona" class="btn btn-success btn-block oculto disabled">Guardar cambios</button>
                     </div>  
             </div>
         </form>

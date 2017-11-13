@@ -14,7 +14,6 @@ removerErroresTodos();
 
 ocultarMsjError();
 
-
 listar_datos();
 
 
