@@ -6,7 +6,7 @@ var listar_datos = function(){
     var tabla = $('#tablaPacientes').DataTable({
         destroy: true,
         ajax: {
-            url: '../inc/getPacientes.php'
+            url: '../inc/getPaciente.php'
           },
             columns: [
             { data: 'Id_paciente' },

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Consultorios Francoise Dolto</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css"> 
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"> 
     <script src="../js/jquery-3.2.1.js"></script>   
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/abmConsultorios.js"></script>
-    <link rel="stylesheet" href="../css/styleBase.css">
+    <link rel="stylesheet" type="text/css" href="../css/styleBase.css">
     <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.min.css"/>
     <script type="text/javascript" src="../lib/DataTables/datatables.min.js"></script>
     <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -39,12 +39,7 @@
             <h3 class="text-center">ABM de Consultorios</h3>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-8 offset-md-1">
-            <button type="button" id="botonNuevo" class="btn btn-abm" data-toggle="modal" data-target="#modalABM">Nuevo</button>
-        </div>
-    </div>
+  
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 offset-md-1">

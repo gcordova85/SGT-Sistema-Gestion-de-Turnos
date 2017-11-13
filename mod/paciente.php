@@ -14,6 +14,7 @@
     <script src="../js/scriptPaciente.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.min.css"/>
     <script type="text/javascript" src="../lib/DataTables/datatables.min.js"></script>
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">

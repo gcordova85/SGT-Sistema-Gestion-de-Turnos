@@ -14,7 +14,22 @@ var listar_datos = function(){
             { data: 'estado'},
             { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalABM'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>" }
           ],
-            language : idioma_espanol
+            language : idioma_espanol,
+            dom: "<'row'<'form-inline' <'col-sm-offset-5'B>>>"
+            +"<'row' <'form-inline' <'col-sm-1'f>>>"
+            +"<rt>"
+            +"<'row'<'form-inline'"
+            +" <'col-sm-6 col-md-6 col-lg-6'l>"
+            +"<'col-sm-6 col-md-6 col-lg-6'p>>>",//'Bfrtip',
+            buttons : [                	
+                {
+                    text: '<i class="fa fa-plus">Agregar consultorio</i>',
+                    titleAttr: 'Agregar',
+                    className: 'btn btn-success',
+                    action: 	function(){
+                                    agregar_nuevo_usuario();
+                    }
+                }]
     });
     editar_datos("#tablaConsultorios tbody",tabla);
 };
