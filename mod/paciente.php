@@ -66,7 +66,7 @@
         <div id="divFormulario" class="div-oculto">
         <form id="frmPrincipal">
                 <div class="text-left col-md-6">
-                    <label id="lblId">33</label>
+                    <label id="lblId"></label>
                 </div>
                 <div  class="text-right col-md-6">
                     <label id="lblEstado">Borrador</label>

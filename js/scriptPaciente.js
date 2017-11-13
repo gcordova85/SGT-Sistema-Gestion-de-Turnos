@@ -14,7 +14,6 @@ removerErroresTodos();
 
 ocultarMsjError();
 
-alternarPantalla()
 
 listar_datos();
 
@@ -211,6 +210,8 @@ function validarTel() {
 
 //***************************comienzo de configuracion de botones*********************************
 
+
+
 function habilitarEdicion() { //habilita la edicion del formulario
 
     $(".btn-paciente").each(function(){
@@ -279,31 +280,72 @@ function mostrarOcultarPaciente() {
 }
 
 
-function alternarPantalla() {
+function mostrarForm(){
     var divT=$("#divTabla");
     var divF=$("#divFormulario");
+    if($(divT).hasClass("div-visible")){
+        $(divT).removeClass("div-visible");
+        $(divT).addClass("div-oculto");
+    }
+    
+    if($(divF).hasClass("div-oculto")){
+        $(divF).removeClass("div-oculto");
+        $(divF).addClass("div-visible");
+    }     
+}
+
+function mostrarTabla(){
+    var divT=$("#divTabla");
+    var divF=$("#divFormulario");
+    if($(divF).hasClass("div-visible")){
+        $(divF).removeClass("div-visible");
+        $(divF).addClass("div-oculto");
+    }
+    
+    if($(divT).hasClass("div-oculto")){
+        $(divT).removeClass("div-oculto");
+        $(divT).addClass("div-visible");
+    }   
+}
+
+function alternarPantalla(tabla) {
     $("#botonNuevo").on("click",function(){
-        if($(divT).hasClass("div-visible")){
-            $(divT).removeClass("div-visible");
-            $(divT).addClass("div-oculto");
-        }
-        
-        if($(divF).hasClass("div-oculto")){
-            $(divF).removeClass("div-oculto");
-            $(divF).addClass("div-visible");
-        }     
+        mostrarForm();
     });
     $("#btnAcep").on("click",function(){
-        console.log("aceptar");
-        if($(divF).hasClass("div-visible")){
-            $(divF).removeClass("div-visible");
-            $(divF).addClass("div-oculto");
-        }
+        mostrarTabla();  
+    });
+
+    $('#tablaPacientes tbody').on( 'click', 'button.btnVerMas',function(){
+        mostrarForm(); 
+        var data=tabla.row($(this).parents("tr")).data();
+        var id=data.Id_paciente;
+        var data=[]; //creo un json con los datos
+        data.push(  
+            {"id":id},
+        );
+        var datos={"data":data};
+        var json= JSON.stringify(datos); //convierto el array de objetos en una cadena json
+        __ajax("../inc/getPacienteId.php",{"json":json})
+
+        .done(function(info) {
+            if(info){//si hay respuesta
+                var persona=JSON.parse(info);
+                console.log(info);
+                $("#lblId").text(persona.data[0].Id_paciente);
+                $("#nom").val(persona.data[0].nombre);
+                $("#ape").val(persona.data[0].apellido);
+                $("#dni").val(persona.data[0].dni);
+                $("#dir").val(persona.data[0].direccion);
+                $("#tel").val(persona.data[0].telefono);
+                $("#os").val(persona.data[0].Id_obrasocial);   
+                  
+
+                console.log(persona.data[0].nombre);
+                
+    
+            }});
         
-        if($(divT).hasClass("div-oculto")){
-            $(divT).removeClass("div-oculto");
-            $(divT).addClass("div-visible");
-        }     
     });
     
 }
@@ -311,8 +353,20 @@ function alternarPantalla() {
 //********************************************ajax************************************* */
 
 
+function __ajax(url,data){ //funcion general para enviar o traer datos
+    var ajax = $.ajax({
+        "method":"POST",
+        "url":url,
+         
+
+        "data":data
+
+    })
+    return ajax;
+}
+
 function listar_datos() {
-     $('#tablaPacientes').DataTable({
+   var tabla= $('#tablaPacientes').DataTable({
         ajax: {
             url: '../inc/getPaciente.php'
           },
@@ -324,29 +378,15 @@ function listar_datos() {
             { data: 'telefono' },
             { data: 'Id_obrasocial' },
             { data: 'Id_estado'},
-            { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalABM'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>" },
-          ]
+            { defaultContent : "<button type='button' class='btnVerMas btn btn-info'>Ver mas</button>" },
+          ],
+          idioma_espanol
     });
 
+    alternarPantalla(tabla);
 
-
-    // editar_datos("#tablaPacientes tbody",tabla);
 };
-// var editar_datos = function(tbody, tabla){
-//     $(tbody).on("click", "button.editar", function(){
-//         var data = tabla.row($(this).parents("tr")).data();
-//         console.log(data.id_consultorio);
-//         console.log(data.ubicacion);
-//         var consultorio = $("#nConsultorio").val(data.id_consultorio),
-//         ubicacion = $("#selUbicacion").val(data.ubicacion);
-//     });
-// };
-// var eliminar_datos = function(tbody, tabla){
-//     $(tbody).on("click", "button.editar", function(){
-//         var data = tabla.row($(this).parents("tr")).data();
-//         console.log(data);
-//     });
-// };
+
 var idioma_espanol = {
     "sProcessing":     "Procesando...",
     "sLengthMenu":     "Mostrar _MENU_ registros",

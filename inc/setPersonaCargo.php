@@ -1,6 +1,7 @@
 <?php
 
-include 'Conexion.php';
+session_start();
+require_once 'conexion.php';
 
 $personas = json_decode($_POST["json"]); // recibo json y lo decodifico
 

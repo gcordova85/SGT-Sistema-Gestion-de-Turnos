@@ -2,15 +2,12 @@
 
 $(document).ready(function(){ 
     guardar();  
-    listar();
-    seleccionarFilas(); 
-    editarRegistros();
-   
+    listar();  
+    
 });
 
 
-function seleccionarFilas(){ //selecciona las filas al hacer click
-    var tabla=$("#tablaPersonas").DataTable();
+function seleccionarFilas(tabla){ //selecciona las filas al hacer click
     $('#tablaPersonas tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('info')) {
             $(this).removeClass('info');
@@ -23,19 +20,44 @@ function seleccionarFilas(){ //selecciona las filas al hacer click
 }
 
 
-function editarRegistros() {
-    var tabla=$("#tablaPersonas").DataTable();
-    $('#tablaPersonas tbody').on( 'click', 'button.btn-editar', function () { //cuando hace click en el botón que tiene la clase btn-edirar
+function editarRegistros(tabla) {        
+    $('#tablaPersonas tbody').on( 'click', 'a.btn-editar', function () { //cuando hace click en el botón que tiene la clase btn-edirar
         var data=tabla.row($(this).parents("tr")).data();
         var id=data.id_personaCargo;
-        console.log(id);
+
+
+        var data=[]; //creo un json con los datos
+        data.push(  
+            {"id":id},
+        );
+        var datos={"data":data};
+        var json= JSON.stringify(datos); //convierto el array de objetos en una cadena json
+        __ajax("../inc/getPersonaCargoId.php",{"json":json})
+
+        .done(function(info) {
+            if(info){//si hay respuesta
+               // console.log(info);
+                 var persona=JSON.parse(info);
+                $("#idPers").text(persona.data[0].id_personaCargo);
+                 $("#nombrePersona").val(persona.data[0].nombre);
+                 $("#apellidoPersona").val(persona.data[0].apellido);
+                 $("#dniPersona").val(persona.data[0].dni);
+                 $("#direccionPersona").val(persona.data[0].direccion);
+                 $("#telPersona").val(persona.data[0].telefono);
+                  
+
+        //         console.log(persona.data[0].nombre);
+                
+    
+             }});
+        
     })
 
 
 }
 
 
-var listar= function(){ //carga los registros en el datatable
+function listar(){ //carga los registros en el datatable
     var tabla=$('#tablaPersonas').DataTable({
         ajax:{
             url:'../inc/getPersonaCargo.php'
@@ -81,7 +103,9 @@ var listar= function(){ //carga los registros en el datatable
             "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
             "sSortDescending": ": Activar para ordenar la columna de manera descendente"
         }
-    }
+    };
+    editarRegistros(tabla);
+    seleccionarFilas(tabla);
 }
 
 
@@ -129,6 +153,7 @@ function guardar(){  //al enviar el formulario
     })*/
 })
 }
+
 
 
 //*****************ajax*********************

@@ -84,6 +84,9 @@
 
           <div class="modal-body">
                <form id="frmModal" action="" method="POST">
+
+                <label id="idPers"></label>
+
                   <div id="divNombrePersona" class="form-group  col-md-6"> 
                       <label class="sr-only" for="nombrePersona">Nombre:</label> 
                       <input type="text" class="form-control" id="nombrePersona" placeholder="Nombre:" required>
