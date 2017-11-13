@@ -1,5 +1,6 @@
 $(document).ready(function(){
         listar_datos();
+        guardar_datos();
     });
 
 var listar_datos = function(){
@@ -14,25 +15,18 @@ var listar_datos = function(){
             { data: 'estado'},
             { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalABM'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>" }
           ],
-            language : idioma_espanol,
-            dom: "<'row'<'form-inline' <'col-sm-offset-5'B>>>"
-            +"<'row' <'form-inline' <'col-sm-1'f>>>"
-            +"<rt>"
-            +"<'row'<'form-inline'"
-            +" <'col-sm-6 col-md-6 col-lg-6'l>"
-            +"<'col-sm-6 col-md-6 col-lg-6'p>>>",//'Bfrtip',
-            buttons : [                	
-                {
-                    text: '<i class="fa fa-plus">Agregar consultorio</i>',
-                    titleAttr: 'Agregar',
-                    className: 'btn btn-success',
-                    action: 	function(){
-                                    agregar_nuevo_usuario();
-                    }
-                }]
+            language : idioma_espanol
     });
     editar_datos("#tablaConsultorios tbody",tabla);
 };
+
+var guardar_datos = function(){
+    $("#nuevo-consultorio").on("submit", function(e){
+        e.preventDefault();
+        var frm = $(this).serialize();
+        console.log(frm);
+    })};
+
 var editar_datos = function(tbody, tabla){
     $(tbody).on("click", "button.editar", function(){
         var data = tabla.row($(this).parents("tr")).data();
@@ -47,6 +41,15 @@ var eliminar_datos = function(tbody, tabla){
         var data = tabla.row($(this).parents("tr")).data();
         console.log(data);
     });
+};
+
+function __ajax(url,data){ //funcion general para enviar o traer datos
+    var ajax = $.ajax({
+        "method":"POST",
+        "url":url,
+        "data":data
+    })
+    return ajax;
 };
 var idioma_espanol = {
     "sProcessing":     "Procesando...",
