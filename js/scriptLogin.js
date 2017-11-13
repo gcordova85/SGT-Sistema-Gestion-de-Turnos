@@ -62,13 +62,8 @@ function ValidarUsuarioLogin(){
                 "usuario":usuario,
                 "clave"  :clave,
         },
-        beforeSend: function()
-        { 
-         $("#error").fadeOut();
-         $("#btnAceptar").html('<span class="glyphicon glyphicon-transfer"></span> &nbsp; sending ...');
-        },
         success :  function(response){         
-            if(response == "1"){
+            if(response == true){
                 $("#error").fadeOut();
                 setTimeout(' window.location.assign ("mod/menu.php"); ',1000);
                 }

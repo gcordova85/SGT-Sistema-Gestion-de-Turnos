@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">  
     <link rel="stylesheet" href="../css/styleBase.css">
     <link rel="stylesheet" href="../css/styleTurnos.css">
-    <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.min.css">
 </head>
 <body >
     <div class="container">
@@ -26,6 +26,7 @@
                     <table id="tablePacienteTurno" class="table table-responsive table-bordered">
                         <thead>
                         <tr class="loginhf">
+                            <th>Nro Paciente</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>DNI</th>
