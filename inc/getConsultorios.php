@@ -1,5 +1,6 @@
 <?php
-    include 'Conexion2.php';
+    session_start();
+    include 'conexion.php';
 
     $conexion = new Conexion();
     $cnn = $conexion->getConexion();

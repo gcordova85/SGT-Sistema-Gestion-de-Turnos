@@ -1,5 +1,6 @@
 $(document).ready(function(){
         listar_datos();
+        guardar_datos();
     });
 
 var listar_datos = function(){
@@ -18,6 +19,14 @@ var listar_datos = function(){
     });
     editar_datos("#tablaConsultorios tbody",tabla);
 };
+
+var guardar_datos = function(){
+    $("#nuevo-consultorio").on("submit", function(e){
+        e.preventDefault();
+        var frm = $(this).serialize();
+        console.log(frm);
+    })};
+
 var editar_datos = function(tbody, tabla){
     $(tbody).on("click", "button.editar", function(){
         var data = tabla.row($(this).parents("tr")).data();
@@ -32,6 +41,15 @@ var eliminar_datos = function(tbody, tabla){
         var data = tabla.row($(this).parents("tr")).data();
         console.log(data);
     });
+};
+
+function __ajax(url,data){ //funcion general para enviar o traer datos
+    var ajax = $.ajax({
+        "method":"POST",
+        "url":url,
+        "data":data
+    })
+    return ajax;
 };
 var idioma_espanol = {
     "sProcessing":     "Procesando...",
