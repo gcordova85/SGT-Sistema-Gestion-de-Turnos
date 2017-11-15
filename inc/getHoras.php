@@ -4,7 +4,7 @@
 
  $conexion = new Conexion();
  $cnn = $conexion->getConexion();
- $sql = "SELECT * FROM dias";
+ $sql = "SELECT * FROM horarios";
  $statement = $cnn->prepare($sql);
  $valor = $statement->execute();
 
