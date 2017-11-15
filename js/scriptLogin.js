@@ -69,7 +69,7 @@ function ValidarUsuarioLogin(){
                 }
             else{
                 $(".divError").fadeOut();
-                $("#error").fadeIn("slow");
+                $("#error").fadeIn("slow" );
             };
         },
     });

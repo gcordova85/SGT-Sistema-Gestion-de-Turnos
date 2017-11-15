@@ -21,7 +21,7 @@
     <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="form-group">
                 <label class="control-label" for="idPaciente"> Nro Paciente:</label>
-                <input class="form-control" type="text" id="idPaciente" name="idPaciente" value= "<?php $_REQUEST['id']  ?>" disabled>
+                <input class="form-control" type="text" id="idPaciente" name="idPaciente" value= "<?php echo $_REQUEST['id'];?>" disabled>
             </div>
         </div>
         <div class="col-xs-12 col-sm-3 col-md-3">
@@ -90,6 +90,6 @@
     <script src="../js/jquery.js"></script>   
     <script src="../lib/DataTables/datatables.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>     
-    <script src="../js/scriptTurnos.js"></script>
+    <script src="../js/scriptAsignarTurnos.js"></script>
 </body>
 </html>
