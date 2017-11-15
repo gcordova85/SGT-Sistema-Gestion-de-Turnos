@@ -2,6 +2,7 @@ $(document).ready(function(){
         listarPaciente();
         listarDias();
         listarHorarios();
+        reservarTurnos();
         
     });
 
@@ -61,4 +62,8 @@ function listarHorarios(){
             {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus">Agregar</button>'},
           ]
         }); 
+}
+function reservarTurnos(){
+    var diaActual = new Date();
+    console.log(diaActual)
 }
