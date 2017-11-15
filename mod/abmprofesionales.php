@@ -28,7 +28,7 @@
         <div class="row" id="fila-botones">
             <div class="col-md-1"></div>
             <div class="col-md-8 offset-md-1">
-                <button type="button" id="botonNuevo" class="btn btn-abm"><a href="">Nuevo</a> </button>
+                <button type="button" id="botonNuevo" class="btn btn-abm" data-toggle="modal" data-target="#modalProfesionales" style="margin: 10px">Nuevo</button>
             </div>
         </div>
         <div class="row" id="fila-tabla">
@@ -52,7 +52,82 @@
                 </div>
             </div>
         </div>
-
+        <div id="modalProfesionales" class="modal fade">
+            <div class="modal-dialog">
+                <form method="POST" id="nuevoProfesional">
+                    <div class="modal-content">
+                        <div class="modal-header navbar">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center" id="titulo-modal">Agregar Profesional</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12 container">
+                                    <div class="col-md-2">
+                                            <div id="div-nProfesional" class="form-group">
+                                                <label for="nProfesional" class="control-label col-form-label">N° Prof:</label>
+                                                <input type="number" name="nProfesional" id="nProfesional" class="form-control">
+                                            </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div id="div-nombreProfesional" class="form-group">
+                                            <label for="nombreProfesional" class="control-label col-form-label">Nombre:</label>
+                                            <input type="text" name="nombreProfesional" id="nombreProfesional" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div id="div-apellidoProfesional" class="form-group">
+                                            <label for="apellidoProfesional" class="control-label col-form-label">Apellido:</label>
+                                            <input type="text" name="apellidoProfesional" id="apellidoProfesional" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 container">
+                                    <div class="col-md-6">
+                                        <div id="div-telefonoProfesional" class="form-group">
+                                            <label for="telefonoProfesional" class="control-label col-form-label">Telefono:</label>
+                                            <input type="number" name="telefonoProfesional" id="telefonoProfesional" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="div-direccionProfesional" class="form-group">
+                                            <label for="direccionProfesional" class="control-label col-form-label">Direccion:</label>
+                                            <input type="text" name="direccionProfesional" id="direccionProfesional" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 container">
+                                    <div class="col-md-6">
+                                        <div id="div-emailProfesional" class="form-group">
+                                            <label for="emailProfesional" class="control-label col-form-label">Email:</label>
+                                            <input type="email" name="emailProfesional" id="emailProfesional" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="div-selEspecialidad" class="form-group">
+                                            <label for="selEspecialidad" class="control-label col-form-label">Especialidad:</label>
+                                            <select name="selEspecialidad" id="selEspecialidad" placeholder="Seleccione especialidad" class="form-control">
+                                                    <option value=1>Psicologo</option>
+                                                    <option value=2>Psicopedagogo</option>
+                                                    <option value=3>Enfermero</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" name="agregarNuevo" id="agregarNuevo" class="btn btn-success" value="Agregar" />
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <?php
             require_once '../inc/footer.php'; 
         ?>
