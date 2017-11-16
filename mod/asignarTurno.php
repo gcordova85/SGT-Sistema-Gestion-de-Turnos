@@ -49,12 +49,16 @@
                 <div class="panel-heading">
                     Seleccione un dia
                 </div>
-                <div id="divTablaHorarios">
-                    <table id="tablaDias" class="table table-bordered">
+
+                <div id="divTablaHorarios" class="table-responsive">
+                    <table id="tablaDias" class="table table-bordered dt-responsive">
+                      <thead>
                         <tr class="loginhf text-center">
                             <th>ID Dia</th>
                             <th>Dia </th>
+                            <th></th>
                         </tr>
+                     </thead>
                     </table>  
                 </div>
             </div>
@@ -67,13 +71,19 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Seleccionar horario</h4>
                     </div>
-                        <table id="tablaHorarios" class="table table-bordered">
-                            <tr class="loginhf">
-                                <th > Codigo de Horario</th>    
-                                <th> Horarios disponibles</th>
-                            </tr>
-                            
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                          <table id="tablaHorarios" class="table table-bordered dt-responsive">
+                            <thead>
+                                 <tr class="loginhf">
+                                   <th > Codigo de Horario</th>    
+                                   <th> Horarios disponibles</th>
+                                   <th></th>
+                                 </tr>
+                            </thead>
                         </table>
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnAceptar" class="btn btn-buscar" data-dismiss="modal"> 
                             <span class="glyphicon glyphicon-ok"></span> Aceptar

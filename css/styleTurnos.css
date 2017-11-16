@@ -9,7 +9,7 @@ input:focus, input[type]:focus {
     border: solid 1px;
 }
 .table{
-    margin: center;
+   /* margin: center;*/
     background:#F1F0F0;
     color:#0E0C0C;
     border: solid 1px; 
