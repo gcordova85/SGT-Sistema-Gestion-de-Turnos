@@ -25,21 +25,6 @@ var listar_datos = function(){
     editar_datos("#tablaProfesionales tbody",tabla);
 };
 
-var guardar_datos = function(){
-    $("#nuevoProfesional").on("submit", function(e){
-        e.preventDefault();
-        var frm = $(this)[0].serializeObject();
-        console.log(frm);
-        // $.ajax({
-        //     method: "POST",
-        //     url: "../inc/setProfesionales.php",
-        //     data: frm
-        // }).done(function(info){
-        //     console.log(info);
-        // });
-    });
-};
-
 var idioma_espanol = {
     "sProcessing":     "Procesando...",
     "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -64,6 +49,32 @@ var idioma_espanol = {
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
     }
 };
+
+function guardar_datos(){
+    $("#nuevoProfesional").on("submit", function(e){
+        e.preventDefault();
+        var idprofesional = $("#nProfesional").val(),
+        nombre = $("#nombreProfesional").val(),
+        apellido = $("#apellidoProfesional").val(),
+        tel = $("#telefonoProfesional").val(),
+        dire = $("#direccionProfesional").val(),
+        mail = $("#emailProfesional").val(),
+        especialidad = $("#selEspecialidad").val()
+
+        $.ajax({
+                method: "POST",
+                url: "../inc/setProfesionales.php",
+                data: {'nombres':nombre,
+                'apellido':apellido,
+                'telefono':tel,
+                'direccion':dire,
+                'email':mail,
+                'id_especialidad':especialidad},
+            }).done(function(info){
+                console.log("hola",info);
+            });
+        });
+};
 var editar_datos = function(tbody, tabla){
     $(tbody).on("click", "button.editar", function(){
         $("#titulo-modal").text("Editar Profesional");
@@ -83,7 +94,7 @@ var boton_nuevo = function(){
         $("#titulo-modal").text("Agregar Profesional");
     });
 };
-var eliminar_datos = function(tbody, tabla){
+function eliminar_datos(tbody, tabla){
     $(tbody).on("click", "button.eliminar", function(){
         var data = tabla.row($(this).parents("tr")).data();
         var json = [{'id_profesional': data.id_profesional}]
