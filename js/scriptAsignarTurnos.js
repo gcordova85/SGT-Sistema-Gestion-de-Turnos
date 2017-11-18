@@ -29,13 +29,13 @@ function reservarTurnos(){
     var tablaD = $('#tablaDias').DataTable();  
     $('#tablaDias tbody').on( 'click', 'button #btnDia', function () {
         var fila = tablaD.row( $(this).parents('tr') ).data();
-         idDia = fila.Id_dia;
+         idDia = fila.id_dia;
         console.log(idDia);
     });
     var tablaH = $('#tablaHorarios').DataTable();
     $('#tablaHorarios tbody').on( 'click', 'button #btnHora', function () {
         var fila = tablaH.row( $(this).parents('tr') ).data();
-         idHora = fila.Id_horario;
+         idHora = fila.id_horario;
     });
 
     $.ajax({
@@ -62,7 +62,7 @@ function listarDias(){
             url: '../inc/getDias.php'
           },
           columns: [
-            { data: 'Id_dia'},
+            { data: 'id_dia'},
             { data: 'nombre' },
             {defaultContent:'<button id="btnDia" name="btnDia" class="btn btn-success" data-toggle="modal" data-target="#modalAsignar"><span class="glyphicon glyphicon-plus"></span>Seleccionar horario </button>'},
           ]
@@ -74,7 +74,7 @@ function listarHorarios(){
             url: '../inc/getHoras.php'
           },
           columns: [
-            { data: 'Id_horario'},
+            { data: 'id_horario'},
             { data: 'hora' },
             {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" id="btnHora">Agregar</button>'},
           ]
