@@ -3,35 +3,30 @@
 session_start();
 require_once 'conexion.php';
 
-$profesionales = json_decode($_POST["json"]);
+$nombres=$_POST['nombres'];
+$apellido=$_POST['apellido'];
+$telefono=$_POST['telefono'];
+$direccion=$_POST['direccion'];
+$email=$_POST['email'];
+$id_especialidad=$_POST['id_especialidad'];
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion();
-$sql= "INSERT INTO profesionales(id_profesional,nombres,apellido,telefono,direccion,email,id_especialidad) values(?,?,?,?,?,?,?);";
-$statement = $cnn->prepare($sql);
+$sql = "INSERT INTO profesionales(nombres,apellido,telefono,direccion,email,id_especialidad) values(:nombres,:apellido,:telefono,:direccion,:email,:id_especialidad)";
+$stmt = $cnn->prepare($sql);
 
-$respuesta=false;
-var_dump($profesionales->{"data"});
-foreach($profesionales->{"data"} as $profesional){
-    echo $profesional->{"id_profesional"};
-    echo $profesional->{"nombres"};
-    echo $profesional->{"apellido"};
-    echo $profesional->{"telefono"};
-    echo $profesional->{"direccion"};
-    echo $profesional->{"email"};
-    echo $profesional->{"id_especialidad"};
-    
-    $statement->bindParam(1, $profesional->{"id_profesional"},PDO::PARAM_INT);
-    $statement->bindParam(2, $profesional->{"nombres"},PDO::PARAM_STR);
-    $statement->bindParam(3, $profesional->{"apellido"},PDO::PARAM_STR);
-    $statement->bindParam(4, $profesional->{"telefono"},PDO::PARAM_INT);
-    $statement->bindParam(5, $profesional->{"direccion"},PDO::PARAM_STR);
-    $statement->bindParam(6, $profesional->{"email"},PDO::PARAM_STR);
-    $statement->bindParam(7, $profesional->{"id_especialidad"},PDO::PARAM_INT);
-
-    $respuesta=$statement->execute();
-
-    }
-
-echo $respuesta;
-
+$stmt->bindparam(':nombres', $nombres);
+$stmt->bindparam(':apellido', $apellido);
+$stmt->bindparam(':telefono', $telefono);
+$stmt->bindparam(':direccion', $direccion);
+$stmt->bindparam(':email', $email);
+$stmt->bindparam(':id_especialidad', $id_especialidad);
+if($stmt->execute())
+{
+  $respuesta="Datos insertados correctamente:";
+  echo json_encode($respuesta);
+}
+else {
+  $error="No se han insertado los datos.";
+  echo json_encode($error);
+}

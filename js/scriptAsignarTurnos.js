@@ -1,27 +1,25 @@
 $(document).ready(function(){
     listarDias();
     listarHorarios(); 
-    reservarTurnos();       
+    reservarTurnos(); 
+    llenarForm();      
 });
 
 
 
-
-
-
-function datos(){   // obtengo los datos contenidos en los input
-    var nombre =$("#nombre").val();
-    var apellido =$("#apellido").val();
-    var dni =$("#dni").val();
+// function datos(){   // obtengo los datos contenidos en los input
+//     var nombre =$("#nombre").val();
+//     var apellido =$("#apellido").val();
+//     var dni =$("#dni").val();
    
-      var data=[]; //creo un json con los datos
-      data.push(  
-          {"nombre":nombre,"apellido":apellido,"dni":dni},
+//       var data=[]; //creo un json con los datos
+//       data.push(  
+//           {"nombre":nombre,"apellido":apellido,"dni":dni},
           
-      );
-      var personas={"data":data}; //creo un array con la clave data
-      return personas; 
-}
+//       );
+//       var personas={"data":data}; //creo un array con la clave data
+//       return personas; 
+// }
 function reservarTurnos(){
     var idDia = 1
     var idHora = 1
@@ -65,7 +63,14 @@ function listarDias(){
             { data: 'id_dia'},
             { data: 'nombre' },
             {defaultContent:'<button id="btnDia" name="btnDia" class="btn btn-success" data-toggle="modal" data-target="#modalAsignar"><span class="glyphicon glyphicon-plus"></span>Seleccionar horario </button>'},
-          ]
+          ],
+          "bPaginate": false, 
+          "bLengthChange": false, 
+          "bFilter": false, 
+          "bInfo": false, 
+          "bAutoWidth": false,
+          "ordering": false,
+          "bSearch":false
         });
 }
 function listarHorarios(){
@@ -77,6 +82,39 @@ function listarHorarios(){
             { data: 'id_horario'},
             { data: 'hora' },
             {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" id="btnHora">Agregar</button>'},
-          ]
+          ],
+          "bPaginate": false, 
+          "bLengthChange": false, 
+          "bFilter": false, 
+          "bInfo": false, 
+          "bAutoWidth": false,
+          "ordering": false,
+          "bSearch":false
         }); 
+}
+
+function llenarForm() {
+    var id=$("#idPaciente").val();
+    var data=[]; //creo un json con los datos
+    data.push(  
+        {"id":id},
+    );
+    var datos={"data":data};
+    var json= JSON.stringify(datos);
+    $.ajax({
+        "method":"POST",
+        "url":"../inc/getPacienteId.php",  
+        "data":{"json":json}
+    })
+    .done(function(info) {
+            if(info){//si hay respuesta
+                var persona=JSON.parse(info);
+                //console.log(info);
+                $("#nombre").val(persona.data[0].nombre);
+                $("#apellido").val(persona.data[0].apellido);
+                $("#dni").val(persona.data[0].dni);
+            }
+        })
+    
+    
 }
