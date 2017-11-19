@@ -12,7 +12,7 @@ ocultarMsjError();
 
 listar_datos();
 
-
+setPaciente();
 $('#tablaTurnos').DataTable();    
 })
 
@@ -275,6 +275,7 @@ function mostrarTabla(){
 
 function alternarPantalla(tabla) {
     $("#botonNuevo").on("click",function(){
+        habilitarEdicion();
         mostrarForm();
     });
     $("#btnAcep").on("click",function(){
@@ -284,7 +285,7 @@ function alternarPantalla(tabla) {
     $('#tablaPacientes tbody').on( 'click', 'button.btnVerMas',function(){
         mostrarForm(); 
         var data=tabla.row($(this).parents("tr")).data();
-        var id=data.Id_paciente;
+        var id=data.id_paciente;
         var data=[]; //creo un json con los datos
         data.push(  
             {"id":id},
@@ -297,13 +298,13 @@ function alternarPantalla(tabla) {
             if(info){//si hay respuesta
                 var persona=JSON.parse(info);
                 console.log(info);
-                $("#lblId").text(persona.data[0].Id_paciente);
+                $("#lblId").text(persona.data[0].id_paciente);
                 $("#nom").val(persona.data[0].nombre);
                 $("#ape").val(persona.data[0].apellido);
                 $("#dni").val(persona.data[0].dni);
                 $("#dir").val(persona.data[0].direccion);
                 $("#tel").val(persona.data[0].telefono);
-                $("#os").val(persona.data[0].Id_obrasocial);   
+                $("#os").val(persona.data[0].id_obrasocial);   
                   
 
                 console.log(persona.data[0].nombre);
@@ -336,13 +337,13 @@ function listar_datos() {
             url: '../inc/getPaciente.php'
           },
             columns: [
-            { data: 'Id_paciente' },
+            { data: 'id_paciente' },
             { data: 'nombre' },
             { data: 'apellido' },
             { data: 'dni' },
             { data: 'telefono' },
-            { data: 'Id_obrasocial' },
-            { data: 'Id_estado'},
+            { data: 'id_obrasocial' },
+            { data: 'id_estado'},
             { defaultContent : "<button type='button' class='btnVerMas btn btn-info'>Ver mas</button>" },
           ],
          languaje: idioma_espanol
@@ -387,13 +388,44 @@ function obtenerDatos(){   // obtengo los datos contenidos en los input
     var dni =$("#dni").val();
     var direccion =$("#dir").val();
     var telefono =$("#tel").val();
-    var os=$("#os").val();
+    // 
+    var os="1";
+    var discapacidad="sadfd";
+    var autorizacion="errt";
+    var estado="1";
     
       var data=[]; //creo un json con los datos
       data.push(  
-          {id_personaCargo:id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono},
+          {id_personaCargo:id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"discapacidad":discapacidad ,"autorizacion":autorizacion,"estado":estado},
           
       );
       var personas={"data":data}; //creo un array con la clave data
+      console.log(personas);
       return personas; 
+}
+
+function guardarDatos(url){  //al enviar el formulario
+    $("#frmPrincipal").on("submit",function(){
+    var json= JSON.stringify(obtenerDatos()); //convierto el array de objetos en una cadena json
+    console.log(json);
+    __ajax(url,{"json":json}) //espera respuesta en formato json y le paso mis datos
+    .done(function(info) {
+        if(info){//si hay respuesta
+            console.log(info)
+            //listar();
+
+        }else{
+            console.log("algo fue mal");
+            
+        }
+    })
+})
+}
+
+function nuevoPaciente(){
+    $("#botonNuevo").on("click",function(){
+        $('#frmPrincipal').trigger("reset"); 
+        guardarDatos("../inc/setPaciente.php");           
+    })
+    
 }

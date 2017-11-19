@@ -116,7 +116,7 @@
             
                  <div  id="divOs" class="divInput form-group col-md-6">   
                         <label for="os" class="control-label col-form-label">Obra social/Prepaga:</label>   
-                        <select name="" id="os" class="form-control inp-paciente" disabled>
+                        <select name="os" id="os" class="form-control inp-paciente" disabled>
                             <option value="0">Seleccione una opción</option>
                             <option value="1">Opcion 1</option>
                         </select>
