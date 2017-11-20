@@ -66,6 +66,7 @@
         <div id="divFormulario" class="div-oculto">
         <form id="frmPrincipal">
                 <div class="text-left col-md-6">
+                    <label>Número de paciente </label>
                     <label id="lblId"></label>
                 </div>
                 <div  class="text-right col-md-6">
@@ -140,15 +141,13 @@
                     </div>
 
                     <div class="cert-paciente col-md-6 form-group text-center visible">
-                        <label for="imgDisc">Certificado de discapacidad: </label>
                         <div>
-                        <a href="../data/discapacidad.jpg"><img id="imgDisc" src="../data/discapacidad.jpg" class="img-thumbnail img-cert" alt="No se enuentra ningún archivo"></a>
+                        <a id="linkCert" href="">Certificado de discapacidad</a>
                         </div>
                     </div>
                     <div class="cert-paciente col-md-6 form-group text-center visible">
-                        <label for="imgAut">Autorización de O.S./Prepaga: </label>
                         <div>
-                        <a href="../data/autorizacion.jpg"><img id="imgAut" src="../data/autorizacion.jpg" class="img-thumbnail img-cert" alt="No se enuentra ningún archivo"></a>                        
+                        <a id="linkAutoriz" href="">Autorizacion de obra social/prepaga</a>                        
                         </div>
                     </div>
                     <div  id="divDir" class="form-group col-md-6 file-paciente oculto">

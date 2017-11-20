@@ -306,7 +306,9 @@ function alternarPantalla(tabla) {
                 $("#dir").val(persona.data[0].direccion);
                 $("#tel").val(persona.data[0].telefono);
                 $("#os").val(persona.data[0].id_obrasocial);   
-                  
+                $("#linkAutoriz").attr("href",persona.data[0].autorizacion);
+                $("#linkCert").attr("href",persona.data[0].certificado);
+                
 
                 console.log(persona.data[0].nombre);
                 
@@ -382,63 +384,48 @@ var idioma_espanol = {
 
 ///*************************carga de datos****************************** */
 
-// function obtenerDatos(){   // obtengo los datos contenidos en los input
-//     var id = $("#lblId").text();
-//     var nombre =$("#nom").val();
-//     var apellido =$("#ape").val();
-//     var dni =$("#dni").val();
-//     var direccion =$("#dir").val();
-//     var telefono =$("#tel").val();
-//     // 
-//     var os=$("#os").val();
-//     var fileCert=$("#fileCert").val();
-//     var fileAutoriz=$("#fileAutoriz").val();
-//     var discapacidad="wwwwwwwwww";
-//     var autorizacion="www.www.ww";
-//     var estado="1";
-//     console.log(fileAutoriz);
+function obtenerDatos(){   // obtengo los datos contenidos en los input
+    var id = $("#lblId").text();
+    var nombre =$("#nom").val();
+    var apellido =$("#ape").val();
+    var dni =$("#dni").val();
+    var direccion =$("#dir").val();
+    var telefono =$("#tel").val();
+    // 
+    var os=$("#os").val();
+    var fileCert=$("#fileCert").val();
+    var fileAutoriz=$("#fileAutoriz").val();
+    var estado="1";
+    console.log(fileAutoriz);
     
-//       var data=[]; //creo un json con los datos
-//       data.push(  
-//           {"id":id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"discapacidad":discapacidad ,"autorizacion":autorizacion,"ileCert":fileCert,"fileAutoriz":fileAutoriz,"estado":estado},
+      var data=[]; //creo un json con los datos
+      data.push(  
+          {"id":id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"fileCert":fileCert,"fileAutoriz":fileAutoriz,"estado":estado},
           
-//       );
-//       var personas={"data":data}; //creo un array con la clave data
-//       console.log(personas);
-//       return personas; 
-// }
+      );
+      var personas={"data":data}; //creo un array con la clave data
+      console.log(personas);
+      return personas; 
+}
 
-// function guardarDatos(url){  //al enviar el formulario
-//     $("#frmPrincipal").on("submit",function(){
-//     var json= JSON.stringify(obtenerDatos()); //convierto el array de objetos en una cadena json
-//     console.log(json);
-//     __ajax(url,{"json":json}) //espera respuesta en formato json y le paso mis datos
-//     .done(function(info) {
-//         if(info){//si hay respuesta
-//             console.log(info)
-//             //listar();
-
-//         }else{
-//             console.log("algo fue mal");
-            
-//         }
-//     })
-// })
-// }
-
-// function nuevoPaciente(){
-//     $("#botonNuevo").on("click",function(e){
-//         e.preventDefault();
-//         $('#frmPrincipal').trigger("reset"); 
-//         guardarDatos("../inc/setPaciente.php");           
-//     })
-    
-// }
 
 function nuevoPaciente(){
         $("#botonNuevo").on("click",function(e){
             e.preventDefault();
-            $('#frmPrincipal').trigger("reset");           
+            $('#frmPrincipal').trigger("reset");
+
+
+            __ajax("../inc/getUltimoPaciente.php","")
+            
+                    .done(function(info) {
+                        if(info){
+                            var persona=JSON.parse(info);
+                            // console.log(info);
+                            var ultimoId=persona.data[0].id_paciente;
+                            $("#lblId").text(parseInt(ultimoId)+1);                            
+                        }});
+            
+            
         })
         $("#frmPrincipal").on("submit", function(){
             // e.preventDefault();

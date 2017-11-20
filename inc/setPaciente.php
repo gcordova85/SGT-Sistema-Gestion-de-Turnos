@@ -10,10 +10,9 @@ session_start();
  $os= $_POST["os"];
 //  $fileAut= $_FILES["fileAutoriz"]["name"];
 //  $fileCert= $_FILES["fileCert"]["name"];
-// echo(true);
- echo ($_FILES["fileAutoriz"]["type"]=="application/pdf");
-$fileAut= "autorizacionPaciente".$nombre.$dni.".pdf";
-$fileCert= "certificadoPaciente".$nombre.$dni.".pdf";
+echo $_FILES["fileCert"]["name"];
+$fileAut= "autPac".$id.".pdf";
+$fileCert= "certPac".$id.".pdf";
  $estado= $_POST["estado"];
 
  $rutaCert="../data/discapacidad/".$fileCert;
@@ -36,7 +35,7 @@ $fileCert= "certificadoPaciente".$nombre.$dni.".pdf";
   $conexion = new Conexion();
   $cnn = $conexion->getConexion();
   $sql="INSERT INTO paciente (nombre, apellido, dni, direccion, telefono, id_obrasocial, certificado, autorizacion, id_estado) 
-  values (:nombre, :apellido, :dni, :direccion, :telefono, :os, :fileAut, :fileCert, :estado);";
+  values (:nombre, :apellido, :dni, :direccion, :telefono, :os, :fileCert, :fileAut, :estado);";
   $statement = $cnn->prepare($sql);
   $respuesta=false;
   
