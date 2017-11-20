@@ -10,15 +10,26 @@ session_start();
  $os= $_POST["os"];
 //  $fileAut= $_FILES["fileAutoriz"]["name"];
 //  $fileCert= $_FILES["fileCert"]["name"];
-$fileAut= "autorizacionPaciente".$nombre.$dni.".jpg";
-$fileCert= "certificadoPaciente".$nombre.$dni.".jpg";
+// echo(true);
+ echo ($_FILES["fileAutoriz"]["type"]=="application/pdf");
+$fileAut= "autorizacionPaciente".$nombre.$dni.".pdf";
+$fileCert= "certificadoPaciente".$nombre.$dni.".pdf";
  $estado= $_POST["estado"];
 
  $rutaCert="../data/discapacidad/".$fileCert;
  $rutaAut="../data/autorizacion/".$fileAut;
  
- move_uploaded_file($_FILES["fileCert"]["tmp_name"],$rutaCert);
- move_uploaded_file($_FILES["fileAutoriz"]["tmp_name"],$rutaAut);
+ if($_FILES["fileCert"]["type"]=="application/pdf"){
+    move_uploaded_file($_FILES["fileCert"]["tmp_name"],$rutaCert);    
+ }else{
+     echo "El certificado de discapacidad ser un archivo pdf";
+ }
+
+ if($_FILES["fileAutoriz"]["type"]=="application/pdf"){
+    move_uploaded_file($_FILES["fileAutoriz"]["tmp_name"],$rutaAut);    
+ }else{
+    echo "La autorizacion ser un archivo pdf";
+}
  
 
 
