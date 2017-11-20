@@ -12,7 +12,8 @@ ocultarMsjError();
 
 listar_datos();
 
-setPaciente();
+nuevoPaciente();
+
 $('#tablaTurnos').DataTable();    
 })
 
@@ -381,51 +382,85 @@ var idioma_espanol = {
 
 ///*************************carga de datos****************************** */
 
-function obtenerDatos(){   // obtengo los datos contenidos en los input
-    var id = $("#lblId").text();
-    var nombre =$("#nom").val();
-    var apellido =$("#ape").val();
-    var dni =$("#dni").val();
-    var direccion =$("#dir").val();
-    var telefono =$("#tel").val();
-    // 
-    var os="1";
-    var discapacidad="sadfd";
-    var autorizacion="errt";
-    var estado="1";
+// function obtenerDatos(){   // obtengo los datos contenidos en los input
+//     var id = $("#lblId").text();
+//     var nombre =$("#nom").val();
+//     var apellido =$("#ape").val();
+//     var dni =$("#dni").val();
+//     var direccion =$("#dir").val();
+//     var telefono =$("#tel").val();
+//     // 
+//     var os=$("#os").val();
+//     var fileCert=$("#fileCert").val();
+//     var fileAutoriz=$("#fileAutoriz").val();
+//     var discapacidad="wwwwwwwwww";
+//     var autorizacion="www.www.ww";
+//     var estado="1";
+//     console.log(fileAutoriz);
     
-      var data=[]; //creo un json con los datos
-      data.push(  
-          {id_personaCargo:id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"discapacidad":discapacidad ,"autorizacion":autorizacion,"estado":estado},
+//       var data=[]; //creo un json con los datos
+//       data.push(  
+//           {"id":id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"discapacidad":discapacidad ,"autorizacion":autorizacion,"ileCert":fileCert,"fileAutoriz":fileAutoriz,"estado":estado},
           
-      );
-      var personas={"data":data}; //creo un array con la clave data
-      console.log(personas);
-      return personas; 
-}
+//       );
+//       var personas={"data":data}; //creo un array con la clave data
+//       console.log(personas);
+//       return personas; 
+// }
 
-function guardarDatos(url){  //al enviar el formulario
-    $("#frmPrincipal").on("submit",function(){
-    var json= JSON.stringify(obtenerDatos()); //convierto el array de objetos en una cadena json
-    console.log(json);
-    __ajax(url,{"json":json}) //espera respuesta en formato json y le paso mis datos
-    .done(function(info) {
-        if(info){//si hay respuesta
-            console.log(info)
-            //listar();
+// function guardarDatos(url){  //al enviar el formulario
+//     $("#frmPrincipal").on("submit",function(){
+//     var json= JSON.stringify(obtenerDatos()); //convierto el array de objetos en una cadena json
+//     console.log(json);
+//     __ajax(url,{"json":json}) //espera respuesta en formato json y le paso mis datos
+//     .done(function(info) {
+//         if(info){//si hay respuesta
+//             console.log(info)
+//             //listar();
 
-        }else{
-            console.log("algo fue mal");
+//         }else{
+//             console.log("algo fue mal");
             
-        }
-    })
-})
-}
+//         }
+//     })
+// })
+// }
+
+// function nuevoPaciente(){
+//     $("#botonNuevo").on("click",function(e){
+//         e.preventDefault();
+//         $('#frmPrincipal').trigger("reset"); 
+//         guardarDatos("../inc/setPaciente.php");           
+//     })
+    
+// }
 
 function nuevoPaciente(){
-    $("#botonNuevo").on("click",function(){
-        $('#frmPrincipal').trigger("reset"); 
-        guardarDatos("../inc/setPaciente.php");           
-    })
-    
-}
+        $("#botonNuevo").on("click",function(e){
+            e.preventDefault();
+            $('#frmPrincipal').trigger("reset");           
+        })
+        $("#frmPrincipal").on("submit", function(){
+            // e.preventDefault();
+            //var f = $(this);
+            var id = $("#lblId").text();
+            var formData = new FormData(document.getElementById("frmPrincipal"));
+            formData.append("id", id);
+            formData.append("estado", "1");
+            
+            //formData.append(f.attr("name"), $(this)[0].files[0]);
+            $.ajax({
+                url: "../inc/setPaciente.php",
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+	     processData: false
+            })
+                .done(function(res){
+                    console.log(res);
+                    // $("#mensaje").html("Respuesta: " + res);
+                });
+        });
+    }
