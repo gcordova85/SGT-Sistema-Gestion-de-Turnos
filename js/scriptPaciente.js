@@ -16,6 +16,10 @@ nuevoPaciente();
 
 editarArchivos();
 
+guardar();
+
+guardarCambios();
+
 $('#tablaTurnos').DataTable();    
 })
 
@@ -209,6 +213,21 @@ function estadoNuevo() {//estados de los botones
     $("#divGuardarC").removeClass("visible");
     $("#divGuardarC").addClass("oculto");
     
+    $("#divCertLink").removeClass("visible");
+    $("#divCertLink").addClass("oculto");
+
+    $("#divCert").removeClass("oculto");
+    $("#divCert").addClass("visible");
+
+    $("#divAutorizLink").removeClass("visible");        
+    $("#divAutorizLink").addClass("oculto");
+
+    $("#divAutoriz").removeClass("oculto");
+    $("#divAutoriz").addClass("visible");
+
+    $(".fileNoEdit").each(function(){
+        $(this).addClass("hidden");
+    })
 }
 function estadoEdicion() {
     $("#divEdit").removeClass("visible");
@@ -228,6 +247,10 @@ function estadoEdicion() {
     
     $("#divGuardarC").removeClass("oculto");
     $("#divGuardarC").addClass("visible");
+
+    $(".fileNoEdit").each(function(){
+        $(this).removeClass("hidden");
+    })
 }
 
 function estadoDetalles() {
@@ -498,21 +521,20 @@ function nuevoPaciente(){
  function guardar() {
      $("#btnGuardar").on("click",function(){
          var url= "../inc/setPaciente.php";
-         enviarDatos(url);
+         guardarNuevo(url);
      })
  }
  function guardarCambios() {
-    $("#btnGuardarC").on("click",function(){
+    $("#btnGuardarCambios").on("click",function(){
         var url= "../inc/updatePaciente.php";        
-        enviarDatos(url);
+        editarPaciente(url);
     })
 }
 
     
-function enviarDatos(url) {
+function guardarNuevo(url) {
     $("#frmPrincipal").on("submit", function(){
         // e.preventDefault();
-        //var f = $(this);
         var id = $("#lblId").text();
         var formData = new FormData(document.getElementById("frmPrincipal"));
         formData.append("id", id);
@@ -535,6 +557,26 @@ function enviarDatos(url) {
     
 }
 
-function editarPaciente(){
+function editarPaciente(url){
+    $("#frmPrincipal").on("submit", function(){
+        //  e.preventDefault();
+        var id = $("#lblId").text();
+        var formData = new FormData(document.getElementById("frmPrincipal"));
+        formData.append("id", id);
+        formData.append("estado", "1");
         
+        $.ajax({
+            url: url,
+            type: "post",
+            dataType: "html",
+            data: formData,
+            cache: false,
+            contentType: false,
+     processData: false
+        })
+            .done(function(res){
+                console.log(res);
+                // $("#mensaje").html("Respuesta: " + res);
+            });
+    });
     }

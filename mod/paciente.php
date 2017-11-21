@@ -147,7 +147,7 @@
                     </div>
 
                     <div  id="divCert" class="form-group col-md-6 file-paciente oculto">
-                            <label for="fileCert" class="control-label col-form-label">Certificado de discapacidad:</label> <button type="button" id="btnNoEditarCert" class="btn btn-xs btn-danger glyphicon glyphicon-arrow-left "></button>
+                            <label for="fileCert" class="control-label col-form-label">Certificado de discapacidad:</label> <button type="button" id="btnNoEditarCert" class="fileNoEdit btn btn-xs btn-danger glyphicon glyphicon-arrow-left "></button>
                              <input type="file" name="fileCert" id="fileCert" class="form-control">
                              <div class="alert alert-danger divError oculto" id="errorCert">
                                 <p><b>Debe cargar el certificado</b></p>
@@ -161,7 +161,7 @@
                     </div>
 
                      <div  id="divAutoriz" class="form-group col-md-6  oculto file-paciente">
-                            <label for="fileAutoriz" class="control-label col-form-label">Autorización de O.S/Prepaga:</label> <button type="button" id="btnNoEditarAutoriz" class="btn btn-xs btn-danger glyphicon glyphicon-arrow-left "></button>
+                            <label for="fileAutoriz" class="control-label col-form-label">Autorización de O.S/Prepaga:</label> <button type="button" id="btnNoEditarAutoriz" class="fileNoEdit btn btn-xs btn-danger glyphicon glyphicon-arrow-left "></button>
                              <input type="file" name="fileAutoriz" id="fileAutoriz" class="form-control">
                              <div class="alert alert-danger divError oculto" id="errorAutoriz">
                                 <p><b>Debe cargar la autorización</b></p>

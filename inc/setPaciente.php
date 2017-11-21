@@ -8,9 +8,7 @@ session_start();
  $direccion= $_POST["dir"];
  $telefono= $_POST["tel"];
  $os= $_POST["os"];
-//  $fileAut= $_FILES["fileAutoriz"]["name"];
-//  $fileCert= $_FILES["fileCert"]["name"];
-echo $_FILES["fileCert"]["name"];
+
 $fileAut= "autPac".$id.".pdf";
 $fileCert= "certPac".$id.".pdf";
  $estado= $_POST["estado"];
