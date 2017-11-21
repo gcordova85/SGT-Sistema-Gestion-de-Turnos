@@ -20,6 +20,8 @@ guardar();
 
 guardarCambios();
 
+asignarPersona();
+
 $('#tablaTurnos').DataTable();    
 })
 
@@ -521,18 +523,18 @@ function nuevoPaciente(){
  function guardar() {
      $("#btnGuardar").on("click",function(){
          var url= "../inc/setPaciente.php";
-         guardarNuevo(url);
+         enviarDatos(url);
      })
  }
  function guardarCambios() {
     $("#btnGuardarCambios").on("click",function(){
         var url= "../inc/updatePaciente.php";        
-        editarPaciente(url);
+        enviarDatos(url);
     })
 }
 
     
-function guardarNuevo(url) {
+function enviarDatos(url) {
     $("#frmPrincipal").on("submit", function(){
         // e.preventDefault();
         var id = $("#lblId").text();
@@ -557,26 +559,11 @@ function guardarNuevo(url) {
     
 }
 
-function editarPaciente(url){
-    $("#frmPrincipal").on("submit", function(){
-        //  e.preventDefault();
-        var id = $("#lblId").text();
-        var formData = new FormData(document.getElementById("frmPrincipal"));
-        formData.append("id", id);
-        formData.append("estado", "1");
-        
-        $.ajax({
-            url: url,
-            type: "post",
-            dataType: "html",
-            data: formData,
-            cache: false,
-            contentType: false,
-     processData: false
+
+    function asignarPersona(){
+        $("#btnAsignar").on("click",function(){
+            var id = $("#lblId").text();       
+            $.redirect( "../mod/personaPaciente.php", { 'id': id} );        
         })
-            .done(function(res){
-                console.log(res);
-                // $("#mensaje").html("Respuesta: " + res);
-            });
-    });
+        
     }

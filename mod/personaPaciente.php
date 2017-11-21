@@ -20,6 +20,34 @@
         require_once '../inc/header.php'; 
         ?>
 
+
+<div class="row">
+    <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="form-group">
+                <label class="control-label" for="idPaciente"> Nro Paciente:</label>
+                <input class="form-control" type="text" id="idPaciente" name="idPaciente" value= "<?php echo $_REQUEST['id'];?>" disabled>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="form-group">
+                <label class="control-label" for="nombre"> Nombre:</label>
+                <input class="form-control" type="text" id="nombre" name="nombre" disabled>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="form-group">
+                <label class="control-label" for="apellido"> Apellido:</label>
+                <input class="form-control" type="text" id="apellido" name="apellido" disabled>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="form-group">
+                <label class="control-label" for="dni"> DNI</label>
+                <input class="form-control" type="number" id="dni" name="dni" disabled>
+            </div>
+        </div>
+    </div>
+
         <div class="form-group text-right">
             <a href="#cargo" id="btnCargo" class="btn btn-info btnModal" data-toggle="modal">Nueva persona</a>
         </div>

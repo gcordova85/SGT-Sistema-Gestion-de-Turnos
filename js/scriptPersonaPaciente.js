@@ -4,8 +4,32 @@ $(document).ready(function(){
     //guardar();  
     listar();  
     nuevaPersona(); 
+    obtenerPaciente();
     
 });
+
+function obtenerPaciente() {
+    var id=$("#idPaciente").val();
+    alert(id);
+    var data=[]; //creo un json con los datos
+
+    data.push(  
+        {"id":id},
+    );
+
+    var datos={"data":data};
+    var json= JSON.stringify(datos); //convierto el array de objetos en una cadena json
+    __ajax("../inc/getPacienteId.php",{"json":json})
+
+        .done(function(info) {
+             if(info){//si hay respuesta
+                 var persona=JSON.parse(info);
+                 $("#nombre").val(persona.data[0].nombre);
+                 $("#apellido").val(persona.data[0].apellido);
+                 $("#dni").val(persona.data[0].dni);
+             }
+        });
+}
 
 function alternarBotones(editar){
     var btnGuardar=$("#guardarPersona");

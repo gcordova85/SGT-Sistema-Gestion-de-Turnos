@@ -14,6 +14,7 @@
     <script src="../js/scriptPaciente.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.min.css"/>
     <script type="text/javascript" src="../lib/DataTables/datatables.min.js"></script>
+    <script src="../js/redirectPlugin.js"></script>  
     <link rel="stylesheet" href="../css/font-awesome.min.css">
 </head>
 <body>
@@ -297,7 +298,7 @@
             <div class="modal-body">
              
                 <div class="text-right">
-                    <a href="personaPaciente.php" class="btn btn-info glyphicon glyphicon-plus"> Asignar</a>
+                    <button type="button" id="btnAsignar" class="btn btn-info glyphicon glyphicon-plus"> Asignar</button>
                 </div>
                 <table id="tablaCargo" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
