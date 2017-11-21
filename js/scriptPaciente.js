@@ -12,6 +12,7 @@ ocultarMsjError();
 
 listar_datos();
 
+nuevoPaciente();
 
 $('#tablaTurnos').DataTable();    
 })
@@ -275,6 +276,7 @@ function mostrarTabla(){
 
 function alternarPantalla(tabla) {
     $("#botonNuevo").on("click",function(){
+        habilitarEdicion();
         mostrarForm();
     });
     $("#btnAcep").on("click",function(){
@@ -284,7 +286,7 @@ function alternarPantalla(tabla) {
     $('#tablaPacientes tbody').on( 'click', 'button.btnVerMas',function(){
         mostrarForm(); 
         var data=tabla.row($(this).parents("tr")).data();
-        var id=data.Id_paciente;
+        var id=data.id_paciente;
         var data=[]; //creo un json con los datos
         data.push(  
             {"id":id},
@@ -297,14 +299,16 @@ function alternarPantalla(tabla) {
             if(info){//si hay respuesta
                 var persona=JSON.parse(info);
                 console.log(info);
-                $("#lblId").text(persona.data[0].Id_paciente);
+                $("#lblId").text(persona.data[0].id_paciente);
                 $("#nom").val(persona.data[0].nombre);
                 $("#ape").val(persona.data[0].apellido);
                 $("#dni").val(persona.data[0].dni);
                 $("#dir").val(persona.data[0].direccion);
                 $("#tel").val(persona.data[0].telefono);
-                $("#os").val(persona.data[0].Id_obrasocial);   
-                  
+                $("#os").val(persona.data[0].id_obrasocial);   
+                $("#linkAutoriz").attr("href",persona.data[0].autorizacion);
+                $("#linkCert").attr("href",persona.data[0].certificado);
+                
 
                 console.log(persona.data[0].nombre);
                 
@@ -336,13 +340,13 @@ function listar_datos() {
             url: '../inc/getPaciente.php'
           },
             columns: [
-            { data: 'Id_paciente' },
+            { data: 'id_paciente' },
             { data: 'nombre' },
             { data: 'apellido' },
             { data: 'dni' },
             { data: 'telefono' },
-            { data: 'Id_obrasocial' },
-            { data: 'Id_estado'},
+            { data: 'id_obrasocial' },
+            { data: 'id_estado'},
             { defaultContent : "<button type='button' class='btnVerMas btn btn-info'>Ver mas</button>" },
           ],
          languaje: idioma_espanol
@@ -387,13 +391,63 @@ function obtenerDatos(){   // obtengo los datos contenidos en los input
     var dni =$("#dni").val();
     var direccion =$("#dir").val();
     var telefono =$("#tel").val();
+    // 
     var os=$("#os").val();
+    var fileCert=$("#fileCert").val();
+    var fileAutoriz=$("#fileAutoriz").val();
+    var estado="1";
+    console.log(fileAutoriz);
     
       var data=[]; //creo un json con los datos
       data.push(  
-          {id_personaCargo:id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono},
+          {"id":id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"fileCert":fileCert,"fileAutoriz":fileAutoriz,"estado":estado},
           
       );
       var personas={"data":data}; //creo un array con la clave data
+      console.log(personas);
       return personas; 
 }
+
+
+function nuevoPaciente(){
+        $("#botonNuevo").on("click",function(e){
+            e.preventDefault();
+            $('#frmPrincipal').trigger("reset");
+
+
+            __ajax("../inc/getUltimoPaciente.php","")
+            
+                    .done(function(info) {
+                        if(info){
+                            var persona=JSON.parse(info);
+                            // console.log(info);
+                            var ultimoId=persona.data[0].id_paciente;
+                            $("#lblId").text(parseInt(ultimoId)+1);                            
+                        }});
+            
+            
+        })
+        $("#frmPrincipal").on("submit", function(){
+            // e.preventDefault();
+            //var f = $(this);
+            var id = $("#lblId").text();
+            var formData = new FormData(document.getElementById("frmPrincipal"));
+            formData.append("id", id);
+            formData.append("estado", "1");
+            
+            //formData.append(f.attr("name"), $(this)[0].files[0]);
+            $.ajax({
+                url: "../inc/setPaciente.php",
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+	     processData: false
+            })
+                .done(function(res){
+                    console.log(res);
+                    // $("#mensaje").html("Respuesta: " + res);
+                });
+        });
+    }
