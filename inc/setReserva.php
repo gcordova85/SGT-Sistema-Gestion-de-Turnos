@@ -3,53 +3,72 @@
      require_once 'conexion.php';
       $conexion = new Conexion();
       $cnn = $conexion->getConexion();
-
-
-      $dia = $_REQUEST['idDia'];  echo "dia-------------------".$dia." <br>    " ;
-      $hora = $_REQUEST['idHora'];  echo "hora elegida----- ".$hora."<br>";
+      $diaElegido = $_REQUEST['idDia'];  echo "dia-------------------".$diaElegido." <br>    " ;
+      $horaElegida = $_REQUEST['idHora'];  echo "hora elegida----- ".$horaElegida."<br>";
       $diaSemana = date("w"); echo "dia Semana ---".$diaSemana."<br>";
       $diaHoyNum = date("z"); echo "dia del anio en numero ".$diaHoyNum,"<br>";
-      $array_turnos = array(); echo "array turnos".$array_turnos."<br>";
+      $array_turnos = array(); echo "array turnos";
+      foreach($array_turnos as $turno)
+        {
+        echo $turno . " ";
+        } 
+      echo "<br>";
+      
       $contador = 0;
       $indicador = 0;
-    function localizarDia(diaElegido,diaSemana,diaHoyNum,horaElegida,array_turnos,contador,indicador)
+    function localizarDia($diaElegido,$diaSemana,$diaHoyNum,$horaElegida,$array_turnos,$contador,$indicador)
     {
-        if (diaElegido == diaSemana){
-            while(diaHoyNum <= 365){
-              if(indicador == 0){
-                  diaHoyNum+=7; 
-                  array_push(array_turnos,diaHoyNum,horaElegida);
+        if ($diaElegido == $diaSemana){
+            while($diaHoyNum <= 365){
+              // if (($diaHoyNum+7)>365 ) {
+              //   return $array_turnos;
+              //   foreach($array_turnos as $turno)
+              //   {
+              //   echo $turno . "<br>";
+              //   } 
+              // }
+              if($indicador == 0){
+                  $diaHoyNum+=7; 
+                  echo "dia igual a semana ".$diaHoyNum."<br>";
+                  array_push($array_turnos,$diaHoyNum,$horaElegida);
               }
-              if (indicador == 1) {
-                diaHoyNum = diaHoyNum - contador;
-                diaHoyNum+=7; 
-                array_push(array_turnos,diaHoyNum,horaElegida);
+              if ($indicador == 1) {
+                $diaHoyNum = $diaHoyNum - $contador;
+                $diaHoyNum+=7; 
+                array_push($array_turnos,$diaHoyNum,$horaElegida);
               }
               else{
-                diaHoyNum = diaHoyNum + contador;
-                diaHoyNum+=7; 
-                array_push(array_turnos,diaHoyNum,horaElegida);
+                $diaHoyNum = $diaHoyNum + $contador;
+                $diaHoyNum+=7; 
+                array_push($array_turnos,$diaHoyNum,$horaElegida);
               }
             }
-          return array_turnos;
+          foreach($array_turnos as $turno)
+            {
+            echo $turno . "<br>";
+            } 
+          return $array_turnos;
         } 
-        if(diaElegido < diaSemana){
-          indicador = 1;
-          diaElegido+=1;
-          contador+=1;
-          echo diaElegido , contador;
-          localizarDia( diaElegido, diaSemana, diaHoyNum, horaElegida, array_turnos,contador,indicador);
+        if($diaElegido < $diaSemana){
+          $indicador = 1;
+          $diaElegido+=1;
+          $contador+=1;
+          localizarDia( $diaElegido, $diaSemana, $diaHoyNum, $horaElegida, $array_turnos,$contador,$indicador);
         }
         else{
-          indicador = 2;
-          diaElegido-=1;
-          contador+=1;
-          echo diaElegido , contador;
-          localizarDia( diaElegido, diaSemana, diaHoyNum, horaElegida, array_turnos,contador,indicador);
+          $indicador = 2;
+          $diaElegido-=1;
+          $contador+=1;
+          localizarDia( $diaElegido, $diaSemana, $diaHoyNum, $horaElegida, $array_turnos,$contador,$indicador);
         } 
 
     }
-    localizarDia($dia,$diaSemana,$diaHoyNum,$hora,$array_turnos,$contador,$indicador);
+localizarDia($diaElegido,$diaSemana,$diaHoyNum,$horaElegida,$array_turnos,$contador,$indicador);
+echo "turnos despues "."<br>";
+foreach($array_turnos as $turno)
+  {
+  echo $turno . " ";
+  }
 
 //   $diasTurnos = array();
 //   $anioActual = date("Y");
