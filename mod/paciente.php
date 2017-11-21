@@ -140,26 +140,28 @@
                             </div>
                     </div>
 
-                    <div class="cert-paciente col-md-6 form-group text-center visible">
+                    <div id="divCertLink" class="cert-paciente col-md-6 form-group text-center visible">
                         <div>
-                        <a id="linkCert" href="">Certificado de discapacidad</a>
+                        <a id="linkCert" href="">Certificado de discapacidad </a><button type="button" id="btnEditarCert" class="fileEdit btn btn-xs btn-warning glyphicon glyphicon-edit hidden"></button>
                         </div>
                     </div>
-                    <div class="cert-paciente col-md-6 form-group text-center visible">
-                        <div>
-                        <a id="linkAutoriz" href="">Autorizacion de obra social/prepaga</a>                        
-                        </div>
-                    </div>
-                    <div  id="divDir" class="form-group col-md-6 file-paciente oculto">
-                            <label for="fileCert" class="control-label col-form-label">Certificado de discapacidad:</label> 
+
+                    <div  id="divCert" class="form-group col-md-6 file-paciente oculto">
+                            <label for="fileCert" class="control-label col-form-label">Certificado de discapacidad:</label> <button type="button" id="btnNoEditarCert" class="btn btn-xs btn-danger glyphicon glyphicon-arrow-left "></button>
                              <input type="file" name="fileCert" id="fileCert" class="form-control">
                              <div class="alert alert-danger divError oculto" id="errorCert">
                                 <p><b>Debe cargar el certificado</b></p>
                              </div>
                      </div>                                         
 
-                     <div  id="divDir" class="form-group col-md-6  oculto file-paciente">
-                            <label for="fileCert" class="control-label col-form-label">Autorización de O.S/Prepaga:</label> 
+                    <div id="divAutorizLink" class="cert-paciente col-md-6 form-group text-center visible">
+                        <div>
+                        <a id="linkAutoriz" href="">Autorizacion de obra social/prepaga </a> <button type="button" id="btnEditarAutoriz" class="fileEdit btn btn-xs btn-warning glyphicon glyphicon-edit hidden"></button>                       
+                        </div>
+                    </div>
+
+                     <div  id="divAutoriz" class="form-group col-md-6  oculto file-paciente">
+                            <label for="fileAutoriz" class="control-label col-form-label">Autorización de O.S/Prepaga:</label> <button type="button" id="btnNoEditarAutoriz" class="btn btn-xs btn-danger glyphicon glyphicon-arrow-left "></button>
                              <input type="file" name="fileAutoriz" id="fileAutoriz" class="form-control">
                              <div class="alert alert-danger divError oculto" id="errorAutoriz">
                                 <p><b>Debe cargar la autorización</b></p>
@@ -169,7 +171,7 @@
 
 
 
-                    <div class="form-group col-xs-6 col-md-6 visible btn-paciente visible">
+                    <div id="divAcep" class="form-group col-xs-6 col-md-6 visible btn-paciente visible">
                             <div class="">
                                 <button type="button" id="btnAcep" class="acciones btn btn-block btn-success glyphicon glyphicon-ok-circle"> Aceptar</button>
                             </div>
@@ -178,7 +180,7 @@
 
 
 
-                <div class="form-group col-xs-6 col-md-6 visible btn-paciente visible">
+                <div id="divEdit" class="form-group col-xs-6 col-md-6 visible btn-paciente visible">
                     <div class="">
                         <button type="button" id="btnEditarPaciente" class="acciones btn btn-block btn-warning glyphicon glyphicon-edit"> Editar</button>
                     </div>
@@ -186,22 +188,22 @@
 
                
 
-                <div class="form-group col-xs-6 col-md-4 btn-paciente oculto">
+                <div id="divCancel" class="form-group col-xs-6 col-md-6 btn-paciente oculto">
                     <div class="">
                         <button type="button" id="btnCancelar" class="acciones btn btn-block btn-danger glyphicon glyphicon-remove-circle"> Cancelar</button>                 
                     </div>
                 </div>
 
-                <div class="form-group col-xs-12 col-md-4 btn-paciente oculto">
+
+                <div id="divGuardar" class="form-group col-xs-6 col-md-6 btn-paciente oculto ">
                     <div class="">
-                        <button type="button" id="btnBorrador" class="acciones btn btn-block btn-warning glyphicon glyphicon-erase"> Guardar en borrador</button>
+                        <button type="submit" id="btnGuardar" class="acciones btn btn-block btn-success 	glyphicon glyphicon-floppy-disk"> Guardar</button>        
                     </div>
                 </div>
 
-
-                <div class="form-group col-xs-6 col-md-4 btn-paciente oculto ">
+                <div id="divGuardarC" class="form-group col-xs-6 col-md-6 btn-paciente oculto ">
                     <div class="">
-                        <button type="submit" id="btnGuardar" class="acciones btn btn-block btn-success 	glyphicon glyphicon-floppy-disk"> Guardar</button>        
+                        <button type="submit" id="btnGuardarCambios" class="acciones btn btn-block btn-success 	glyphicon glyphicon-floppy-disk"> Guardar cambios</button>        
                     </div>
                 </div>
             

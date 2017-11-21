@@ -14,6 +14,8 @@ listar_datos();
 
 nuevoPaciente();
 
+editarArchivos();
+
 $('#tablaTurnos').DataTable();    
 })
 
@@ -178,46 +180,80 @@ function validarCampos(){
 
 
 
-function habilitarEdicion() { //habilita la edicion del formulario
 
-    $(".btn-paciente").each(function(){
-        if($(this).hasClass("oculto")){
-            $(this).removeClass("oculto");
-            $(this).addClass("visible");
-        }else{
-            if($(this).hasClass("visible")){
-                $(this).removeClass("visible");
-                $(this).addClass("oculto");
-            }
-        }
-    });
+function habilitarEdicion() { //habilita la edicion del formulario
     
     $(".inp-paciente").each(function(){
         $(this).removeAttr("disabled");
     });
-    $(".file-paciente").each(function(){
-        $(this).removeClass("oculto");
-        $(this).addClass("visible");      
+    $(".fileEdit").each(function(){
+        $(this).removeClass("hidden");
     })
-    $(".cert-paciente").each(function(){
-        $(this).removeClass("visible");
-        $(this).addClass("oculto");      
-    })
+    
+}
+
+
+function estadoNuevo() {//estados de los botones
+    $("#divEdit").removeClass("visible");
+    $("#divEdit").addClass("oculto");
+
+    $("#divAcep").removeClass("visible");
+    $("#divAcep").addClass("oculto");
+
+    $("#divGuardar").removeClass("oculto");
+    $("#divGuardar").addClass("visible");
+
+    $("#divCancel").removeClass("oculto");
+    $("#divCancel").addClass("visible");
+    
+    $("#divGuardarC").removeClass("visible");
+    $("#divGuardarC").addClass("oculto");
+    
+}
+function estadoEdicion() {
+    $("#divEdit").removeClass("visible");
+    $("#divEdit").addClass("oculto");
+
+    $("#divAcep").removeClass("visible");
+    $("#divAcep").addClass("oculto");
+
+    $("#divGuardar").removeClass("visible");
+    $("#divGuardar").addClass("oculto");
+
+    $("#divCancel").removeClass("oculto");
+    $("#divCancel").addClass("visible");
+
+    $("#btnEditarCert").removeClass("hidden");
+    $("#btnEditarAutoriz").removeClass("hidden");
+    
+    $("#divGuardarC").removeClass("oculto");
+    $("#divGuardarC").addClass("visible");
+}
+
+function estadoDetalles() {
+    $("#divEdit").removeClass("oculto");
+    $("#divEdit").addClass("visible");
+
+    $("#divAcep").removeClass("oculto");
+    $("#divAcep").addClass("visible");
+
+    $("#divGuardar").removeClass("visible");
+    $("#divGuardar").addClass("oculto");
+
+    $("#divCancel").removeClass("visible");
+    $("#divCancel").addClass("oculto");
+
+    $("#divGuardarC").removeClass("visible");
+    $("#divGuardarC").addClass("oculto");
+
+    $("#btnEditarCert").addClass("hidden");
+    $("#btnEditarCert").addClass("hidden");
+
+    $("#btnEditarAutoriz").addClass("hidden");
+    $("#btnEditarAutoriz").addClass("hidden");
 }
 
 function deshabilitarEdicion() {
-
-    $(".btn-paciente").each(function(){
-        if($(this).hasClass("visible")){
-            $(this).removeClass("visible");
-            $(this).addClass("oculto");
-        }else{
-            if($(this).hasClass("oculto")){
-                $(this).removeClass("oculto");
-                $(this).addClass("visible");
-            }
-        }
-    });
     $(".alert").each(function(){
         $(this).addClass("oculto");            
     }) 
@@ -238,13 +274,47 @@ function deshabilitarEdicion() {
 function mostrarOcultarPaciente() {
     $("#btnEditarPaciente").click(function() {
         habilitarEdicion();
+        estadoEdicion();    
     })
 
     $("#btnCancelar").click(function(){
-      deshabilitarEdicion();        
+        deshabilitarEdicion(); 
+      mostrarTabla();
     })
 }
 
+function editarArchivos() {
+    $("#btnEditarCert").on("click", function(){
+        $("#divCertLink").removeClass("visible");
+        $("#divCertLink").addClass("oculto");
+
+        $("#divCert").removeClass("oculto");
+        $("#divCert").addClass("visible");
+    })
+    $("#btnEditarAutoriz").on("click", function(){
+        $("#divAutorizLink").removeClass("visible");        
+        $("#divAutorizLink").addClass("oculto");
+
+        $("#divAutoriz").removeClass("oculto");
+        $("#divAutoriz").addClass("visible");
+    })
+
+    $("#btnNoEditarCert").on("click", function(){
+        $("#divCert").removeClass("visible");
+        $("#divCert").addClass("oculto");
+
+        $("#divCertLink").removeClass("oculto");
+        $("#divCertLink").addClass("visible");
+    })
+
+    $("#btnNoEditarAutoriz").on("click", function(){
+        $("#divAutoriz").removeClass("visible");
+        $("#divAutoriz").addClass("oculto");
+
+        $("#divAutorizLink").removeClass("oculto");        
+        $("#divAutorizLink").addClass("visible");
+    })
+}
 
 function mostrarForm(){
     var divT=$("#divTabla");
@@ -277,6 +347,7 @@ function mostrarTabla(){
 function alternarPantalla(tabla) {
     $("#botonNuevo").on("click",function(){
         habilitarEdicion();
+       estadoNuevo();
         mostrarForm();
     });
     $("#btnAcep").on("click",function(){
@@ -285,6 +356,7 @@ function alternarPantalla(tabla) {
 
     $('#tablaPacientes tbody').on( 'click', 'button.btnVerMas',function(){
         mostrarForm(); 
+        estadoDetalles();
         var data=tabla.row($(this).parents("tr")).data();
         var id=data.id_paciente;
         var data=[]; //creo un json con los datos
@@ -308,11 +380,8 @@ function alternarPantalla(tabla) {
                 $("#os").val(persona.data[0].id_obrasocial);   
                 $("#linkAutoriz").attr("href",persona.data[0].autorizacion);
                 $("#linkCert").attr("href",persona.data[0].certificado);
-                
-
-                console.log(persona.data[0].nombre);
-                
-    
+                $("#fileAutoriz").attr("value",persona.data[0].autorizacion);
+                $("#fileCert").attr("value",persona.data[0].certificado);
             }});
         
     });
@@ -410,8 +479,7 @@ function obtenerDatos(){   // obtengo los datos contenidos en los input
 
 
 function nuevoPaciente(){
-        $("#botonNuevo").on("click",function(e){
-            e.preventDefault();
+        $("#botonNuevo").on("click",function(){
             $('#frmPrincipal').trigger("reset");
 
 
@@ -423,31 +491,50 @@ function nuevoPaciente(){
                             // console.log(info);
                             var ultimoId=persona.data[0].id_paciente;
                             $("#lblId").text(parseInt(ultimoId)+1);                            
-                        }});
-            
-            
+                        }});         
         })
-        $("#frmPrincipal").on("submit", function(){
-            // e.preventDefault();
-            //var f = $(this);
-            var id = $("#lblId").text();
-            var formData = new FormData(document.getElementById("frmPrincipal"));
-            formData.append("id", id);
-            formData.append("estado", "1");
-            
-            //formData.append(f.attr("name"), $(this)[0].files[0]);
-            $.ajax({
-                url: "../inc/setPaciente.php",
-                type: "post",
-                dataType: "html",
-                data: formData,
-                cache: false,
-                contentType: false,
-	     processData: false
-            })
-                .done(function(res){
-                    console.log(res);
-                    // $("#mensaje").html("Respuesta: " + res);
-                });
-        });
+    }
+
+ function guardar() {
+     $("#btnGuardar").on("click",function(){
+         var url= "../inc/setPaciente.php";
+         enviarDatos(url);
+     })
+ }
+ function guardarCambios() {
+    $("#btnGuardarC").on("click",function(){
+        var url= "../inc/updatePaciente.php";        
+        enviarDatos(url);
+    })
+}
+
+    
+function enviarDatos(url) {
+    $("#frmPrincipal").on("submit", function(){
+        // e.preventDefault();
+        //var f = $(this);
+        var id = $("#lblId").text();
+        var formData = new FormData(document.getElementById("frmPrincipal"));
+        formData.append("id", id);
+        formData.append("estado", "1");
+        
+        $.ajax({
+            url: url,
+            type: "post",
+            dataType: "html",
+            data: formData,
+            cache: false,
+            contentType: false,
+     processData: false
+        })
+            .done(function(res){
+                console.log(res);
+                // $("#mensaje").html("Respuesta: " + res);
+            });
+    });
+    
+}
+
+function editarPaciente(){
+        
     }
