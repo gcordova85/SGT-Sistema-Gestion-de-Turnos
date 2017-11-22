@@ -3,7 +3,7 @@
 session_start();
 require_once 'conexion.php';
 
-$nombres=$_POST['nombres'];
+$nombre=$_POST['nombre'];
 $apellido=$_POST['apellido'];
 $telefono=$_POST['telefono'];
 $direccion=$_POST['direccion'];
@@ -13,10 +13,10 @@ $estado=$_POST['estado'];
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion();
-$sql = "INSERT INTO profesionales(nombres,apellido,telefono,direccion,email,id_especialidad,estado) values(:nombres,:apellido,:telefono,:direccion,:email,:id_especialidad,:estado)";
+$sql = "INSERT INTO profesionales(nombre,apellido,telefono,direccion,email,id_especialidad,estado) values(:nombre,:apellido,:telefono,:direccion,:email,:id_especialidad,:estado)";
 $stmt = $cnn->prepare($sql);
 
-$stmt->bindparam(':nombres', $nombres);
+$stmt->bindparam(':nombre', $nombre);
 $stmt->bindparam(':apellido', $apellido);
 $stmt->bindparam(':telefono', $telefono);
 $stmt->bindparam(':direccion', $direccion);
