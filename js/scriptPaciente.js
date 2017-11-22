@@ -432,7 +432,7 @@ function listar_datos() {
    var tabla= $('#tablaPacientes').DataTable({
         ajax: {
             url: '../inc/getPaciente.php'
-          },
+        },
             columns: [
             { data: 'id_paciente' },
             { data: 'nombre' },

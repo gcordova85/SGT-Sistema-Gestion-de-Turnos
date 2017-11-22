@@ -42,7 +42,10 @@
                 <input class="form-control" type="number" max="99999999" min="11111111" id="dni" name="dni">
             </div>
         </div>
-    </div>    
+    </div>   
+    <div>
+        <label for="espec"></label>
+    </div> 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="panel panel-default">
