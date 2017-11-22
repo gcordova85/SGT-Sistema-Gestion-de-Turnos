@@ -10,7 +10,6 @@ $(document).ready(function(){
 
 function obtenerPaciente() {
     var id=$("#idPaciente").val();
-    alert(id);
     var data=[]; //creo un json con los datos
 
     data.push(  
