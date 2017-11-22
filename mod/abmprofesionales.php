@@ -130,9 +130,9 @@
                                         <div id="div-selEspecialidad" class="form-group">
                                             <label for="selEspecialidad" class="control-label col-form-label">Especialidad:</label>
                                             <select name="selEspecialidad" id="selEspecialidad" placeholder="Seleccione especialidad" class="form-control">
-                                                    <option value=1>Psicologo</option>
-                                                    <option value=2>Psicopedagogo</option>
-                                                    <option value=3>Enfermero</option>
+                                                    <option value="Psicologo">Psicologo</option>
+                                                    <option value="Psicopedagogo">Psicopedagogo</option>
+                                                    <option value="Enfermero">Enfermero</option>
                                             </select>
                                         </div>
                                     </div>
@@ -140,13 +140,13 @@
                             </div>
                         </div>
                            <div id="div-eliminar" class="container oculto">
-                            <p>¿Esta seguro que desea eliminar este registro?</p>
+                            <p><b>¿Esta seguro que desea eliminar este registro?</b></p>
                            </div>
                         </div>
                         <div class="modal-footer">
                             <input type="submit" name="agregarNuevo" id="agregarNuevo" class="btn btn-success" value="Agregar Nuevo" />
                             <input type="submit" name="guardarCambios" id="guardarCambios" class="btn btn-warning oculto" value="Guardar" />
-                            <input type="submit" name="eliminarProfesional" id="eliminarProfesional" class="btn btn-warning oculto" value="EliminarProfesional" />
+                            <input type="submit" name="eliminarProfesional" id="eliminarProfesional" class="btn btn-warning oculto" value="Eliminar Profesional" />
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                             
                         </div>
