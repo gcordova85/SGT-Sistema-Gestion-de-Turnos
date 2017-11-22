@@ -13,7 +13,7 @@ function listar_datos(){
           },
             columns: [
             { data: 'id_profesional' },
-            { data: 'nombres' },
+            { data: 'nombre' },
             { data: 'apellido' },
             { data: 'telefono' },
             { data: 'direccion' },
@@ -80,7 +80,7 @@ function editar_registro(tbody, tabla){
         $("#titulo-modal").text("Editar Profesional");
         var data = tabla.row($(this).parents("tr")).data();
         $("#nProfesional").val(data.id_profesional),
-        $("#nombreProfesional").val(data.nombres),
+        $("#nombreProfesional").val(data.nombre),
         $("#apellidoProfesional").val(data.apellido),
         $("#telefonoProfesional").val(data.telefono),
         $("#direccionProfesional").val(data.direccion),
@@ -103,7 +103,7 @@ function eliminar_registro(tbody, tabla){
             divDel.removeClass("oculto")
         }
         $("#nProfesional").val(data.id_profesional),
-        $("#nombreProfesional").val(data.nombres),
+        $("#nombreProfesional").val(data.nombre),
         $("#apellidoProfesional").val(data.apellido),
         $("#telefonoProfesional").val(data.telefono),
         $("#direccionProfesional").val(data.direccion),
@@ -183,7 +183,7 @@ function validarCamposNuevo(){
         especialidad = $("#selEspecialidad").val(),
         estado = 1
         var data={'id_profesional':idprofesional,
-        'nombres':nombre,
+        'nombre':nombre,
         'apellido':apellido,
         'telefono':tel,
         'direccion':dire,
@@ -210,7 +210,7 @@ function validarCamposEditar(){
         especialidad = $("#selEspecialidad").val(),
         estado = 1
         var data={'id_profesional':idprofesional,
-        'nombres':nombre,
+        'nombre':nombre,
         'apellido':apellido,
         'telefono':tel,
         'direccion':dire,

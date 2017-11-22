@@ -4,7 +4,10 @@
 
     $conexion = new Conexion();
     $cnn = $conexion->getConexion();
-    $sql = "SELECT * FROM profesionales WHERE estado = 1";
+    $sql = "SELECT id_profesional, nombre,apellido,telefono,direccion,email, especialidades.descripcion AS id_especialidad
+    FROM profesionales
+    INNER JOIN especialidades ON especialidades.id_especialidad = especialidades.id_especialidad 
+    WHERE estado = 1";
     $statement = $cnn->prepare($sql);
     $valor = $statement->execute();
 
