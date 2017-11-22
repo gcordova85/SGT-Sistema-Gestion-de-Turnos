@@ -3,6 +3,7 @@
 session_start();
 require_once 'conexion.php';
 
+$id_profesional=$_POST['id_profesional'];
 $nombres=$_POST['nombres'];
 $apellido=$_POST['apellido'];
 $telefono=$_POST['telefono'];
@@ -13,9 +14,10 @@ $estado=$_POST['estado'];
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion();
-$sql = "INSERT INTO profesionales(nombres,apellido,telefono,direccion,email,id_especialidad,estado) values(:nombres,:apellido,:telefono,:direccion,:email,:id_especialidad,:estado)";
+$sql = "UPDATE profesionales SET nombres = :nombres ,apellido = :apellido,telefono = :telefono,direccion = :direccion,email = :email,id_especialidad = :id_especialidad,estado = :estado WHERE id_profesional= :id_profesional;";
 $stmt = $cnn->prepare($sql);
 
+$stmt->bindparam(':id_profesional', $id_profesional);
 $stmt->bindparam(':nombres', $nombres);
 $stmt->bindparam(':apellido', $apellido);
 $stmt->bindparam(':telefono', $telefono);
@@ -25,10 +27,10 @@ $stmt->bindparam(':id_especialidad', $id_especialidad);
 $stmt->bindparam(':estado', $estado);
 if($stmt->execute())
 {
-  $respuesta="Datos insertados correctamente:";
+  $respuesta="Datos actualizados correctamente:";
   echo json_encode($respuesta);
 }
 else {
-  $error="No se han insertado los datos.";
+  $error="No se han actualizados los datos.";
   echo json_encode($error);
 }

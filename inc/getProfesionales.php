@@ -4,7 +4,7 @@
 
     $conexion = new Conexion();
     $cnn = $conexion->getConexion();
-    $sql = "SELECT * FROM profesionales";
+    $sql = "SELECT * FROM profesionales WHERE estado = 1";
     $statement = $cnn->prepare($sql);
     $valor = $statement->execute();
 

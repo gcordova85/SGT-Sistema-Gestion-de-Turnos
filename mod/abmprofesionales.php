@@ -10,11 +10,12 @@
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/abmProfesionales.js"></script>
         <link rel="stylesheet" href="../css/styleBase.css">
+        <link rel="stylesheet" href="../css/styleABM.css">
         <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.min.css"/>
         <script type="text/javascript" src="../lib/DataTables/datatables.min.js"></script>
         <link rel="stylesheet" href="../css/font-awesome.min.css">
     </head>
-    <body >
+    <body>
         <div class="container">
             <?php
                 require_once '../inc/header.php';
@@ -61,24 +62,33 @@
                             <h4 class="modal-title text-center" id="titulo-modal">Agregar Profesional</h4>
                         </div>
                         <div class="modal-body">
+                        <div id="div-formulario">
+                            <div class="row oculto">
+                                <div class="col-md-12">
+                                    <div id="div-nProfesional" class="form-group">
+                                        <label for="nProfesional" class="control-label col-form-label">N° Prof:</label>
+                                        <input type="number" name="nProfesional" id="nProfesional" class="form-control">
+                                        </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12 container">
-                                    <div class="col-md-2">
-                                            <div id="div-nProfesional" class="form-group">
-                                                <label for="nProfesional" class="control-label col-form-label">N° Prof:</label>
-                                                <input type="number" name="nProfesional" id="nProfesional" class="form-control">
-                                            </div>
-                                    </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div id="div-nombreProfesional" class="form-group">
                                             <label for="nombreProfesional" class="control-label col-form-label">Nombre:</label>
-                                            <input type="text" name="nombreProfesional" id="nombreProfesional" class="form-control">
+                                            <input type="text" name="nombreProfesional" id="nombreProfesional" class="form-control" required>
+                                            <div class="alert alert-danger divError oculto" id="errorNom">
+                                                <p><b>Ingrese un nombre correcto (Uno o dos de al menos 3 letras c/u)</b></p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div id="div-apellidoProfesional" class="form-group">
                                             <label for="apellidoProfesional" class="control-label col-form-label">Apellido:</label>
-                                            <input type="text" name="apellidoProfesional" id="apellidoProfesional" class="form-control">
+                                            <input type="text" name="apellidoProfesional" id="apellidoProfesional" class="form-control" required>
+                                            <div class="alert alert-danger divError oculto" id="errorApe">
+                                                <p><b>Ingrese un apellido correcto (Uno o dos de al menos 3 letras c/u)</b></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,13 +98,19 @@
                                     <div class="col-md-6">
                                         <div id="div-telefonoProfesional" class="form-group">
                                             <label for="telefonoProfesional" class="control-label col-form-label">Telefono:</label>
-                                            <input type="number" name="telefonoProfesional" id="telefonoProfesional" class="form-control">
+                                            <input type="number" name="telefonoProfesional" id="telefonoProfesional" class="form-control" required>
+                                            <div class="alert alert-danger divError oculto" id="errorTel">
+                                                <p><b>Ingrese un teléfono valido, ejemplo: 01142325466</b></p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div id="div-direccionProfesional" class="form-group">
                                             <label for="direccionProfesional" class="control-label col-form-label">Direccion:</label>
-                                            <input type="text" name="direccionProfesional" id="direccionProfesional" class="form-control">
+                                            <input type="text" name="direccionProfesional" id="direccionProfesional" class="form-control" required>
+                                            <div class="alert alert-danger divError oculto" id="errorDir">
+                                                <p><b>Debe completar este campo (Calle, numero, piso, dpto, localidad)</b></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +120,10 @@
                                     <div class="col-md-6">
                                         <div id="div-emailProfesional" class="form-group">
                                             <label for="emailProfesional" class="control-label col-form-label">Email:</label>
-                                            <input type="email" name="emailProfesional" id="emailProfesional" class="form-control">
+                                            <input type="email" name="emailProfesional" id="emailProfesional" class="form-control" required>
+                                            <div class="alert alert-danger divError oculto" id="errorMail">
+                                                <p><b>Debe ingresar un E-mail valido</b></p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -120,9 +139,16 @@
                                 </div>
                             </div>
                         </div>
+                           <div id="div-eliminar" class="container oculto">
+                            <p>¿Esta seguro que desea eliminar este registro?</p>
+                           </div>
+                        </div>
                         <div class="modal-footer">
-                            <input type="submit" name="agregarNuevo" id="agregarNuevo" class="btn btn-success" value="Agregar" />
+                            <input type="submit" name="agregarNuevo" id="agregarNuevo" class="btn btn-success" value="Agregar Nuevo" />
+                            <input type="submit" name="guardarCambios" id="guardarCambios" class="btn btn-warning oculto" value="Guardar" />
+                            <input type="submit" name="eliminarProfesional" id="eliminarProfesional" class="btn btn-warning oculto" value="EliminarProfesional" />
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            
                         </div>
                     </div>
                 </form>
