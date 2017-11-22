@@ -22,7 +22,8 @@ guardarCambios();
 
 asignarPersona();
 
-$('#tablaTurnos').DataTable();    
+cargarTurnos();
+
 })
 
 
@@ -368,7 +369,16 @@ function mostrarTabla(){
         $(divT).addClass("div-visible");
     }   
 }
-
+function eliminarRegistros(tabla){
+    $('#tablaPacientes tbody').on( 'click', 'a.btn-eliminar', function () { 
+        var data=tabla.row($(this).parents("tr")).data();
+        var id=data.id_paciente;
+        $("#eliminarPaciente").on("click",function() {      
+             bajaPaciente("../inc/bajaPaciente.php",id);
+             tabla.ajax.reload();
+        })
+})
+}
 function alternarPantalla(tabla) {
     $("#botonNuevo").on("click",function(){
         habilitarEdicion();
@@ -407,7 +417,10 @@ function alternarPantalla(tabla) {
                 $("#linkCert").attr("href",persona.data[0].certificado);
                 $("#fileAutoriz").attr("value",persona.data[0].autorizacion);
                 $("#fileCert").attr("value",persona.data[0].certificado);
+                $("#lblEstado").text("Activo: "+persona.data[0].estado);
+                
             }});
+
         
     });
     
@@ -440,16 +453,28 @@ function listar_datos() {
             { data: 'dni' },
             { data: 'telefono' },
             { data: 'id_obrasocial' },
-            { data: 'id_estado'},
-            { defaultContent : "<button type='button' class='btnVerMas btn btn-info'>Ver mas</button>" },
+            { data: 'estado'},
+            { defaultContent : "<button type='button' class='btnVerMas btn-xs btn btn-info'>Ver mas</button><a href='#modalEliminar' class='btn-xs btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' ></i></a>" },
           ],
          languaje: idioma_espanol
     });
 
     alternarPantalla(tabla);
+    eliminarRegistros(tabla);
+
+    
+    tabla.columns(6).search("si").draw();                          
+    
+
+    $("#inactivos").on("change",function(){
+        if( $(this).is(':checked') ) {
+            tabla.columns(6).search("no").draw();                          
+        }else{
+            tabla.columns(6).search("si").draw();                                      
+        }
+    })
 
 };
-
 var idioma_espanol = {
     "sProcessing":     "Procesando...",
     "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -478,29 +503,29 @@ var idioma_espanol = {
 
 ///*************************carga de datos****************************** */
 
-function obtenerDatos(){   // obtengo los datos contenidos en los input
-    var id = $("#lblId").text();
-    var nombre =$("#nom").val();
-    var apellido =$("#ape").val();
-    var dni =$("#dni").val();
-    var direccion =$("#dir").val();
-    var telefono =$("#tel").val();
-    // 
-    var os=$("#os").val();
-    var fileCert=$("#fileCert").val();
-    var fileAutoriz=$("#fileAutoriz").val();
-    var estado="1";
-    console.log(fileAutoriz);
+// function obtenerDatos(){   // obtengo los datos contenidos en los input
+//     var id = $("#lblId").text();
+//     var nombre =$("#nom").val();
+//     var apellido =$("#ape").val();
+//     var dni =$("#dni").val();
+//     var direccion =$("#dir").val();
+//     var telefono =$("#tel").val();
+//     // 
+//     var os=$("#os").val();
+//     var fileCert=$("#fileCert").val();
+//     var fileAutoriz=$("#fileAutoriz").val();
+//     var estado="No";
+//     console.log(fileAutoriz);
     
-      var data=[]; //creo un json con los datos
-      data.push(  
-          {"id":id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"fileCert":fileCert,"fileAutoriz":fileAutoriz,"estado":estado},
+//       var data=[]; //creo un json con los datos
+//       data.push(  
+//           {"id":id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"fileCert":fileCert,"fileAutoriz":fileAutoriz,"estado":estado},
           
-      );
-      var personas={"data":data}; //creo un array con la clave data
-      console.log(personas);
-      return personas; 
-}
+//       );
+//       var personas={"data":data}; //creo un array con la clave data
+//       console.log(personas);
+//       return personas; 
+// }
 
 
 function nuevoPaciente(){
@@ -540,7 +565,7 @@ function enviarDatos(url) {
         var id = $("#lblId").text();
         var formData = new FormData(document.getElementById("frmPrincipal"));
         formData.append("id", id);
-        formData.append("estado", "1");
+        formData.append("estado", "Si");
         
         $.ajax({
             url: url,
@@ -567,3 +592,42 @@ function enviarDatos(url) {
         })
         
     }
+
+
+    function bajaPaciente(url,id) {
+        
+        var data=[]; //creo un json con los datos
+        data.push(  
+            {"id":id},
+        );
+        var datos={"data":data};
+        var json= JSON.stringify(datos); //convierto el array de objetos en una cadena json
+        __ajax(url,{"json":json})
+
+         .done(function(info) {
+        //     if(info){//si hay respuesta
+                 console.log(info);
+    
+            // }
+            });
+}
+
+function cargarTurnos() {
+    $("#btnTurnos").on("click",function() {
+        var idPac=$("#lblId").text();
+        
+        var tablaTurnos= $('#tablaTurnos').DataTable({
+          ajax: {
+              url: "../inc/getTurnoPaciente.php?id="+idPac         
+          },
+          
+              columns: [
+              { data: 'id_profesional' },
+              { data: 'fecha' },        
+              { data: 'id_hora' },
+              { data: 'id_consultorio' },
+              { data: 'id_estado' }      
+            ],
+      });
+    })
+}

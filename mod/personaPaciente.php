@@ -64,7 +64,7 @@
                     <th>DNI</th>
                     <th>Dirección</th>
                     <th>Teléfono</th>
-                    <th>Estado</th>
+                    <th>Activo</th>
                     <th></th>
                 </tr>
             </thead>

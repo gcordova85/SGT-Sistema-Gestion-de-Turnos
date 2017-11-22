@@ -39,6 +39,9 @@
                 <button type="button" id="botonNuevo" class="btn btn-abm">Nuevo</a> </button>
             </div>
         </div>
+        <div class="checkbox">
+            <label><input id="inactivos" type="checkbox" value="">Inactivos</label>
+         </div>
         <div class="row" id="fila-tabla">
             <div class="col-md-1"></div>
             <div class="col-md-10 offset-md-1">
@@ -52,7 +55,7 @@
                                 <th class="navbar">Dni</th>
                                 <th class="navbar">Telefono</th>
                                 <th class="navbar">Obra social</th>
-                                <th class="navbar">Estado</th>
+                                <th class="navbar">Activo</th>
                                 <th class="navbar">Opciones</th>
                             </tr>
                         </thead>
@@ -234,6 +237,7 @@
                             <th>Fecha</th>
                             <th>Hora</th>
                             <th>Consultorio</th>
+                            <th>Estado del turno</th>
                             <th>Asistió</th>
                         </tr>
                     </thead>
@@ -345,9 +349,43 @@
     
 
 
+
+
              
     </div>
 
+
+    <div class="modal fade" id="modalEliminar"> 
+    <div class="modal-dialog"> 
+        <div class="modal-content"> 
+
+            <div class="modal-header"> 
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="modal">
+                   <span class="glyphicon glyphicon-remove"></span>
+               </button> 
+               <h4 class="modal-title text-center">Eliminar</h4>
+           </div> 
+
+            <div class="modal-body">
+               
+            <h3>¿Está seguro que desea eliminar este paciente?</h3>
+                  
+               <p class="footerCenter">.</p> 
+            </div>
+            
+             <div class="modal-footer">
+                    <div class="col-xs-6">
+                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">No</button>                           
+                        </div>
+                    <div class="col-xs-6">
+                         <button type="button" id="eliminarPaciente" class="btn btn-success btn-block visible" data-dismiss="modal">Si</button>
+                    </div>  
+            </div>
+        
+                
+        </div>
+    </div>
+</div>
     </div>
     <?php
     require_once '../inc/footer.php'; 

@@ -25,15 +25,15 @@
     font-size: 1px;
 }
 
-.modal-header, .modal-footer,thead{
+ .modal-header, .modal-footer,thead{
     background: #a93957;
     color: #FFFFFF;
-}
+} 
 
-.modal-body{
+/* .modal-body{
     background-color: #FF9BC2;
     color: white;
-}
+} */
 
 input:focus, input[type]:focus, select:focus, select[name]:focus {
     border-color: #a93957;

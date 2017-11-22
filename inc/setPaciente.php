@@ -32,7 +32,7 @@ $fileCert= "certPac".$id.".pdf";
 
   $conexion = new Conexion();
   $cnn = $conexion->getConexion();
-  $sql="INSERT INTO paciente (nombre, apellido, dni, direccion, telefono, id_obrasocial, certificado, autorizacion, id_estado) 
+  $sql="INSERT INTO paciente (nombre, apellido, dni, direccion, telefono, id_obrasocial, certificado, autorizacion, estado) 
   values (:nombre, :apellido, :dni, :direccion, :telefono, :os, :fileCert, :fileAut, :estado);";
   $statement = $cnn->prepare($sql);
   $respuesta=false;
@@ -45,7 +45,7 @@ $fileCert= "certPac".$id.".pdf";
   $statement->bindParam(":os",$os, PDO::PARAM_INT);
   $statement->bindParam(":fileAut",$rutaAut, PDO::PARAM_STR);
   $statement->bindParam(":fileCert",$rutaCert, PDO::PARAM_STR);
-  $statement->bindParam(":estado",$estado, PDO::PARAM_INT);
+  $statement->bindParam(":estado",$estado, PDO::PARAM_STR);
   
 
   $respuesta=$statement->execute();

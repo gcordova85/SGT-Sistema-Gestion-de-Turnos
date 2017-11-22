@@ -42,7 +42,7 @@ $fileCert= "certPac".$id.".pdf";
 
   if($cert and $aut){ 
     $sql="UPDATE paciente SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
-    telefono = :telefono, id_obrasocial=:os, certificado=:fileCert, autorizacion=:fileAut, id_estado=:estado
+    telefono = :telefono, id_obrasocial=:os, certificado=:fileCert, autorizacion=:fileAut
     WHERE id_paciente = :id;";
 
     $statement = $cnn->prepare($sql);
@@ -57,7 +57,6 @@ $fileCert= "certPac".$id.".pdf";
     $statement->bindParam(":os",$os, PDO::PARAM_INT);
     $statement->bindParam(":fileAut",$rutaAut, PDO::PARAM_STR);
     $statement->bindParam(":fileCert",$rutaCert, PDO::PARAM_STR);
-    $statement->bindParam(":estado",$estado, PDO::PARAM_INT);
 
 }
 
@@ -65,7 +64,7 @@ $fileCert= "certPac".$id.".pdf";
 
   if($cert and !$aut){  
     $sql="UPDATE paciente SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
-    telefono = :telefono, id_obrasocial=:os, certificado=:fileCert, id_estado=:estado
+    telefono = :telefono, id_obrasocial=:os, certificado=:fileCert
     WHERE id_paciente = :id;";
   
     $statement = $cnn->prepare($sql);
@@ -79,7 +78,6 @@ $fileCert= "certPac".$id.".pdf";
     $statement->bindParam(":telefono",$telefono);
     $statement->bindParam(":os",$os, PDO::PARAM_INT);
     $statement->bindParam(":fileCert",$rutaCert, PDO::PARAM_STR);
-    $statement->bindParam(":estado",$estado, PDO::PARAM_INT);
 
 }
 
@@ -87,7 +85,7 @@ $fileCert= "certPac".$id.".pdf";
 
   if(!$cert and $aut){
     $sql="UPDATE paciente SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
-    telefono = :telefono, id_obrasocial=:os, autorizacion=:fileAut, id_estado=:estado
+    telefono = :telefono, id_obrasocial=:os, autorizacion=:fileAut
     WHERE id_paciente = :id;";
   
     $statement = $cnn->prepare($sql);
@@ -101,12 +99,11 @@ $fileCert= "certPac".$id.".pdf";
     $statement->bindParam(":telefono",$telefono);
     $statement->bindParam(":os",$os, PDO::PARAM_INT);
     $statement->bindParam(":fileAut",$rutaAut, PDO::PARAM_STR);
-    $statement->bindParam(":estado",$estado, PDO::PARAM_INT);
 
 }
   if(!$cert and !$aut){
     $sql="UPDATE paciente SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
-    telefono = :telefono, id_obrasocial=:os, id_estado=:estado
+    telefono = :telefono, id_obrasocial=:os
     WHERE id_paciente = :id;";
  
     $statement = $cnn->prepare($sql);
@@ -119,7 +116,6 @@ $fileCert= "certPac".$id.".pdf";
     $statement->bindParam(":direccion",$direccion, PDO::PARAM_STR);
     $statement->bindParam(":telefono",$telefono);
     $statement->bindParam(":os",$os, PDO::PARAM_INT);
-    $statement->bindParam(":estado",$estado, PDO::PARAM_INT);
 }
   
   $respuesta=$statement->execute();

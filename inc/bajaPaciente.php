@@ -7,7 +7,7 @@ $personas = json_decode($_POST["json"]); // recibo json y lo decodifico
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion(); //obtengo conexion
-$sql= "UPDATE paciente SET estado = 'Inactivo' WHERE id_paciente = :id;";
+$sql= "UPDATE paciente SET estado = 'No' WHERE id_paciente = :id;";
 $statement = $cnn->prepare($sql);
 
 $respuesta=false;
