@@ -1,0 +1,7 @@
+.oculto, .div-oculto{
+    display: none;
+}
+
+.visible, .div-visible{
+    display: block;
+}
