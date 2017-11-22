@@ -130,9 +130,9 @@
                                         <div id="div-selEspecialidad" class="form-group">
                                             <label for="selEspecialidad" class="control-label col-form-label">Especialidad:</label>
                                             <select name="selEspecialidad" id="selEspecialidad" placeholder="Seleccione especialidad" class="form-control">
-                                                    <option value="Psicologo">Psicologo</option>
-                                                    <option value="Psicopedagogo">Psicopedagogo</option>
-                                                    <option value="Enfermero">Enfermero</option>
+                                                    <option value="1">Psicologo</option>
+                                                    <option value="2">Psicopedagogo</option>
+                                                    <option value="3">Enfermero</option>
                                             </select>
                                         </div>
                                     </div>
