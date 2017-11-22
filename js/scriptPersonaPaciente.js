@@ -69,7 +69,10 @@ function eliminarRegistros(tabla){
     $('#tablaPersonas tbody').on( 'click', 'a.btn-eliminar', function () { 
         var data=tabla.row($(this).parents("tr")).data();
         var id=data.id_personaCargo;
-        bajaPersona("../inc/bajaPersonaCargo.php",id);
+        $("#eliminarPersona").on("click",function() {      
+             bajaPersona("../inc/bajaPersonaCargo.php",id);
+             tabla.ajax.reload();
+        })
 })
 }
 
@@ -128,6 +131,7 @@ function listar(){ //carga los registros en el datatable
             {data:'dni'},
             {data:'direccion'},
             {data:'telefono'},
+            {data:'estado'},
             {defaultContent:'<a href="#cargo" class="btn btn-warning btn-tabla btn-editar glyphicon glyphicon-edit" data-toggle="modal"></a><a href="#modalEliminar" class="btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" ></i></a>'} //aparecerá en todas las filas
            
         ],
@@ -164,6 +168,17 @@ function listar(){ //carga los registros en el datatable
     };
     editarRegistros(tabla);
     seleccionarFilas(tabla);
+    eliminarRegistros(tabla);
+
+    $("#inactivos").on("change",function(){
+        if( $(this).is(':checked') ) {
+            tabla.columns(6).search("A").draw();                          
+        }else{
+            tabla.columns(6).search("n").draw();                                      
+        }
+    })
+    
+
 }
 
 
@@ -182,10 +197,11 @@ function datos(id){   // obtengo los datos contenidos en los input
       var dni =$("#dniPersona").val();
       var direccion =$("#direccionPersona").val();
       var telefono =$("#telPersona").val();
+      var estado = "Activo";
       
         var data=[]; //creo un json con los datos
         data.push(  
-            {id_personaCargo:id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono},
+            {id_personaCargo:id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono,"estado":estado},
             
         );
         var personas={"data":data}; //creo un array con la clave data
@@ -243,8 +259,7 @@ function nuevaPersona(){
 
 
 function bajaPersona(url,id) {
-    $("#eliminarPersona").on("click",function() {
-
+        
         var data=[]; //creo un json con los datos
         data.push(  
             {"id":id},
@@ -253,13 +268,14 @@ function bajaPersona(url,id) {
         var json= JSON.stringify(datos); //convierto el array de objetos en una cadena json
         __ajax(url,{"json":json})
 
-        // .done(function(info) {
+         .done(function(info) {
         //     if(info){//si hay respuesta
-        //        // console.log(info);                
+                 console.log(info);
     
-        //      }});
+            // }
+            });
         
-    })
+    
 }
 
 //*****************ajax*********************

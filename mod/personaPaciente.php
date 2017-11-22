@@ -51,6 +51,9 @@
         <div class="form-group text-right">
             <a href="#cargo" id="btnCargo" class="btn btn-info btnModal" data-toggle="modal">Nueva persona</a>
         </div>
+        <div class="checkbox">
+            <label><input id="inactivos" type="checkbox" value="">Inactivos</label>
+         </div>
         <div clas="table-responsive">
         <table id="tablaPersonas" class="table table-striped table-bordered nowrap">
             <thead>
@@ -61,6 +64,7 @@
                     <th>DNI</th>
                     <th>Dirección</th>
                     <th>Teléfono</th>
+                    <th>Estado</th>
                     <th></th>
                 </tr>
             </thead>
@@ -200,7 +204,7 @@
                             <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">No</button>                           
                         </div>
                     <div class="col-xs-6">
-                         <button type="button" id="eliminarPersona" class="btn btn-success btn-block visible">Si</button>
+                         <button type="button" id="eliminarPersona" class="btn btn-success btn-block visible" data-dismiss="modal">Si</button>
                     </div>  
             </div>
         
