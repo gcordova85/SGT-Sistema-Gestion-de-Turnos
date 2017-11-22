@@ -45,7 +45,7 @@ $fileCert= "certPac".$id.".pdf";
   $statement->bindParam(":os",$os, PDO::PARAM_INT);
   $statement->bindParam(":fileAut",$rutaAut, PDO::PARAM_STR);
   $statement->bindParam(":fileCert",$rutaCert, PDO::PARAM_STR);
-  $statement->bindParam(":estado",$estado, PDO::PARAM_STR);
+  $statement->bindParam(":estado",$estado, PDO::PARAM_INT);
   
 
   $respuesta=$statement->execute();

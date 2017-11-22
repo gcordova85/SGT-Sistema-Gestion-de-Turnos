@@ -7,7 +7,7 @@ $personas = json_decode($_POST["json"]); // recibo json y lo decodifico
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion(); //obtengo conexion
-$sql= "UPDATE personas_cargo SET estado = 'No' WHERE id_personaCargo = :id;";
+$sql= "UPDATE personas_cargo SET estado = '0' WHERE id_personaCargo = :id;";
 $statement = $cnn->prepare($sql);
 
 $respuesta=false;
@@ -20,7 +20,7 @@ foreach($personas->{"data"} as $persona){
     echo $persona->{"id"};
     //echo $producto->{"precio"};
     
-    $statement->bindParam(":id", $persona->{"id"},PDO::PARAM_STR); 
+    $statement->bindParam(":id", $persona->{"id"},PDO::PARAM_INT); 
    
     
     $respuesta=$statement->execute();

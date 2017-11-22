@@ -463,14 +463,14 @@ function listar_datos() {
     eliminarRegistros(tabla);
 
     
-    tabla.columns(6).search("si").draw();                          
+    tabla.columns(6).search("1").draw();                          
     
 
     $("#inactivos").on("change",function(){
         if( $(this).is(':checked') ) {
-            tabla.columns(6).search("no").draw();                          
+            tabla.columns(6).search("0").draw();                          
         }else{
-            tabla.columns(6).search("si").draw();                                      
+            tabla.columns(6).search("1").draw();                                      
         }
     })
 
@@ -565,7 +565,7 @@ function enviarDatos(url) {
         var id = $("#lblId").text();
         var formData = new FormData(document.getElementById("frmPrincipal"));
         formData.append("id", id);
-        formData.append("estado", "Si");
+        formData.append("estado", "1");
         
         $.ajax({
             url: url,
@@ -623,10 +623,10 @@ function cargarTurnos() {
           
               columns: [
               { data: 'id_profesional' },
-              { data: 'fecha' },        
+              { data: 'diaNumero' },        
               { data: 'id_hora' },
               { data: 'id_consultorio' },
-              { data: 'id_estado' }      
+              { data: 'estado' }      
             ],
       });
     })

@@ -171,14 +171,14 @@ function listar(){ //carga los registros en el datatable
     eliminarRegistros(tabla);
 
     
-    tabla.columns(6).search("si").draw();                          
+    tabla.columns(6).search("1").draw();                          
     
 
     $("#inactivos").on("change",function(){
         if( $(this).is(':checked') ) {
-            tabla.columns(6).search("no").draw();                          
+            tabla.columns(6).search("0").draw();                          
         }else{
-            tabla.columns(6).search("si").draw();                                      
+            tabla.columns(6).search("1").draw();                                      
         }
     })
     
@@ -201,7 +201,7 @@ function datos(id){   // obtengo los datos contenidos en los input
       var dni =$("#dniPersona").val();
       var direccion =$("#direccionPersona").val();
       var telefono =$("#telPersona").val();
-      var estado = "Si";
+      var estado = "1";
       
         var data=[]; //creo un json con los datos
         data.push(  
