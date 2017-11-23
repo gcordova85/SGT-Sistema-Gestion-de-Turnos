@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2017 a las 02:26:42
+-- Tiempo de generación: 24-11-2017 a las 00:33:36
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sgt`
+-- Base de datos: `sgt-turnos`
 --
 
 -- --------------------------------------------------------
@@ -30,30 +30,59 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `consultorios` (
   `id_consultorio` int(11) NOT NULL,
-  `Ubicacion` varchar(30) NOT NULL
+  `ubicacion` varchar(30) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estado_paciente`
+-- Estructura de tabla para la tabla `dias`
 --
 
-CREATE TABLE `estado_paciente` (
-  `Id_estado` int(11) NOT NULL,
+CREATE TABLE `dias` (
+  `id_dia` int(11) NOT NULL,
   `nombre` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `dias`
+--
+
+INSERT INTO `dias` (`id_dia`, `nombre`) VALUES
+(1, 'Lunes'),
+(2, 'Martes'),
+(3, 'Miercoles'),
+(4, 'Jueves'),
+(5, 'Viernes');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estado_turno`
+-- Estructura de tabla para la tabla `horarios`
 --
 
-CREATE TABLE `estado_turno` (
-  `Id_estadoTurno` int(11) NOT NULL,
-  `nombre` int(11) NOT NULL
+CREATE TABLE `horarios` (
+  `id_horario` int(11) NOT NULL,
+  `hora` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `horarios`
+--
+
+INSERT INTO `horarios` (`id_horario`, `hora`) VALUES
+(1, '08:00:00'),
+(2, '09:00:00'),
+(3, '10:00:00'),
+(4, '11:00:00'),
+(5, '12:00:00'),
+(6, '13:00:00'),
+(7, '14:00:00'),
+(8, '15:00:00'),
+(9, '16:00:00'),
+(10, '17:00:00'),
+(11, '18:00:00');
 
 -- --------------------------------------------------------
 
@@ -62,10 +91,11 @@ CREATE TABLE `estado_turno` (
 --
 
 CREATE TABLE `obra_sociales` (
-  `Id_obrasocial` int(11) NOT NULL,
-  `nombre` varchar(15) NOT NULL,
-  `email` int(15) NOT NULL,
-  `telefono` int(10) NOT NULL
+  `id_obrasocial` int(11) NOT NULL,
+  `nombre` varchar(40) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `telefono` bigint(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -75,25 +105,17 @@ CREATE TABLE `obra_sociales` (
 --
 
 CREATE TABLE `paciente` (
-  `Id_paciente` int(11) NOT NULL,
-  `nombre` varchar(15) NOT NULL,
-  `apellido` varchar(15) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `nombre` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `apellido` varchar(40) CHARACTER SET utf8 NOT NULL,
   `dni` int(8) NOT NULL,
-  `direccion` int(15) NOT NULL,
-  `telefono` int(10) NOT NULL,
-  `Id_obrasocial` int(11) NOT NULL,
-  `certificado` int(11) NOT NULL,
-  `autorizacion` int(11) NOT NULL,
-  `Id_estado` int(1) NOT NULL
+  `direccion` varchar(60) NOT NULL,
+  `telefono` bigint(11) NOT NULL,
+  `id_obrasocial` int(11) NOT NULL,
+  `certificado` varchar(100) NOT NULL,
+  `autorizacion` varchar(100) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `paciente`
---
-
-INSERT INTO `paciente` (`Id_paciente`, `nombre`, `apellido`, `dni`, `direccion`, `telefono`, `Id_obrasocial`, `certificado`, `autorizacion`, `Id_estado`) VALUES
-(1, 'tania', 'scortegagna', 35949247, 0, 1223454, 1, 1, 1, 1),
-(2, 'zoe', 'flores', 12345678, 0, 1223454, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -102,9 +124,8 @@ INSERT INTO `paciente` (`Id_paciente`, `nombre`, `apellido`, `dni`, `direccion`,
 --
 
 CREATE TABLE `paciente_personacargo` (
-  `Id_personaCargo` int(11) NOT NULL,
-  `Id_paciente_personaCargo` int(11) NOT NULL,
-  `Id_paciente` int(11) NOT NULL
+  `id_paciente` int(11) NOT NULL,
+  `id_personaCargo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -115,20 +136,13 @@ CREATE TABLE `paciente_personacargo` (
 
 CREATE TABLE `personas_cargo` (
   `id_personaCargo` int(11) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `apellido` varchar(30) NOT NULL,
+  `nombre` varchar(40) NOT NULL,
+  `apellido` varchar(40) CHARACTER SET utf8 NOT NULL,
   `dni` int(8) NOT NULL,
-  `direccion` varchar(50) NOT NULL,
-  `telefono` bigint(11) NOT NULL
+  `direccion` varchar(60) CHARACTER SET utf8 NOT NULL,
+  `telefono` bigint(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `personas_cargo`
---
-
-INSERT INTO `personas_cargo` (`id_personaCargo`, `nombre`, `apellido`, `dni`, `direccion`, `telefono`) VALUES
-(1, 'taniaeqwewd', 'Scorte', 2333333, 'dfszgf334', 34234424234),
-(2, 'tania', 'Scorte', 2333333, 'dfszgf334', 34234424234);
 
 -- --------------------------------------------------------
 
@@ -138,21 +152,14 @@ INSERT INTO `personas_cargo` (`id_personaCargo`, `nombre`, `apellido`, `dni`, `d
 
 CREATE TABLE `profesionales` (
   `id_profesional` int(11) NOT NULL,
-  `nombres` varchar(11) NOT NULL,
-  `apellido` varchar(11) NOT NULL,
+  `nombre` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `apellido` varchar(40) CHARACTER SET utf8 NOT NULL,
   `telefono` int(11) NOT NULL,
-  `direccion` varchar(11) NOT NULL,
-  `email` varchar(11) NOT NULL,
-  `id_especialidad` int(11) NOT NULL
+  `direccion` varchar(60) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `id_especialidad` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `profesionales`
---
-
-INSERT INTO `profesionales` (`id_profesional`, `nombres`, `apellido`, `telefono`, `direccion`, `email`, `id_especialidad`) VALUES
-(1, 'Adara', 'Denis', 22223333, 'eskkk222', 'ddddd@ddddf', 1),
-(2, 'Adaddddra', 'Denis', 22223333, 'eskkk222', 'ddddd@ddddf', 1);
 
 -- --------------------------------------------------------
 
@@ -161,14 +168,26 @@ INSERT INTO `profesionales` (`id_profesional`, `nombres`, `apellido`, `telefono`
 --
 
 CREATE TABLE `turnos` (
-  `Id_turno` int(11) NOT NULL,
-  `Id_consultorio` int(11) NOT NULL,
-  `Id_profesional` int(11) NOT NULL,
-  `Id_paciente` int(11) NOT NULL,
+  `id_turno` int(11) NOT NULL,
+  `id_consultorio` int(11) NOT NULL,
+  `id_profesional` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `hora` time NOT NULL,
-  `Id_estado` int(11) NOT NULL
+  `id_hora` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `anio` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `turnos`
+--
+
+INSERT INTO `turnos` (`id_turno`, `id_consultorio`, `id_profesional`, `id_paciente`, `fecha`, `id_hora`, `estado`, `anio`) VALUES
+(56, 1, 1, 1, '0000-00-00', 1, 1, 2017),
+(57, 1, 1, 1, '0000-00-00', 1, 1, 2017),
+(58, 1, 1, 1, '0000-00-00', 1, 1, 2017),
+(59, 1, 1, 1, '0000-00-00', 1, 1, 2017),
+(60, 1, 1, 1, '0000-00-00', 1, 1, 2017);
 
 -- --------------------------------------------------------
 
@@ -189,8 +208,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `usuario`, `clave`, `tipo_usuario`) VALUES
 (1, 'tania', '1234', 1),
-(2, 'juan', '1234', 1),
-(3, 'gabi', '1234', 1);
+(2, 'juan', '1234', 2),
+(3, 'gabi', '1234', 3);
 
 --
 -- Índices para tablas volcadas
@@ -204,35 +223,28 @@ ALTER TABLE `consultorios`
   ADD UNIQUE KEY `id_consultorio` (`id_consultorio`);
 
 --
--- Indices de la tabla `estado_paciente`
+-- Indices de la tabla `dias`
 --
-ALTER TABLE `estado_paciente`
-  ADD PRIMARY KEY (`Id_estado`);
+ALTER TABLE `dias`
+  ADD PRIMARY KEY (`id_dia`);
 
 --
--- Indices de la tabla `estado_turno`
+-- Indices de la tabla `horarios`
 --
-ALTER TABLE `estado_turno`
-  ADD PRIMARY KEY (`Id_estadoTurno`);
+ALTER TABLE `horarios`
+  ADD PRIMARY KEY (`id_horario`);
 
 --
 -- Indices de la tabla `obra_sociales`
 --
 ALTER TABLE `obra_sociales`
-  ADD PRIMARY KEY (`Id_obrasocial`);
+  ADD PRIMARY KEY (`id_obrasocial`);
 
 --
 -- Indices de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  ADD PRIMARY KEY (`Id_paciente`);
-
---
--- Indices de la tabla `paciente_personacargo`
---
-ALTER TABLE `paciente_personacargo`
-  ADD PRIMARY KEY (`Id_personaCargo`),
-  ADD UNIQUE KEY `FK-Pers-Paciente` (`Id_personaCargo`,`Id_paciente_personaCargo`) USING BTREE;
+  ADD PRIMARY KEY (`id_paciente`);
 
 --
 -- Indices de la tabla `personas_cargo`
@@ -251,7 +263,7 @@ ALTER TABLE `profesionales`
 -- Indices de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  ADD PRIMARY KEY (`Id_turno`);
+  ADD PRIMARY KEY (`id_turno`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -270,52 +282,46 @@ ALTER TABLE `consultorios`
   MODIFY `id_consultorio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `estado_paciente`
+-- AUTO_INCREMENT de la tabla `dias`
 --
-ALTER TABLE `estado_paciente`
-  MODIFY `Id_estado` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `dias`
+  MODIFY `id_dia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `estado_turno`
+-- AUTO_INCREMENT de la tabla `horarios`
 --
-ALTER TABLE `estado_turno`
-  MODIFY `Id_estadoTurno` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `horarios`
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `obra_sociales`
 --
 ALTER TABLE `obra_sociales`
-  MODIFY `Id_obrasocial` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_obrasocial` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `Id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `paciente_personacargo`
---
-ALTER TABLE `paciente_personacargo`
-  MODIFY `Id_personaCargo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `personas_cargo`
 --
 ALTER TABLE `personas_cargo`
-  MODIFY `id_personaCargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_personaCargo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `profesionales`
 --
 ALTER TABLE `profesionales`
-  MODIFY `id_profesional` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_profesional` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `Id_turno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

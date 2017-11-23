@@ -16,9 +16,17 @@
                     <li><a href="../inc/Logout.php">Salir</a></li>
                 </ul>
             </div> 
+        <?php
+            if($_SESSION['rol'] == 2){
+                
+        ?>
         <div class="pull-right">
             <button class="btn btn-barra navbar-btn "> Reporte de asistencia</button>
-        </div>           
+        </div>     
+        <?php
+            }
+            
+       ?>      
         </nav>         
 </header>
 

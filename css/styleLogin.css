@@ -1,11 +1,8 @@
-.fondoLogin{
-
-    background-image: url(image/fondoLogin.jpg);
-    background-position: right bottom, left top;
-    background-size: cover;
-    padding: 100px;
+body {background: url(image/fondoLogin.jpg); 
+    background-repeat: no-repeat; 
+    background-size: 100% 100%; 
+    background-attachment: fixed; 
 }
-
 .hLogin{
     border: solid 2px;
     background: #a93957; 

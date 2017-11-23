@@ -12,10 +12,14 @@
       $horaElegida = $_REQUEST['idHora'];  echo "hora elegida----- ".$horaElegida."<br>";
       $diaSemana = date("w"); echo "dia Semana ---".$diaSemana."<br>";
       $diaHoyNum = date("z"); echo "dia del anio en numero ".$diaHoyNum,"<br>";
+      $date = DateTime::createFromFormat('z' , $diaHoyNum);
+      $date = $date->format("d-m-y");
+      echo($date);
       $array_turnos = array(); echo "array turnos"; 
+      $anioActual = date('Y'); echo "anio en numero ".$anioActual,"<br>";
       $contador = 0;
       $indicador = 0;
-    function localizarDia($diaElegido,$diaSemana,$diaHoyNum,$horaElegida,$array_turnos,$contador,$indicador,$idConsultorio,$idProfesional,$idPaciente,$idEstado,$cnn)
+    function localizarDia($diaElegido,$diaSemana,$diaHoyNum,$horaElegida,$array_turnos,$contador,$indicador,$idConsultorio,$idProfesional,$idPaciente,$idEstado,$anioActual,$cnn)
     {
         if ($diaElegido == $diaSemana){
             while($diaHoyNum <= 358){
@@ -23,19 +27,24 @@
                   $diaHoyNum+=7; 
                   echo "dia igual a semana ".$diaHoyNum."<br>";
                   array_push($array_turnos,$diaHoyNum,$horaElegida);
-                  consulta($idConsultorio,$idProfesional,$idPaciente,$diaHoyNum,$horaElegida,$idEstado,$cnn);
+                  $diaAgregar = DateTime::createFromFormat('z' , $diaHoyNum);
+                  $diaAgregar = $diaAgregar->format("Y-m-d");
+                  consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaElegida,$idEstado,$anioActual,$cnn);
               }
               if ($indicador == 1) {
                 $diaHoyNum = $diaHoyNum - $contador;
                 $diaHoyNum+=7; 
                 array_push($array_turnos,$diaHoyNum,$horaElegida);
-                consulta($idConsultorio,$idProfesional,$idPaciente,$diaHoyNum,$horaElegida,$idEstado,$cnn);
+                $diaAgregar = DateTime::createFromFormat('z' , $diaHoyNum);
+                consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaElegida,$idEstado,$anioActual,$cnn);
                 $contador = 0;
               }
               if ($indicador == 2) {
                 $diaHoyNum = $diaHoyNum + $contador;
                 array_push($array_turnos,$diaHoyNum,$horaElegida);
-                consulta($idConsultorio,$idProfesional,$idPaciente,$diaHoyNum,$horaElegida,$idEstado,$cnn);
+                $diaAgregar = DateTime::createFromFormat('z' , $diaHoyNum);
+                $diaAgregar = $diaAgregar->format("d-m-Y");
+                consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaElegida,$idEstado,$anioActual,$cnn);
                 $contador = 0;
                 $diaHoyNum+=7; 
               }
@@ -50,23 +59,24 @@
           $indicador = 1;
           $diaElegido+=1;
           $contador+=1;
-          localizarDia( $diaElegido, $diaSemana, $diaHoyNum, $horaElegida, $array_turnos,$contador,$indicador,$idConsultorio,$idProfesional,$idPaciente,$idEstado,$cnn);
+          localizarDia($diaElegido,$diaSemana,$diaHoyNum,$horaElegida,$array_turnos,$contador,$indicador,$idConsultorio,$idProfesional,$idPaciente,$idEstado,$anioActual,$cnn);
         }
         if($diaElegido > $diaSemana){
           $indicador = 2;
           $diaElegido-=1;
           $contador+=1;
-          localizarDia( $diaElegido, $diaSemana, $diaHoyNum, $horaElegida, $array_turnos,$contador,$indicador,$idConsultorio,$idProfesional,$idPaciente,$idEstado,$cnn);
+          localizarDia($diaElegido,$diaSemana,$diaHoyNum,$horaElegida,$array_turnos,$contador,$indicador,$idConsultorio,$idProfesional,$idPaciente,$idEstado,$anioActual,$cnn);
         } 
 
     }
-localizarDia($diaElegido,$diaSemana,$diaHoyNum,$horaElegida,$array_turnos,$contador,$indicador,$idConsultorio,$idProfesional,$idPaciente,$idEstado,$cnn);
+localizarDia($diaElegido,$diaSemana,$diaHoyNum,$horaElegida,$array_turnos,$contador,$indicador,$idConsultorio,$idProfesional,$idPaciente,$idEstado,$anioActual,$cnn);
 
-function consulta($idConsultorio,$idProfesional,$idPaciente,$diaHoyNum,$idHora,$idEstado,$cnn){
-  $sql="INSERT INTO turnos (Id_consultorio, Id_profesional,Id_Paciente,fecha,id_hora,id_estado)
-    VALUES ($idConsultorio,$idProfesional,$idPaciente,$diaHoyNum,$idHora,$idEstado)";
+function consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$idHora,$idEstado,$anioActual,$cnn){
+  $sql="INSERT INTO turnos (id_consultorio, id_profesional,id_Paciente,fecha,id_hora,estado,anio)
+    VALUES ($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$idHora,$idEstado,$anioActual)";
   $query = $cnn->prepare($sql);
-  $query->execute();
+  $resultado = $query->execute();
+  echo $resultado;
 }
 
 //   $diasTurnos = array();

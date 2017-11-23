@@ -16,8 +16,25 @@
 <body >
     <div class="container">
         <?php
-            require_once '../inc/header.php';         ?>
-        
+            require_once '../inc/header.php'; 
+        ?>
+        <?php
+            if($_SESSION['rol'] == 3){
+                
+        ?>
+        <div class="text-center">
+            <div class="form-group col-xs-12 col-sm-6">
+                <a href="" class="btn-principal btn"><img src="../iconos/usuario.png" alt="Usuarios"><br>Usuarios</a>
+            </div>
+            <div class="form-group col-xs-12 col-sm-6">
+                <a href="configDias.php" class="btn-principal btn"><img src="../iconos/configuraciones.png" alt="Configuraciones"><br>Configuraciones</a>
+            </div>
+        </div>
+    <?php
+       }
+       else{
+                
+    ?>
         <div class="text-center">
         <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <a href="abmprofesionales.php" class="btn-principal btn"><img src="../iconos/doctor.png" alt="Profesionales"><br>Profesionales</a>
@@ -35,11 +52,22 @@
         <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <a href="abmturnos.php" class="btn-principal btn"><img src="../iconos/turno.png" alt="Turno"><br>Turnos</a>
         </div>
+        <?php
+            if($_SESSION['rol'] == 2){
+                
+        ?>
         <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <a href="" class="btn-principal btn"><img src="../iconos/asistencia.png" alt="registro de asistencia"><br>Registrar asistencia</a>
         </div>
+        <?php
+            } ;           
+        ?>
     </div>
     </div>
+    <?php
+        }            
+    ?>
+
     <?php
         require_once '../inc/footer.php'; 
     ?>

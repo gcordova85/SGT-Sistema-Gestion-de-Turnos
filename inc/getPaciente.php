@@ -13,7 +13,8 @@
          $data["data"][] = $resultado;
      }
      echo json_encode($data);
- }else{
+ }
+ else{
      echo "error";
  }
  $statement->closeCursor();

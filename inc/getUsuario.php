@@ -15,7 +15,8 @@ session_start();
     
       echo trim(1); // log in
       $_SESSION['usuario'] = $row['usuario'];
-   }
+      $_SESSION['rol'] = $row['tipo_usuario'];
+    }
    else{    
     echo 0; 
    }

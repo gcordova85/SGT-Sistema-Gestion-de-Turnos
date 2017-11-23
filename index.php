@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="css/styleLogin.css">
     <link rel="stylesheet" href="css/bootstrap.min.css"> 
 </head>
-<body class="fondoLogin">
+<body>
     <div class="container text-center">
         <div class="page-header hLogin ">
              <header> <h1 class="text-center"> <strong> SGT- Sistema Gestion de Turnos </strong> </h1> </header>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="hidden-xs col-sm-12 col-md-6">
                     <div id="carouselLogin" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                       <li data-target="#carouselLogin" data-slide-to="0" class="active"></li>
