@@ -5,19 +5,27 @@ $(document).ready(function(){
 
 
 function listarPaciente(){
-    $('#tablePacienteTurno').DataTable({
-        "ajax": {
-            type : 'POST',
-            url: '../inc/getPaciente.php'
-          },
-          columns: [
-            { data: 'id_paciente'},
-            { data: 'nombre' },
-			{ data: 'apellido' },
-            { data: 'dni' },
-            {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" onClick="obtenerID();">Asignar</button>'},
-          ]
-        });
+    $.ajax({
+        type : 'POST',
+        url  : '../inc/getPaciente.php',
+        data : null,
+        success :  function(response){         
+            if(response != "error"){
+                $('#tablePacienteTurno').DataTable({
+                    columns: [
+                      { data: 'id_paciente'},
+                      { data: 'nombre' },
+                      { data: 'apellido' },
+                      { data: 'dni' },
+                      {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" onClick="obtenerID();">Asignar</button>'},
+                    ]
+                  }) 
+            }
+            else{
+                $('#tablePacienteTurno').DataTable();
+            };
+        },
+    });
 }
 function obtenerID(){
     var table = $('#tablePacienteTurno').DataTable();    

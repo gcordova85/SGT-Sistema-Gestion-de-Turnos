@@ -62,8 +62,8 @@ function localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador){
     localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
     } 
 }
-var_dump(localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador));
-
+ $prueba=localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
+echo $prueba;
 // while($diaAgregar < 358){
 //   consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaElegida,$idEstado,$anioActual,$cnn);
 //   $diaAgregar+=7;
