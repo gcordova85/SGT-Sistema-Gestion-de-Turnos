@@ -35,7 +35,7 @@
         <div class="row" id="fila-tabla">
             <div class="col-md-1"></div>
             <div class="col-md-10 offset-md-1">
-                <div class="table-responsive">
+                <div class="">
                     <table id="tablaProfesionales" class="table table-bordered table-condensed">
                         <thead>
                             <tr>
