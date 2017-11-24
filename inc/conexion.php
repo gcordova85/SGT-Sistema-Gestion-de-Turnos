@@ -2,7 +2,7 @@
 <?php
 	class Conexion{
 		private $host = "localhost";
-		private $dbname = "sgt-turnos";
+		private $dbname = "sgt";
 		private $user = "root";
 		private $password = "";
 		private $conexion = null;

@@ -30,6 +30,19 @@ function consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaEle
   $resultado = $query->execute();
 }
 function localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador){
+  if($diaElegido < $diaSemana){
+    $indicador = 1;
+    $diaElegido+=1;
+    $contador+=1;
+    echo $indicador.$diaElegido.$contador;
+    localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
+    }
+    if($diaElegido > $diaSemana){
+    $indicador = 2;
+    $diaElegido-=1;
+    $contador+=1;
+    localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
+    }
     if ($diaElegido == $diaSemana){
         if($indicador == 0){
             $diaHoyNum+=7; 
@@ -38,8 +51,9 @@ function localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador){
         }
         if ($indicador == 1) {
           $diaHoyNum = $diaHoyNum - $contador;
-          $diaHoyNum+=7; 
-          return $diaHoyNum;
+          $diaHoyNum =  $diaHoyNum + 7; 
+          $result=$diaHoyNum;
+          return $result;
           
         }
         if ($indicador == 2) {
@@ -49,24 +63,12 @@ function localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador){
           
         }
     } 
-    if($diaElegido < $diaSemana){
-    $indicador = 1;
-    $diaElegido+=1;
-    $contador+=1;
-    localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
-    }
-    if($diaElegido > $diaSemana){
-    $indicador = 2;
-    $diaElegido-=1;
-    $contador+=1;
-    localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
-    } 
+ 
 }
  $prueba=localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
-echo $prueba;
+echo "devolucion num".$prueba;
 // while($diaAgregar < 358){
 //   consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaElegida,$idEstado,$anioActual,$cnn);
 //   $diaAgregar+=7;
 // }
-echo 1;
 $conexion = null;
