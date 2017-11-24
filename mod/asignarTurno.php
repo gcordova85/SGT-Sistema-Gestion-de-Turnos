@@ -109,12 +109,6 @@
                         </table>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" id="btnAceptar" class="btn btn-buscar" data-dismiss="modal"> 
-                            <span class="glyphicon glyphicon-ok"></span> Aceptar
-                        </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    </div>
                 </div>        
                 </div>
             </div>

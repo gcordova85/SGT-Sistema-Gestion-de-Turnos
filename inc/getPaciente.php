@@ -7,15 +7,17 @@
  $sql = "SELECT * FROM paciente";
  $statement = $cnn->prepare($sql);
  $valor = $statement->execute();
-
- if($valor){
-     while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
-         $data["data"][] = $resultado;
-     }
-     echo json_encode($data);
+$contar = $statement->rowCount(); 
+ if($contar <> 0){
+    while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+        $data["data"][] = $resultado;
+        echo json_encode($data);
  }
+}
  else{
-     echo "error";
- }
+        echo "error";
+    }
+    
+ 
  $statement->closeCursor();
  $conexion = null;

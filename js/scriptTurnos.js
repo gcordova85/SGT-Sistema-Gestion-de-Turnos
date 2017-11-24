@@ -6,7 +6,8 @@ $(document).ready(function(){
 
 function listarPaciente(){
     $('#tablePacienteTurno').DataTable({
-        ajax: {
+        "ajax": {
+            type : 'POST',
             url: '../inc/getPaciente.php'
           },
           columns: [

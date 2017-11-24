@@ -2,7 +2,9 @@ $(document).ready(function(){
     listarDias();
     listarHorarios(); 
     reservarTurnos();
-    obtenerPaciente();       
+    obtenerPaciente();  
+    obtenerConsultorios();     
+    obtenerProfesionales();
 });
 
 
@@ -101,4 +103,44 @@ function listarHorarios(){
             {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" id="btnHora">Agregar</button>'},
           ]
         }); 
+}
+function obtenerProfesionales() {
+    $.ajax({
+        type: "POST",
+        url: "../inc/getProfesional.php",
+        contentType: "application/json; charset=utf-8",
+        data: null,
+        dataType: "json",
+        success: function (result) {
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_profesional);
+               $option.text(this.nombre +" "+ this.apellido);
+               $('#profesionales').append($option);
+            }); 
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+}
+function obtenerConsultorios() {
+    $.ajax({
+        type: "POST",
+        url: "../inc/getConsultorios.php",
+        contentType: "application/json; charset=utf-8",
+        data: null,
+        dataType: "json",
+        success: function (result) {
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_consultorio);
+               $option.text(this.ubicacion);
+               $('#consultorios').append($option);
+            }); 
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
 }

@@ -5,19 +5,20 @@
     $conexion = new Conexion();
     $cnn = $conexion->getConexion();    
     try {
-        $arrConsultorios=array();
+        $arrProfesionales=array();
         $iCont=0;
         
-        $sql = "SELECT * FROM consultorios";
+        $sql = "SELECT * FROM profesionales";
         $result=$cnn->query($sql) ;
         foreach ($result as $row) {
-        $arrConsultorios[$iCont]=array();
-        $arrConsultorios[$iCont]['id_consultorio']=$row['id_consultorio'];
-        $arrConsultorios[$iCont]['ubicacion']=$row['ubicacion'];
+        $arrProfesionales[$iCont]=array();
+        $arrProfesionales[$iCont]['id_profesional']=$row['id_profesional'];
+        $arrProfesionales[$iCont]['nombre']=$row['nombre'];
+        $arrProfesionales[$iCont]['apellido']=$row['apellido'];
         $iCont++;
        }
        $cnn = null;
-       echo json_encode($arrConsultorios);
+       echo json_encode($arrProfesionales);
     }
     catch (PDOexception $e) {
        echo "Error is: " . $e-> etmessage();
