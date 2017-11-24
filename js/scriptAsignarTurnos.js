@@ -1,7 +1,6 @@
 $(document).ready(function(){
     listarDias();
     listarHorarios(); 
-    reservarTurnos();
     obtenerPaciente();  
     obtenerConsultorios();     
     obtenerProfesionales();
@@ -9,19 +8,6 @@ $(document).ready(function(){
 
 
 
-// function datos(){   // obtengo los datos contenidos en los input
-//     var nombre =$("#nombre").val();
-//     var apellido =$("#apellido").val();
-//     var dni =$("#dni").val();
-   
-//       var data=[]; //creo un json con los datos
-//       data.push(  
-//           {"nombre":nombre,"apellido":apellido,"dni":dni},
-          
-//       );
-//       var personas={"data":data}; //creo un array con la clave data
-//       return personas; 
-// }
 function obtenerPaciente() {
     var id=$("#idPaciente").val();
     var data=[]; //creo un json con los datos
@@ -47,9 +33,9 @@ function obtenerPaciente() {
 }
 
 function reservarTurnos(){
+    var id=$("#idPaciente").val();
     var idDia = 1
     var idHora = 1
-
     var tablaD = $('#tablaDias').DataTable();  
     $('#tablaDias tbody').on( 'click', 'button #btnDia', function () {
         var fila = tablaD.row( $(this).parents('tr') ).data();
@@ -61,6 +47,8 @@ function reservarTurnos(){
         var fila = tablaH.row( $(this).parents('tr') ).data();
          idHora = fila.id_horario;
     });
+    var idProfesional = $("#profesionales").val();
+    var idConsultorio = $("#profesionales").val();
 
     $.ajax({
         type : 'POST',
@@ -68,6 +56,9 @@ function reservarTurnos(){
         data : {
                 "idDia":idDia,
                 "idHora"  :idHora,
+                "idProfesional" : idProfesional,
+                "idConsultorio" : idConsultorio,
+                "idPaciente" : idPaciente
         },
         success :  function(response){         
             if(response == true){
@@ -88,7 +79,7 @@ function listarDias(){
           columns: [
             { data: 'id_dia'},
             { data: 'nombre' },
-            {defaultContent:'<button id="btnDia" name="btnDia" class="btn btn-success" data-toggle="modal" data-target="#modalAsignar"><span class="glyphicon glyphicon-plus"></span>Seleccionar horario </button>'},
+            {defaultContent:'<button id="btnDia" name="btnDia" class="btn btn-default" data-toggle="modal" data-target="#modalAsignar"><span class="glyphicon glyphicon-plus"></span>Seleccionar horario </button>'},
           ]
         });
 }
@@ -100,7 +91,7 @@ function listarHorarios(){
           columns: [
             { data: 'id_horario'},
             { data: 'hora' },
-            {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" id="btnHora">Agregar</button>'},
+            {defaultContent:'<button name="btnHora" class="btn btn-success btn-asignar glyphicon glyphicon-plus" id="btnHora" onClick="reservarTurnos();">Agregar</button>'},
           ]
         }); 
 }

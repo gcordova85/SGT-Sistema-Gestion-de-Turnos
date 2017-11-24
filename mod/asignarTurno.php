@@ -50,7 +50,7 @@
         <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="form-group">
                 <label for="profesionales" class="control-label">Elegir Profesional:</label>           
-                <select name="profesionales" id="profesionales" class="form-control">
+                <select name="profesionales" id="profesionales" class="form-control" require>
                     <option value="0">Selecciones una opcion</option>
                 </select>
 
@@ -59,7 +59,7 @@
         <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="form-group">
                 <label for="consultorios" class="control-label">Elegir Consultorios:</label>           
-                <select name="consultorios" id="consultorios" class="form-control">
+                <select name="consultorios" id="consultorios" class="form-control" require>
                     <option value="0">Selecciones una opcion</option>
                 </select>
 
