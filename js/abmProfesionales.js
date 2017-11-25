@@ -5,41 +5,66 @@ $(document).ready(function(){
         validarCamposEditar();
         confirmarEliminar();
     });
+
 function listar_datos(){
-    $.ajax({
-        type : 'POST',
-        url  : '../inc/getProfesionales.php',
-        data : null,
-        success :  function(response){         
-            if(response != "error"){
-                $('#tablaProfesionales').DataTable({
-                    columns: [
-                        { data: 'id_profesional' },
-                        { data: 'nombre' },
-                        { data: 'apellido' },
-                        { data: 'telefono' },
-                        { data: 'direccion' },
-                        { data: 'email' },
-                        { data: 'id_especialidad' },
-                        { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalProfesionales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalProfesionales' ><i class='fa fa-trash-o'></i></button>" }
-                      ],
-                      columnDefs: [
-                        {   targets: [ 0 ],
-                            visible: false,
-                            searchable: false}
-                      ],
-                        language : idioma_espanol
-                    
-                    })
-                    editar_registro("#tablaProfesionales tbody",tabla);
-                    eliminar_registro("#tablaProfesionales tbody",tabla); 
-            }
-            else{
-                $('#tablaProfesionales').DataTable();
-            };
-        },
+    var tabla = $('#tablaProfesionales').DataTable({
+        destroy: true,
+        ajax: {url: '../inc/getProfesionales.php'},
+        columns: [
+            { data: 'id_profesional' },
+            { data: 'nombre' },
+            { data: 'apellido' },
+            { data: 'telefono' },
+            { data: 'direccion' },
+            { data: 'email' },
+            { data: 'id_especialidad' },
+            { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalProfesionales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalProfesionales' ><i class='fa fa-trash-o'></i></button>" }
+            ],
+        columnDefs: [
+        {   targets: [ 0 ],
+            visible: false,
+            searchable: false}
+        ],
+        language : idioma_espanol
     });
-}
+    editar_registro('#tablaProfesionales tbody',tabla);
+    eliminar_registro('#tablaProfesionales tbody',tabla);
+};    
+// function listar_datos(){
+//     $.ajax({
+//         type : 'POST',
+//         url  : '../inc/getProfesionales.php',
+//         data : null,
+//         success :  function(response){         
+//             if(response != "error"){
+//                 $('#tablaProfesionales').DataTable({
+//                     columns: [
+//                         { data: 'id_profesional' },
+//                         { data: 'nombre' },
+//                         { data: 'apellido' },
+//                         { data: 'telefono' },
+//                         { data: 'direccion' },
+//                         { data: 'email' },
+//                         { data: 'id_especialidad' },
+//                         { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalProfesionales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalProfesionales' ><i class='fa fa-trash-o'></i></button>" }
+//                       ],
+//                       columnDefs: [
+//                         {   targets: [ 0 ],
+//                             visible: false,
+//                             searchable: false}
+//                       ],
+//                         language : idioma_espanol
+                    
+//                     })
+//                     editar_registro("#tablaProfesionales tbody",tabla);
+//                     eliminar_registro("#tablaProfesionales tbody",tabla); 
+//             }
+//             else{
+//                 $('#tablaProfesionales').DataTable();
+//             };
+//         },
+//     });
+// }
 
 
 var idioma_espanol = {
