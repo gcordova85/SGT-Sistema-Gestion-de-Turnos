@@ -1,8 +1,10 @@
 $(document).ready(function(){
-    listarDias();
-    listarHorarios(); 
+    //listarDias();
+    //listarHorarios(); 
+    $('#tablaHorarios').DataTable({
+        language: idioma_espanol
+    });
     obtenerPaciente();  
-    obtenerConsultorios();     
     obtenerProfesionales();
 });
 
@@ -92,7 +94,8 @@ function listarHorarios(){
             { data: 'id_horario'},
             { data: 'hora' },
             {defaultContent:'<button name="btnHora" class="btn btn-success btn-asignar glyphicon glyphicon-plus" id="btnHora" onClick="reservarTurnos();">Agregar</button>'},
-          ]
+          ],
+          languaje: idioma_espanol
         }); 
 }
 function obtenerProfesionales() {
@@ -114,24 +117,57 @@ function obtenerProfesionales() {
             alert("ERROR")
         }
     });
+    $("#profesionales").on('change',function(){    
+        obtenerConsultorios();    
+    }); 
 }
 function obtenerConsultorios() {
+    var idProfesional=$("#profesionales").val();
     $.ajax({
         type: "POST",
         url: "../inc/getConsultorios.php",
         contentType: "application/json; charset=utf-8",
-        data: null,
+        data:  {
+            "idProfesional":idProfesional,
+        },
         dataType: "json",
         success: function (result) {
             $.each(result, function () {
-               $option= $("<option></option>");
-               $option.attr("value",this.id_consultorio);
-               $option.text(this.ubicacion);
-               $('#consultorios').append($option);
+               $('#consultorio').attr("value",this.id_consultorio + " " + this.ubicacion);
             }); 
         },
         error: function (xhr, status, error) {
             alert("ERROR")
         }
     });
+}
+var idioma_espanol = {
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+};
+1	
+function noVolver(){
+    window.location.hash="no-back-button";
+    window.location.hash="Again-No-back-button" //chrome
+    window.onhashchange=function(){window.location.hash="noVolver";}
 }

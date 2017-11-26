@@ -15,8 +15,7 @@
 </head>
 <body >
     <div class="container">
-        <?php
-            require_once '../inc/header.php'; 
+        <?php  require_once '../inc/header.php'; 
         ?>
         <?php
             if($_SESSION['rol'] == 3){
