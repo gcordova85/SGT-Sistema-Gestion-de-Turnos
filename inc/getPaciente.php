@@ -4,7 +4,7 @@
 
  $conexion = new Conexion();
  $cnn = $conexion->getConexion();
- $sql = "SELECT * FROM paciente";
+ $sql = "SELECT * FROM pacientes";
  $statement = $cnn->prepare($sql);
  $valor = $statement->execute();
 $contar = $statement->rowCount(); 

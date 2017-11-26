@@ -18,11 +18,14 @@
             require_once '../inc/header.php'; 
             ?>      
         <div class="text-center">
-            <div class="form-group col-xs-12 col-sm-6">
+            <div class="form-group col-xs-12 col-sm-4">
                 <a href="" class="btn-principal btn"><img src="../iconos/usuario.png" alt="Usuarios"><br>Usuarios</a>
             </div>
-            <div class="form-group col-xs-12 col-sm-6">
+            <div class="form-group col-xs-12 col-sm-4">
                 <a href="configDias.php" class="btn-principal btn"><img src="../iconos/configuraciones.png" alt="Configuraciones"><br>Configuraciones</a>
+            </div>
+            <div class="form-group col-xs-12 col-sm-4">
+                <a href="jornadas.php" class="btn-principal btn"><img src="" alt="Jornadas"><br>Jornada</a>
             </div>
         </div>
         
