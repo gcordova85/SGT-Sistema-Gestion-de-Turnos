@@ -110,8 +110,8 @@
                 </div>
             </div>
         </div> 
-        <div class="col-xs-offset-10 col-sm-offset-10 col-md-offset-11">
-           <a href="abmTurnos.php"> <button class="btn btn-md btn-danger">Cancelar</button></a>
+        <div class="col-xs-offset-9 col-sm-offset-10 col-md-offset-11">
+           <a href="abmTurnos.php"> <button class="btn btn-danger">Cancelar</button></a>
         </div>
     </div>
     <?php

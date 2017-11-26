@@ -22,8 +22,8 @@
                 <div class="panel-heading">
                     Listado de pacientes
                 </div>
-                <div id="divTablaPacientes">
-                    <table id="tablePacienteTurno" class="table table-responsive table-bordered">
+                <div id="divTablaPacientes" class="table-responsive">
+                    <table id="tablePacienteTurno" class="table table-bordered">
                         <thead>
                         <tr class="loginhf">
                             <th>Nro Paciente</th>
@@ -37,8 +37,8 @@
                 </div>  
             </div>
         </div>
-        <div class="col-xs-offset-10 col-sm-offset-10 col-md-offset-11">
-           <a href="menu.php"> <button class="btn btn-md btn-danger">Cancelar</button></a>
+        <div class="col-xs-offset-9 col-sm-offset-10 col-md-offset-11">
+           <a href="menu.php"> <button class="btn btn-danger">Cancelar</button></a>
         </div>
     </div>   
    

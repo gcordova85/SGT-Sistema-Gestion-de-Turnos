@@ -1,5 +1,11 @@
 $(document).ready(function(){
     $('#tablaHorarios').DataTable({
+        columnDefs: [
+            {
+                targets: [ 0 ],
+                visible: false,
+                searchable: false,
+            }],
         language: idioma_espanol
     });
     obtenerPaciente();  
@@ -190,6 +196,53 @@ function obtenerDiasDisponibles() {
             alert("ERROR")
         }
     });
+    $("#dias").on('change',function(){
+        obtenerHoraByDia();    
+    }); 
+}
+function obtenerHoraByDia(){
+    var idPDC         = 1;
+    var idProfesional =   $("#profesionales").val();
+    var idConsultorio =   $("#idConsultorio").val();
+    var idDia         =   $("#dias").val();
+    $ajax:({
+        type : 'POST',
+        url  :"../inc/getPdcByDatos.php",
+        data : {
+            "idProfesional":idProfesional,
+            "idDia": idDia,
+            "idConsultorio":idConsultorio
+        },
+        success: function(result){
+            $.each(result, function () {
+                $idPDC = this.id_pdc;
+             })
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+    $('#tablaHorarios').DataTable({
+        destroy: true,
+        ajax: {
+            url: '../inc/getHoras.php',
+            data:{
+                "idPDC": idPDC,
+            }
+          },
+          columns: [
+            { data: 'id_horario'},
+            { data: 'hora' },
+            {defaultContent:'<button name="btnHora" class="btn btn-success btn-asignar" id="btnHora">Aceptar</button>'},
+          ],
+          columnDefs: [
+            {
+                targets: [ 0 ],
+                visible: false,
+                searchable: false,
+            }],
+          languaje: idioma_espanol
+        }); 
 }
 function obtenerEspecialidades() {
     $.ajax({
