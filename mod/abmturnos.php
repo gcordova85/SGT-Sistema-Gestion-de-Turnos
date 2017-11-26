@@ -30,12 +30,15 @@
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>DNI</th>
-                            <th></th>
+                            <th>Asignar</th>
                         </tr>
                         </thead>
                     </table>
                 </div>  
             </div>
+        </div>
+        <div class="col-xs-offset-10 col-sm-offset-10 col-md-offset-11">
+           <a href="menu.php"> <button class="btn btn-md btn-danger">Cancelar</button></a>
         </div>
     </div>   
    

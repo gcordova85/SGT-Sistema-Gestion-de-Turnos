@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    //listarDias();
-    //listarHorarios(); 
     $('#tablaHorarios').DataTable({
         language: idioma_espanol
     });
@@ -36,7 +34,6 @@ function obtenerPaciente() {
 
 function reservarTurnos(){
     var id=$("#idPaciente").val();
-    var idDia = 1
     var idHora = 1
     var tablaD = $('#tablaDias').DataTable();  
     $('#tablaDias tbody').on( 'click', 'button #btnDia', function () {

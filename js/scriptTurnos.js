@@ -15,7 +15,7 @@ function listarPaciente(){
                 { data: 'nombre' },
                 { data: 'apellido' },
                 { data: 'dni' },
-                {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" onClick="obtenerID();">Asignar</button>'}
+                {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" onClick="obtenerID();"></button>'}
             ],
             language: idioma_espanol
         });

@@ -47,7 +47,7 @@
         <label for="espec"></label>
     </div> 
     <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
                 <label for="especialidades" class="control-label">Elegir especialidad:</label>           
                 <select name="especialidades" id="especialidades" class="form-control" required>
@@ -56,7 +56,7 @@
 
             </div>
         </div>   
-        <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
                 <label for="profesionales" class="control-label">Elegir Profesional:</label>           
                 <select name="profesionales" id="profesionales" class="form-control" required>
@@ -65,17 +65,17 @@
 
             </div>
         </div>   
-        <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="col-xs-12 col-sm-4 col-md-offset-1 col-md-5">
             <div class="form-group">
-                <span class="input-group-addon">Nro.</span>          
-                <input class="form-control" type="text"  id="idConsultorio" name="idConsultorio" disabled>
+                <span class="input-group-addon"> <strong>Nro. consultorio </strong></span>          
+                <input class="form-control text-center" type="text"  id="idConsultorio" name="idConsultorio" disabled>
 
             </div>
         </div> 
-        <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="col-xs-12 col-sm-4 col-md-5">
             <div class="form-group">
-                <span class="input-group-addon">Ubicacion</span>          
-                <input class="form-control" type="text"  id="ubicacionConsultorio" name="ubicacionConsultorio" disabled>
+                <span class="input-group-addon"><strong>Ubicacion</strong></span>          
+                <input class="form-control text-center" type="text"  id="ubicacionConsultorio" name="ubicacionConsultorio" disabled>
 
             </div>
         </div> 
@@ -110,34 +110,9 @@
                 </div>
             </div>
         </div> 
-        <div class="col-xs-12 col-sm-offset-10 col-md-offset-8 col-md-4">
-            <button class="btn btn-danger">Cancelar</button>
+        <div class="col-xs-offset-10 col-sm-offset-10 col-md-offset-11">
+           <a href="abmTurnos.php"> <button class="btn btn-md btn-danger">Cancelar</button></a>
         </div>
-        
-        <!-- modal de horarios -->
-        <!-- <div id="modalAsignar" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Seleccionar horario</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-responsive">
-                          <table id="tablaHorarios" class="table table-bordered dt-responsive">
-                            <thead>
-                                 <tr class="loginhf">
-                                   <th > Codigo de Horario</th>    
-                                   <th> Horarios disponibles</th>
-                                   <th></th>
-                                 </tr>
-                            </thead>
-                        </table>
-                        </div>
-                    </div>
-                </div>        
-                </div>
-            </div> -->
     </div>
     <?php
         require_once '../inc/footer.php';
