@@ -1,11 +1,12 @@
 $(document).ready(function(){
-        listarPaciente();        
-    });
+    listarPaciente();    
+});
 
 
 
 function listarPaciente(){
     $('#tablePacienteTurno').DataTable({
+<<<<<<< HEAD
         ajax: {
             url: '../inc/getPaciente.php'
         },
@@ -20,16 +21,52 @@ function listarPaciente(){
     }
         
     
+=======
+        ajax:{
+            type : 'POST',
+            url  : '../inc/getPaciente.php'
+            },
+            columns: [
+                { data: 'id_paciente'},
+                { data: 'nombre' },
+                { data: 'apellido' },
+                { data: 'dni' },
+                {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" onClick="obtenerID();">Asignar</button>'}
+            ],
+            language: idioma_espanol
+        });
+};
+
+>>>>>>> 891aad21a6aec4376e1addb426c25758b615b153
 function obtenerID(){
     var table = $('#tablePacienteTurno').DataTable();    
     $('#tablePacienteTurno tbody').on( 'click', 'button', function () {
         var fila = table.row( $(this).parents('tr') ).data();
         var id = fila.id_paciente;
-        alert(id + "id");
         $.redirect( "asignarTurno.php", { 'id': id} );
-        
-       // window.location.assign("asignarTurno.php?id=" + id) ;
-    });
-    
-};
+    });}
 
+var idioma_espanol = {
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+}

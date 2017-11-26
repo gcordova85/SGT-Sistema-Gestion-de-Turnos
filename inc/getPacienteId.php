@@ -8,7 +8,7 @@ $datos = json_decode($_POST["json"]); // recibo json y lo decodifico
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion(); //obtengo conexion
-$sql= "select* from paciente where Id_paciente = :id;";
+$sql= "select* from pacientes where Id_paciente = :id;";
 $statement = $cnn->prepare($sql);
 
 $respuesta=false;

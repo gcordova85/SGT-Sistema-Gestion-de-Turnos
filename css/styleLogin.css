@@ -54,3 +54,7 @@ input:focus, input[type]:focus {
     padding: 10px;
     position: absolute;
 }
+@media only screen and (max-width: 500px) {
+    height: 600px;
+    width:370px;
+}

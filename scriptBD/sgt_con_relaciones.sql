@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2017 a las 00:43:24
+-- Tiempo de generación: 26-11-2017 a las 00:22:54
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sgt-turnos`
+-- Base de datos: `sgt2`
 --
 
 -- --------------------------------------------------------
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `consultorios` (
   `id_consultorio` int(11) NOT NULL,
-  `ubicacion` varchar(30) NOT NULL,
+  `ubicacion` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -42,8 +42,8 @@ CREATE TABLE `consultorios` (
 
 CREATE TABLE `dias` (
   `id_dia` int(11) NOT NULL,
-  `nombre` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nombre` varchar(15) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `dias`
@@ -64,8 +64,8 @@ INSERT INTO `dias` (`id_dia`, `nombre`) VALUES
 
 CREATE TABLE `especialidades` (
   `id_especialidad` int(11) NOT NULL,
-  `descripcion` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `descripcion` varchar(40) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE `especialidades` (
 CREATE TABLE `horarios` (
   `id_horario` int(11) NOT NULL,
   `hora` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `horarios`
@@ -103,30 +103,30 @@ INSERT INTO `horarios` (`id_horario`, `hora`) VALUES
 
 CREATE TABLE `obra_sociales` (
   `id_obrasocial` int(11) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
-  `email` varchar(40) NOT NULL,
+  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` bigint(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `paciente`
+-- Estructura de tabla para la tabla `pacientes`
 --
 
-CREATE TABLE `paciente` (
+CREATE TABLE `pacientes` (
   `id_paciente` int(11) NOT NULL,
-  `nombre` varchar(40) CHARACTER SET utf8 NOT NULL,
-  `apellido` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `dni` int(8) NOT NULL,
-  `direccion` varchar(60) NOT NULL,
+  `direccion` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` bigint(11) NOT NULL,
   `id_obrasocial` int(11) NOT NULL,
-  `certificado` varchar(100) NOT NULL,
-  `autorizacion` varchar(100) NOT NULL,
+  `certificado` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `autorizacion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -137,7 +137,20 @@ CREATE TABLE `paciente` (
 CREATE TABLE `paciente_personacargo` (
   `id_paciente` int(11) NOT NULL,
   `id_personaCargo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pdc`
+--
+
+CREATE TABLE `pdc` (
+  `id_pdc` int(11) NOT NULL,
+  `id_profesional` int(11) NOT NULL,
+  `id_consultorio` int(11) NOT NULL,
+  `id_dia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -147,13 +160,13 @@ CREATE TABLE `paciente_personacargo` (
 
 CREATE TABLE `personas_cargo` (
   `id_personaCargo` int(11) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
-  `apellido` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `dni` int(8) NOT NULL,
-  `direccion` varchar(60) CHARACTER SET utf8 NOT NULL,
+  `direccion` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` bigint(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -163,14 +176,14 @@ CREATE TABLE `personas_cargo` (
 
 CREATE TABLE `profesionales` (
   `id_profesional` int(11) NOT NULL,
-  `nombre` varchar(40) CHARACTER SET utf8 NOT NULL,
-  `apellido` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` int(11) NOT NULL,
-  `direccion` varchar(60) CHARACTER SET utf8 NOT NULL,
-  `email` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `direccion` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `id_especialidad` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -180,14 +193,11 @@ CREATE TABLE `profesionales` (
 
 CREATE TABLE `turnos` (
   `id_turno` int(11) NOT NULL,
-  `id_consultorio` int(11) NOT NULL,
-  `id_profesional` int(11) NOT NULL,
   `id_paciente` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `id_hora` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `anio` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_pdc` int(11) NOT NULL,
+  `id_hora` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -197,10 +207,10 @@ CREATE TABLE `turnos` (
 
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
-  `usuario` varchar(10) NOT NULL,
-  `clave` varchar(10) NOT NULL,
+  `usuario` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `clave` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `tipo_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -247,9 +257,9 @@ ALTER TABLE `obra_sociales`
   ADD PRIMARY KEY (`id_obrasocial`);
 
 --
--- Indices de la tabla `paciente`
+-- Indices de la tabla `pacientes`
 --
-ALTER TABLE `paciente`
+ALTER TABLE `pacientes`
   ADD PRIMARY KEY (`id_paciente`),
   ADD KEY `id_obrasocial` (`id_obrasocial`);
 
@@ -259,6 +269,15 @@ ALTER TABLE `paciente`
 ALTER TABLE `paciente_personacargo`
   ADD KEY `id_paciente` (`id_paciente`),
   ADD KEY `id_personaCargo` (`id_personaCargo`);
+
+--
+-- Indices de la tabla `pdc`
+--
+ALTER TABLE `pdc`
+  ADD PRIMARY KEY (`id_pdc`),
+  ADD KEY `id_profesional` (`id_profesional`),
+  ADD KEY `id_consultorio` (`id_consultorio`),
+  ADD KEY `id_dia` (`id_dia`);
 
 --
 -- Indices de la tabla `personas_cargo`
@@ -279,10 +298,9 @@ ALTER TABLE `profesionales`
 --
 ALTER TABLE `turnos`
   ADD PRIMARY KEY (`id_turno`),
-  ADD KEY `id_consultorio` (`id_consultorio`),
-  ADD KEY `id_profesional` (`id_profesional`),
-  ADD KEY `id_paciente` (`id_paciente`),
-  ADD KEY `id_hora` (`id_hora`);
+  ADD UNIQUE KEY `id_pdc` (`id_pdc`),
+  ADD UNIQUE KEY `id_hora` (`id_hora`),
+  ADD KEY `id_paciente` (`id_paciente`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -325,10 +343,16 @@ ALTER TABLE `obra_sociales`
   MODIFY `id_obrasocial` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `paciente`
+-- AUTO_INCREMENT de la tabla `pacientes`
 --
-ALTER TABLE `paciente`
+ALTER TABLE `pacientes`
   MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `pdc`
+--
+ALTER TABLE `pdc`
+  MODIFY `id_pdc` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `personas_cargo`
@@ -346,7 +370,7 @@ ALTER TABLE `profesionales`
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -359,17 +383,25 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Filtros para la tabla `paciente`
+-- Filtros para la tabla `pacientes`
 --
-ALTER TABLE `paciente`
-  ADD CONSTRAINT `paciente_ibfk_1` FOREIGN KEY (`id_obrasocial`) REFERENCES `obra_sociales` (`id_obrasocial`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `pacientes`
+  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`id_obrasocial`) REFERENCES `obra_sociales` (`id_obrasocial`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `paciente_personacargo`
 --
 ALTER TABLE `paciente_personacargo`
-  ADD CONSTRAINT `paciente_personacargo_ibfk_1` FOREIGN KEY (`id_personaCargo`) REFERENCES `personas_cargo` (`id_personaCargo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `paciente_personacargo_ibfk_2` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `paciente_personacargo_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `paciente_personacargo_ibfk_2` FOREIGN KEY (`id_personaCargo`) REFERENCES `personas_cargo` (`id_personaCargo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `pdc`
+--
+ALTER TABLE `pdc`
+  ADD CONSTRAINT `pdc_ibfk_1` FOREIGN KEY (`id_consultorio`) REFERENCES `consultorios` (`id_consultorio`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pdc_ibfk_2` FOREIGN KEY (`id_dia`) REFERENCES `dias` (`id_dia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pdc_ibfk_3` FOREIGN KEY (`id_profesional`) REFERENCES `profesionales` (`id_profesional`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `profesionales`
@@ -382,8 +414,8 @@ ALTER TABLE `profesionales`
 --
 ALTER TABLE `turnos`
   ADD CONSTRAINT `turnos_ibfk_1` FOREIGN KEY (`id_hora`) REFERENCES `horarios` (`id_horario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `turnos_ibfk_2` FOREIGN KEY (`id_profesional`) REFERENCES `profesionales` (`id_profesional`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `turnos_ibfk_3` FOREIGN KEY (`id_consultorio`) REFERENCES `consultorios` (`id_consultorio`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `turnos_ibfk_2` FOREIGN KEY (`id_pdc`) REFERENCES `pdc` (`id_pdc`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `turnos_ibfk_3` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -8,9 +8,11 @@
         </div>
             <div class="dropdown pull-right">
                 <button class="btn btn-barra navbar-btn dropdown-toggle glyphicon glyphicon-user" type="button" data-toggle="dropdown"> 
-                <?php
-                    echo "Hola!,".$_SESSION['usuario'];
-                ?>
+                    <?php
+                        echo "Hola!,".$_SESSION['usuario'];
+                    ?>
+
+
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="../inc/Logout.php">Salir</a></li>

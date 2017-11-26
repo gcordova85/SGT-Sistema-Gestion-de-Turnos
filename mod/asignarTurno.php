@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/styleTurnos.css">
     <link rel="stylesheet" href="../lib/DataTables/datatables.min.css">
 </head>
-<body >
+<body onload="noVolver();">
     <div class="container">
         <?php
             require_once '../inc/header.php';
@@ -27,19 +27,19 @@
         <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="form-group">
                 <label class="control-label" for="nombre"> Nombre:</label>
-                <input class="form-control" type="text" id="nombre" name="nombre">
+                <input class="form-control" type="text" id="nombre" name="nombre" disabled>
             </div>
         </div>
         <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="form-group">
                 <label class="control-label" for="apellido"> Apellido:</label>
-                <input class="form-control" type="text" id="apellido" name="apellido">
+                <input class="form-control" type="text" id="apellido" name="apellido" disabled>
             </div>
         </div>
         <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="form-group">
                 <label class="control-label" for="dni"> DNI</label>
-                <input class="form-control" type="number" max="99999999" min="11111111" id="dni" name="dni">
+                <input class="form-control" type="number" max="99999999" min="11111111" id="dni" name="dni" disabled>
             </div>
         </div>
     </div>   
@@ -47,24 +47,31 @@
         <label for="espec"></label>
     </div> 
     <div class="row">
-        <div class="col-xs-12 col-sm-3 col-md-3">
+        <div class="col-xs-12 col-sm-4 col-md-4">
             <div class="form-group">
                 <label for="profesionales" class="control-label">Elegir Profesional:</label>           
-                <select name="profesionales" id="profesionales" class="form-control" require>
+                <select name="profesionales" id="profesionales" class="form-control" required>
                     <option value="0">Selecciones una opcion</option>
                 </select>
 
             </div>
         </div>   
-        <div class="col-xs-12 col-sm-3 col-md-3">
+        <div class="col-xs-12 col-sm-4 col-md-4">
             <div class="form-group">
-                <label for="consultorios" class="control-label">Elegir Consultorios:</label>           
-                <select name="consultorios" id="consultorios" class="form-control" require>
+                <label for="consultorio" class="control-label">Consultorios</label>           
+                <input class="form-control" type="text"  id="consultorio" name="consultorio" disabled>
+
+            </div>
+        </div> 
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="form-group">
+                <label for="dias" class="control-label">Elegir dia</label>           
+                <select name="dias" id="dias" class="form-control" required>
                     <option value="0">Selecciones una opcion</option>
                 </select>
 
             </div>
-        </div>   
+        </div>     
 
 
     </div>
@@ -72,24 +79,27 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Seleccione un dia
+                    Seleccione un horario
                 </div>
-
-                <div id="divTablaHorarios" class="table-responsive">
-                    <table id="tablaDias" class="table table-bordered dt-responsive">
-                      <thead>
-                        <tr class="loginhf text-center">
-                            <th>ID Dia</th>
-                            <th>Dia </th>
+                <div class="table-responsive">
+                    <table id="tablaHorarios" class="table table-bordered dt-responsive">
+                    <thead>
+                            <tr class="loginhf">
+                            <th > Codigo de Horario</th>    
+                            <th> Horarios disponibles</th>
                             <th></th>
-                        </tr>
-                     </thead>
-                    </table>  
+                            </tr>
+                    </thead>
+                </table>
                 </div>
             </div>
-        </div>   
+        </div> 
+        <div class="col-xs-12 col-sm-offset-10 col-md-offset-8 col-md-4">
+            <button class="btn btn-danger">Cancelar</button>
+        </div>
+        
         <!-- modal de horarios -->
-        <div id="modalAsignar" class="modal fade" role="dialog">
+        <!-- <div id="modalAsignar" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -111,7 +121,7 @@
                     </div>
                 </div>        
                 </div>
-            </div>
+            </div> -->
     </div>
     <?php
         require_once '../inc/footer.php';
