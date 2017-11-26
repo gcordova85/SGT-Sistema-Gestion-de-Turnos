@@ -20,12 +20,10 @@ function ValidarClave() {
         return false; 
     }*/
     if (clave.length == 0) {
-        $("#clave").focus();
         $("#divErrorClave").fadeIn("slow");
         return false;
     }
     if (clave.length <= 4) {
-        $("#clave").focus();
         $("#divErrorClave").fadeIn("slow");
         return false;
     }
@@ -68,7 +66,7 @@ function ValidarUsuarioLogin(){
                 "clave"  :clave,
         },
         success :  function(response){         
-            if(response == 1){
+            if(response == true){
                 $("#error").fadeOut();
                 setTimeout(' window.location.assign ("mod/menu.php"); ',1000);
                 }
