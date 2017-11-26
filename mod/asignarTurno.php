@@ -49,9 +49,18 @@
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-4">
             <div class="form-group">
+                <label for="especialidades" class="control-label">Elegir especialidad:</label>           
+                <select name="especialidades" id="especialidades" class="form-control" required>
+                    
+                </select>
+
+            </div>
+        </div>   
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="form-group">
                 <label for="profesionales" class="control-label">Elegir Profesional:</label>           
                 <select name="profesionales" id="profesionales" class="form-control" required>
-                    <option value="0">Selecciones una opcion</option>
+                    
                 </select>
 
             </div>
@@ -74,7 +83,7 @@
             <div class="form-group">
                 <label for="dias" class="control-label">Elegir dia</label>           
                 <select name="dias" id="dias" class="form-control" required>
-                    <option value="0">Selecciones una opcion</option>
+                    
                 </select>
 
             </div>

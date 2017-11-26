@@ -8,9 +8,14 @@
         $arrProfesionales=array();
         $iCont=0;
         
-        $sql = "SELECT * FROM profesionales";
-        $result=$cnn->query($sql) ;
-        foreach ($result as $row) {
+        $sql = "SELECT p.id_profesional,p.nombre, p.apellido,p.id_especialidad,e.descripcion as 'especialidad'
+        FROM profesionales P
+        INNER JOIN especialidades E ON e.id_especialidad = p.id_especialidad
+        WHERE p.id_especialidad = :id_especialidad";
+        $sql = $cnn->prepare($sql);
+        $sql->bindParam(':id_especialidad', $_REQUEST['idEspecialidad']);
+        $sql->execute();
+        foreach ($sql->fetchAll() as $row) {
         $arrProfesionales[$iCont]=array();
         $arrProfesionales[$iCont]['id_profesional']=$row['id_profesional'];
         $arrProfesionales[$iCont]['nombre']=$row['nombre'];
