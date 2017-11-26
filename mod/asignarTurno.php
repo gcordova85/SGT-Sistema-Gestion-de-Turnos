@@ -58,8 +58,15 @@
         </div>   
         <div class="col-xs-12 col-sm-4 col-md-4">
             <div class="form-group">
-                <label for="consultorio" class="control-label">Consultorios</label>           
-                <input class="form-control" type="text"  id="consultorio" name="consultorio" disabled>
+                <span class="input-group-addon">Nro.</span>          
+                <input class="form-control" type="text"  id="idConsultorio" name="idConsultorio" disabled>
+
+            </div>
+        </div> 
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="form-group">
+                <span class="input-group-addon">Ubicacion</span>          
+                <input class="form-control" type="text"  id="ubicacionConsultorio" name="ubicacionConsultorio" disabled>
 
             </div>
         </div> 

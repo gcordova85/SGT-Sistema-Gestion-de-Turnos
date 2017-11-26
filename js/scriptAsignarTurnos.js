@@ -124,8 +124,8 @@ function obtenerProfesionales() {
 function obtenerConsultorios() {
     var idProfesional=$("#profesionales").val();
     $.ajax({
-        type: "POST",
-        url: "../inc/getConsultorios.php",
+        type: "GET",
+        url: "../inc/getConsultoriosByProfesional.php",
         contentType: "application/json; charset=utf-8",
         data:  {
             "idProfesional":idProfesional,
@@ -133,7 +133,36 @@ function obtenerConsultorios() {
         dataType: "json",
         success: function (result) {
             $.each(result, function () {
-               $('#consultorio').attr("value",this.id_consultorio + " " + this.ubicacion);
+                $("#idConsultorio").val(this.id_consultorio);
+                $("#ubicacionConsultorio").val(this.ubicacion );
+            }); 
+            obtenerDiasDisponibles();
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+    
+}
+function obtenerDiasDisponibles() {
+    var idProfesional=$("#profesionales").val();
+    var idConsultorio =   $("#idConsultorio").val();
+    var ubicacionConsultorio =   $("#ubicacionConsultorio").val();
+    $.ajax({
+        type: "GET",
+        url: "../inc/getDiasByProfesional.php",
+        contentType: "application/json; charset=utf-8",
+        data:  {
+            "idProfesional":idProfesional,
+            "idConsultorio":idConsultorio,
+        },
+        dataType: "json",
+        success: function (result) {
+            $.each(result, function () {
+                $option= $("<option></option>");
+                $option.attr("value",this.id_dia);
+                $option.text(this.nombre);
+                $('#dias').append($option);
             }); 
         },
         error: function (xhr, status, error) {
