@@ -3,14 +3,14 @@
 session_start();
 require_once 'conexion.php';
 
-$id_profesional=$_POST['id_profesional'];
+$id_obrasocial=$_POST['id_obrasocial'];
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion();
-$sql = "UPDATE profesionales SET estado = 0 WHERE id_profesional= :id_profesional;";
+$sql = "UPDATE obras_sociales SET estado = 0 WHERE id_obrasocial= :id_obrasocial;";
 $stmt = $cnn->prepare($sql);
 
-$stmt->bindparam(':id_profesional', $id_profesional);
+$stmt->bindparam(':id_obrasocial', $id_obrasocial);
 
 if($stmt->execute())
 {

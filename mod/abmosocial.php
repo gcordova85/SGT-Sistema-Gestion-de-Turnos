@@ -41,9 +41,9 @@
                             <tr>
                                 <th class="navbar">N° Obra Social/Prepaga</th>
                                 <th class="navbar">Nombre</th>
-                                <th class="navbar hidden-xs">E-Mail</th>
+                                <th class="navbar">E-Mail</th>
                                 <th class="navbar">Telefono</th>
-                                <th class="navbar">Opciones</th>
+                                <th class="navbar" style="width: 10%">Opciones</th>
                             </tr>
                         </thead>
                     </table>
