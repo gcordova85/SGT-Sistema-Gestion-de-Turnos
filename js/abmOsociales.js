@@ -2,6 +2,8 @@ $(document).ready(function(){
         listar_datos();
         boton_nuevo();
         validarCamposNuevo();
+        validarCamposEditar();
+        confirmarEliminar();
     });
 
 function listar_datos(){
@@ -23,7 +25,7 @@ function listar_datos(){
         searchable: false}
         ],
         language : idioma_espanol
-    });
+        });
     editar_registro('#tablaOsociales tbody',tabla);
     eliminar_registro('#tablaOsociales tbody',tabla);
 };
@@ -95,7 +97,7 @@ function eliminar_registro(tbody, tabla){
         if(divDel.hasClass("oculto")){
             divDel.removeClass("oculto")
         }
-        $("#nOsocial").val(data.Id_obrasocial),
+        $("#nOsocial").val(data.id_obrasocial),
         $("#nombreOsocial").val(data.nombre),
         $("#emailOsocial").val(data.email),
         $("#telefonoOsocial").val(data.telefono),
@@ -149,12 +151,12 @@ function validarCamposNuevo(){
         esValidoTel($("#telefonoOsocial").val(),$("#errorTel"),$("#div-telfonoOsocial"));
         esValidoMail($("#emailOsocial").val(),$("#errorMail"),$("#div-emailOsocial"));
         var url = '../inc/setOsocial.php';
-        var idOsocial = $("#nOsocial").val(),
+        var id_obrasocial = $("#nOsocial").val(),
         nombre = $("#nombreOsocial").val(),
         tel = $("#telefonoOsocial").val(),
         mail = $("#emailOsocial").val(),
         estado = 1
-        var data={'id_obrasocial':idOsocial,
+        var data={'id_obrasocial':id_obrasocial,
         'nombre':nombre,
         'email':mail,
         'telefono':tel,
@@ -167,15 +169,15 @@ function validarCamposEditar(){
         esValidoNomApe($("#nombreOsocial").val(),$("#errorNom"),$("#div-nombreOsocial"));       
         esValidoTel($("#telefonoOsocial").val(),$("#errorTel"),$("#div-telfonoOsocial"));
         esValidoMail($("#emailOsocial").val(),$("#errorMail"),$("#div-emailOsocial"));
-        var url = '../inc/updateOsociales.php';
-        var idOsocial = $("#nOsocial").val(),
+        var url = '../inc/updateOsocial.php';
+        var id_obrasocial = $("#nOsocial").val(),
         nombre = $("#nombreOsocial").val(),
         tel = $("#telefonoOsocial").val(),
         mail = $("#emailOsocial").val(),
         especialidad = $("#selEspecialidad").val(),
         estado = 1
-        var data={'id_obrasocial':idOsocial,
-        'nombres':nombre,
+        var data={'id_obrasocial':id_obrasocial,
+        'nombre':nombre,
         'email':mail,
         'telefono':tel,
         'estado':estado}
@@ -184,9 +186,11 @@ function validarCamposEditar(){
 };
 function confirmarEliminar(){
     $("#eliminarOsocial").on("click", function(){
-        var idOsocial = $("#nOsocial").val()
+        var id_obrasocial = $("#nOsocial").val();
+        console.log("id obra social",id_obrasocial);
         var url = '../inc/deleteOsocial.php',
-            data={'id_obrasocial':idOsocial}
+            data={'id_obrasocial':id_obrasocial}
+        console.log("datos para el PHP", data);
         guardar_datos(url,data)
     })
 }
