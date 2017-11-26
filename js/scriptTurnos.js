@@ -15,19 +15,23 @@ function listarPaciente(){
                 { data: 'nombre' },
                 { data: 'apellido' },
                 { data: 'dni' },
-                {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" onClick="obtenerID();">Asignar</button>'}
+                {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" onClick="obtenerID();"></button>'}
             ],
             language: idioma_espanol
         });
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9aa58320ff65815dab3d51866cb5a5ecce66dc17
 function obtenerID(){
     var table = $('#tablePacienteTurno').DataTable();    
     $('#tablePacienteTurno tbody').on( 'click', 'button', function () {
         var fila = table.row( $(this).parents('tr') ).data();
         var id = fila.id_paciente;
         $.redirect( "asignarTurno.php", { 'id': id} );
-    });}
+    });
+}
 
 var idioma_espanol = {
     "sProcessing":     "Procesando...",

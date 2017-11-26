@@ -1,11 +1,15 @@
 $(document).ready(function(){
-    //listarDias();
-    //listarHorarios(); 
     $('#tablaHorarios').DataTable({
+        columnDefs: [
+            {
+                targets: [ 0 ],
+                visible: false,
+                searchable: false,
+            }],
         language: idioma_espanol
     });
     obtenerPaciente();  
-    obtenerProfesionales();
+    obtenerEspecialidades();
 });
 
 
@@ -36,7 +40,6 @@ function obtenerPaciente() {
 
 function reservarTurnos(){
     var id=$("#idPaciente").val();
-    var idDia = 1
     var idHora = 1
     var tablaD = $('#tablaDias').DataTable();  
     $('#tablaDias tbody').on( 'click', 'button #btnDia', function () {
@@ -99,19 +102,30 @@ function listarHorarios(){
         }); 
 }
 function obtenerProfesionales() {
+    var idEspecialidad = $("#especialidades").val();
     $.ajax({
-        type: "POST",
-        url: "../inc/getProfesional.php",
+        type: "GET",
+        url: "../inc/getProfesionalByEspecialidad.php",
         contentType: "application/json; charset=utf-8",
-        data: null,
+        data: {
+            "idEspecialidad":idEspecialidad,
+        },
         dataType: "json",
         success: function (result) {
+            $('#profesionales').empty();
+            $('#consultorios').empty();   
+            $option= $("<option></option>");
+            $option.attr("value",'');
+            $option.text('Seleccione una opcion');
+            $('#profesionales').append($option);
+
             $.each(result, function () {
                $option= $("<option></option>");
                $option.attr("value",this.id_profesional);
                $option.text(this.nombre +" "+ this.apellido);
                $('#profesionales').append($option);
             }); 
+            obtenerConsultorios();
         },
         error: function (xhr, status, error) {
             alert("ERROR")
@@ -132,6 +146,13 @@ function obtenerConsultorios() {
         },
         dataType: "json",
         success: function (result) {
+            $('#consultorios').empty(); 
+            $('#dias').empty();   
+            $option= $("<option></option>");
+            $option.attr("value",'');
+            $option.text('Seleccione una opcion');
+            $('#consultorios').append($option);
+
             $.each(result, function () {
                 $("#idConsultorio").val(this.id_consultorio);
                 $("#ubicacionConsultorio").val(this.ubicacion );
@@ -158,6 +179,12 @@ function obtenerDiasDisponibles() {
         },
         dataType: "json",
         success: function (result) {
+            $('#dias').empty();   
+            $option= $("<option></option>");
+            $option.attr("value",'');
+            $option.text('Seleccione una opcion');
+            $('#dias').append($option);            
+
             $.each(result, function () {
                 $option= $("<option></option>");
                 $option.attr("value",this.id_dia);
@@ -169,6 +196,85 @@ function obtenerDiasDisponibles() {
             alert("ERROR")
         }
     });
+    $("#dias").on('change',function(){
+        obtenerHoraByDia();    
+    }); 
+}
+function obtenerHoraByDia(){
+    var idPDC         = 1;
+    var idProfesional =   $("#profesionales").val();
+    var idConsultorio =   $("#idConsultorio").val();
+    var idDia         =   $("#dias").val();
+    $ajax:({
+        type : 'POST',
+        url  :"../inc/getPdcByDatos.php",
+        data : {
+            "idProfesional":idProfesional,
+            "idDia": idDia,
+            "idConsultorio":idConsultorio
+        },
+        success: function(result){
+            $.each(result, function () {
+                $idPDC = this.id_pdc;
+             })
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+    $('#tablaHorarios').DataTable({
+        destroy: true,
+        ajax: {
+            url: '../inc/getHoras.php',
+            data:{
+                "idPDC": idPDC,
+            }
+          },
+          columns: [
+            { data: 'id_horario'},
+            { data: 'hora' },
+            {defaultContent:'<button name="btnHora" class="btn btn-success btn-asignar" id="btnHora">Aceptar</button>'},
+          ],
+          columnDefs: [
+            {
+                targets: [ 0 ],
+                visible: false,
+                searchable: false,
+            }],
+          languaje: idioma_espanol
+        }); 
+}
+function obtenerEspecialidades() {
+    $.ajax({
+        type: "POST",
+        url: "../inc/getEspecialidades.php",
+        contentType: "application/json; charset=utf-8",
+        data: null,
+        dataType: "json",
+        success: function (result) {
+                $('#profesionales').empty();   
+                $option= $("<option></option>");
+                $option.attr("value",'');
+                $option.text('Seleccione una opcion');
+                $('#especialidades').append($option);
+
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_especialidad);
+               $option.text(this.descripcion);
+               $('#especialidades').append($option);
+            }); 
+            obtenerProfesionales();
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+    $("#especialidades").on('change',function(){
+        $("#idConsultorio").val("");
+        $("#ubicacionConsultorio").val("");
+        obtenerProfesionales();    
+    }); 
 }
 var idioma_espanol = {
     "sProcessing":     "Procesando...",
