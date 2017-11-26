@@ -8,16 +8,21 @@ function listar_datos(){
     var tabla = $('#tablaOsociales').DataTable({
         destroy: true,
         ajax: {
-            url: '../inc/getOsocial.php'
-          },
-            columns: [
-            { data: 'Id_obrasocial' },
-            { data: 'nombre' },
-            { data: 'email' },
-            { data: 'telefono' },
-            { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalOsociales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalOsociales' ><i class='fa fa-trash-o'></i></button>" }
-          ],
-            language : idioma_espanol
+            url: '../inc/getOsociales.php'
+        },  
+        columns: [
+        { data: 'id_obrasocial' },
+        { data: 'nombre' },
+        { data: 'email' },
+        { data: 'telefono' },
+        { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalOsociales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalOsociales' ><i class='fa fa-trash-o'></i></button>" }
+        ],
+        columnDefs:[
+        {targets: [ 0 ],
+        visible: false,
+        searchable: false}
+        ],
+        language : idioma_espanol
     });
     editar_registro('#tablaOsociales tbody',tabla);
     eliminar_registro('#tablaOsociales tbody',tabla);
@@ -70,7 +75,7 @@ function editar_registro(tbody, tabla){
         $("#nuevaOsocial")[0].reset();
         $("#titulo-modal").text("Editar Obra Social/Prepaga");
         var data = tabla.row($(this).parents("tr")).data();
-        $("#nOsocial").val(data.Id_obrasocial),
+        $("#nOsocial").val(data.id_obrasocial),
         $("#nombreOsocial").val(data.nombre),
         $("#emailOsocial").val(data.email),
         $("#telefonoOsocial").val(data.telefono)
@@ -162,7 +167,7 @@ function validarCamposEditar(){
         esValidoNomApe($("#nombreOsocial").val(),$("#errorNom"),$("#div-nombreOsocial"));       
         esValidoTel($("#telefonoOsocial").val(),$("#errorTel"),$("#div-telfonoOsocial"));
         esValidoMail($("#emailOsocial").val(),$("#errorMail"),$("#div-emailOsocial"));
-        var url = '../inc/updateOsocial.php';
+        var url = '../inc/updateOsociales.php';
         var idOsocial = $("#nOsocial").val(),
         nombre = $("#nombreOsocial").val(),
         tel = $("#telefonoOsocial").val(),

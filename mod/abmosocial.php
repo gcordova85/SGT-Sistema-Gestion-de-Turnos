@@ -36,12 +36,12 @@
             <div class="col-md-1"></div>
             <div class="col-md-10 offset-md-1">
                 <div class="table-responsive">
-                    <table id="tablaOsociales" class="table table-bordered table-condensed">
+                    <table id="tablaOsociales" class="table table-bordered table-condensed" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th class="navbar">N° Obra Social/Prepaga</th>
                                 <th class="navbar">Nombre</th>
-                                <th class="navbar">E-Mail</th>
+                                <th class="navbar hidden-xs">E-Mail</th>
                                 <th class="navbar">Telefono</th>
                                 <th class="navbar">Opciones</th>
                             </tr>
@@ -72,7 +72,7 @@
                                 <div class="col-md-12 container">
                                     <div class="col-md-6">
                                         <div id="div-nombreOsocial" class="form-group">
-                                            <label for="nombreOsocial" class="control-label col-form-label">Razon Social:</label>
+                                            <label for="nombreOsocial" class="control-label col-form-label">Nombre:</label>
                                             <input type="text" name="nombreOsocial" id="nombreOsocial" class="form-control">
                                             <div class="alert alert-danger divError oculto" id="errorNom">
                                                 <p><b>Ingrese un nombre correcto (Uno o dos de al menos 3 letras c/u)</b></p>
