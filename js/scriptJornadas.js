@@ -3,18 +3,20 @@ $(document).ready(function(){
         listar_datos();
         agregar();
         ocultarMsjError();
+        obtenerConsultorios();
     });
 
 var listar_datos = function(){
     var tabla = $('#tablaJornadas').DataTable({
         destroy: true,
         ajax: {
-            url: '../inc/getPaciente.php'
+            url: '../inc/getPdc.php'
           },
             columns: [
-            { data: 'id_paciente' },
-            { data: 'id_dia' },
+            { data: 'id_profesional' },
             { data: 'id_consultorio' },
+            { data: 'id_dia' },
+            
           ],
             language : idioma_espanol
     });
@@ -87,26 +89,75 @@ function ocultarMsjError(){ //remueve el mensaje al posicionarse en el campo, so
 }
 
 
-function obtenerEspecialidades() {
+// function obtenerEspecialidades() {
+//     $.ajax({
+//         type: "POST",
+//         url: "../inc/getEspecialidad.php",
+//         contentType: "application/json; charset=utf-8",
+//         data: null,
+//         dataType: "json",
+//         success: function (result) {
+//             $.each(result, function () {
+//                $option= $("<option></option>");
+//                $option.attr("value",this.id_especialidad);
+//                $option.text(this.nombre);
+//                $('#esp').append($option);
+//             }); 
+//         },
+//         error: function (xhr, status, error) {
+//             alert("ERROR")
+//         }
+//     });
+//     $("#esp").on('change',function(){    
+//         obtenerProfesionales();    
+//     }); 
+// }
+
+// function obtenerProfesionales() {
+//     var id_especialidad=$("#esp").val();
+//     $.ajax({
+//         type: "POST",
+//         url: "../inc/getProfesionalByEspecialidad.php",
+//         contentType: "application/json; charset=utf-8",
+//         data:  {
+//             "idEspecialidad":idEspecialidad,
+//         },
+//         dataType: "json",
+//         success: function (result) {
+//             $.each(result, function () {
+//                 $option= $("<option></option>");
+//                 $option.attr("value",this.id_profesional);
+//                 $option.text(this.nombre +" "+ this.apellido);
+//                 $('#esp').append($option);           
+//              }); 
+//         },
+//         error: function (xhr, status, error) {
+//             alert("ERROR")
+//         }
+//     });
+// }
+
+
+function obtenerConsultorios() {
     $.ajax({
         type: "POST",
-        url: "../inc/getEspecialidad.php",
+        url: "../inc/getConsultoriosCombo.php",
         contentType: "application/json; charset=utf-8",
         data: null,
         dataType: "json",
         success: function (result) {
             $.each(result, function () {
                $option= $("<option></option>");
-               $option.attr("value",this.id_especialidad);
-               $option.text(this.nombre);
-               $('#esp').append($option);
+               $option.attr("value",this.id_consultorio);
+               $option.text(this.id_consultorio +" "+ this.ubicacion);
+               $('#cons').append($option);
             }); 
         },
         error: function (xhr, status, error) {
             alert("ERROR")
         }
     });
-    $("#profesionales").on('change',function(){    
-        obtenerConsultorios();    
-    }); 
+    // $("#profesionales").on('change',function(){    
+    //     obtenerConsultorios();    
+    // }); 
 }
