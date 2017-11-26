@@ -452,7 +452,7 @@ function listar_datos() {
             { data: 'apellido' },
             { data: 'dni' },
             { data: 'telefono' },
-            { data: 'id_obrasocial' },
+            { data: 'Obra_social' },
             { data: 'estado'},
             { defaultContent : "<button type='button' class='btnVerMas btn-xs btn btn-info'>Ver mas</button><a href='#modalEliminar' class='btn-xs btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' ></i></a>" },
           ],

@@ -85,3 +85,28 @@ function ocultarMsjError(){ //remueve el mensaje al posicionarse en el campo, so
         $("#errorCons").fadeOut(700); 
     })
 }
+
+
+function obtenerEspecialidades() {
+    $.ajax({
+        type: "POST",
+        url: "../inc/getEspecialidad.php",
+        contentType: "application/json; charset=utf-8",
+        data: null,
+        dataType: "json",
+        success: function (result) {
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_especialidad);
+               $option.text(this.nombre);
+               $('#esp').append($option);
+            }); 
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+    $("#profesionales").on('change',function(){    
+        obtenerConsultorios();    
+    }); 
+}
