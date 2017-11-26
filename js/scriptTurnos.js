@@ -6,22 +6,6 @@ $(document).ready(function(){
 
 function listarPaciente(){
     $('#tablePacienteTurno').DataTable({
-<<<<<<< HEAD
-        ajax: {
-            url: '../inc/getPaciente.php'
-        },
-        columns: [
-            { data: 'id_paciente'},
-            { data: 'nombre' },
-            { data: 'apellido' },
-            { data: 'dni' },
-            {defaultContent:'<button class="btn btn-success btn-asignar glyphicon glyphicon-plus" onClick="obtenerID();">Asignar</button>'},
-        ]
-        }) 
-    }
-        
-    
-=======
         ajax:{
             type : 'POST',
             url  : '../inc/getPaciente.php'
@@ -37,14 +21,14 @@ function listarPaciente(){
         });
 };
 
->>>>>>> 891aad21a6aec4376e1addb426c25758b615b153
 function obtenerID(){
     var table = $('#tablePacienteTurno').DataTable();    
     $('#tablePacienteTurno tbody').on( 'click', 'button', function () {
         var fila = table.row( $(this).parents('tr') ).data();
         var id = fila.id_paciente;
         $.redirect( "asignarTurno.php", { 'id': id} );
-    });}
+    });
+}
 
 var idioma_espanol = {
     "sProcessing":     "Procesando...",
