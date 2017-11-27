@@ -223,13 +223,14 @@ function obtenerDias() {
 
 function obtenerConsultorios() {
     var idDia = $("#dia").val();
-
+    var idProfesional = $("#profesionales").val();
     $.ajax({
         type: "GET",
         url: "../inc/getConsultoriosLibresByDia.php",
         contentType: "application/json; charset=utf-8",
         data: {
             "idDia":idDia,
+            "idProfesional":idProfesional
         },
         dataType: "json",
         success: function (result) {

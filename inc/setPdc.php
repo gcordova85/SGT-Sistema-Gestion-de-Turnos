@@ -10,7 +10,7 @@ $estado=$_POST['estado'];
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion();
-$sql = "INSERT INTO pdc(id_profesional,id_dia,id_consultorio) values($profesional,$dia,$consultorio)";
+$sql = "INSERT INTO pdc(id_profesional,id_dia,id_consultorio, estado) values($profesional,$dia,$consultorio, $estado)";
 $stmt = $cnn->prepare($sql);
 
 if($stmt->execute())
