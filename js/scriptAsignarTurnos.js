@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    
     $('#tablaHorarios').DataTable({
         columnDefs: [
             {
@@ -11,8 +12,6 @@ $(document).ready(function(){
     obtenerPaciente();  
     obtenerEspecialidades();
 });
-
-
 
 function obtenerPaciente() {
     var id=$("#idPaciente").val();
@@ -39,67 +38,32 @@ function obtenerPaciente() {
 }
 
 function reservarTurnos(){
-    var id=$("#idPaciente").val();
-    var idHora = 1
-    var tablaD = $('#tablaDias').DataTable();  
-    $('#tablaDias tbody').on( 'click', 'button #btnDia', function () {
-        var fila = tablaD.row( $(this).parents('tr') ).data();
-         idDia = fila.id_dia;
-        console.log(idDia);
-    });
+    var idPaciente=$("#idPaciente").val();
+    var idProfesional = $("#profesionales").val();
+    var idConsultorio = $("#idConsultorio").val();
+    var idDia = $("#dias").val();
+    var idHora = 0;
     var tablaH = $('#tablaHorarios').DataTable();
     $('#tablaHorarios tbody').on( 'click', 'button #btnHora', function () {
         var fila = tablaH.row( $(this).parents('tr') ).data();
-         idHora = fila.id_horario;
+        idHora = fila.id_horario;
     });
-    var idProfesional = $("#profesionales").val();
-    var idConsultorio = $("#profesionales").val();
-
     $.ajax({
         type : 'POST',
         url  : '../inc/setReserva.php',
         data : {
                 "idDia":idDia,
                 "idHora"  :idHora,
-                "idProfesional" : idProfesional,
-                "idConsultorio" : idConsultorio,
-                "idPaciente" : idPaciente
         },
-        success :  function(response){         
-            if(response == true){
-                return "ok";
-                }
-            else{
-                    return "mal";
-            };
+        success :  function(result){  
+            $.each(result, function () {
+                $td= $("<td></td>");
+                $td.text(this.fecha);
+                $('#tablaAceptarTurnos').append($td);
+            });             
         },
     });
     
-}
-function listarDias(){
-    $('#tablaDias').DataTable({
-        ajax: {
-            url: '../inc/getDias.php'
-          },
-          columns: [
-            { data: 'id_dia'},
-            { data: 'nombre' },
-            {defaultContent:'<button id="btnDia" name="btnDia" class="btn btn-default" data-toggle="modal" data-target="#modalAsignar"><span class="glyphicon glyphicon-plus"></span>Seleccionar horario </button>'},
-          ]
-        });
-}
-function listarHorarios(){
-    $('#tablaHorarios').DataTable({
-        ajax: {
-            url: '../inc/getHoras.php'
-          },
-          columns: [
-            { data: 'id_horario'},
-            { data: 'hora' },
-            {defaultContent:'<button name="btnHora" class="btn btn-success btn-asignar glyphicon glyphicon-plus" id="btnHora" onClick="reservarTurnos();">Agregar</button>'},
-          ],
-          languaje: idioma_espanol
-        }); 
 }
 function obtenerProfesionales() {
     var idEspecialidad = $("#especialidades").val();
@@ -201,48 +165,55 @@ function obtenerDiasDisponibles() {
     }); 
 }
 function obtenerHoraByDia(){
-    var idPDC         = 1;
     var idProfesional =   $("#profesionales").val();
     var idConsultorio =   $("#idConsultorio").val();
     var idDia         =   $("#dias").val();
-    $ajax:({
-        type : 'POST',
+    $.ajax({
+        type : 'GET',
         url  :"../inc/getPdcByDatos.php",
         data : {
             "idProfesional":idProfesional,
             "idDia": idDia,
             "idConsultorio":idConsultorio
         },
-        success: function(result){
-            $.each(result, function () {
-                $idPDC = this.id_pdc;
-             })
+        success: function(response){
+            if(response >=1){
+                var idPDCrecibido = response;
+                var idPDC = $.trim(idPDCrecibido);
+                $('#tablaHorarios').DataTable({
+                    destroy: true,
+                    ajax: {
+                        type:'GET',
+                        url: '../inc/getHoras.php',
+                        data:{
+                            "idPDC": idPDC,
+                        }
+                      },
+                      columns: [
+                        { data: 'id_horario'},
+                       { data: 'hora' },
+                       {defaultContent:'<button name="btnHora" onClick="reservarTurnos(" + id_horario + ");" class="btn btn-success btn-asignar" id="btnHora" data-toggle="modal" data-target="#aceptarTurnos">Aceptar</button>'},
+                      ],
+                     /*columnDefs: [
+                        {
+                           targets: [ 0 ],
+                            visible: false,
+                            searchable: false,
+
+                        }],*/
+                      languaje: idioma_espanol
+                    }); 
+            }
+            else{
+                $('#tablaHorarios').DataTable();
+            }   
+
         },
         error: function (xhr, status, error) {
+            
             alert("ERROR")
         }
     });
-    $('#tablaHorarios').DataTable({
-        destroy: true,
-        ajax: {
-            url: '../inc/getHoras.php',
-            data:{
-                "idPDC": idPDC,
-            }
-          },
-          columns: [
-            { data: 'id_horario'},
-            { data: 'hora' },
-            {defaultContent:'<button name="btnHora" class="btn btn-success btn-asignar" id="btnHora">Aceptar</button>'},
-          ],
-          columnDefs: [
-            {
-                targets: [ 0 ],
-                visible: false,
-                searchable: false,
-            }],
-          languaje: idioma_espanol
-        }); 
 }
 function obtenerEspecialidades() {
     $.ajax({

@@ -97,8 +97,8 @@
                 <div class="panel-heading">
                     Seleccione un horario
                 </div>
-                <div class="table-responsive">
-                    <table id="tablaHorarios" class="table table-bordered dt-responsive">
+           
+                    <table id="tablaHorarios" class="table table-bordered dt-responsive table-responsive">
                     <thead>
                             <tr class="loginhf">
                             <th > Codigo de Horario</th>    
@@ -107,12 +107,45 @@
                             </tr>
                     </thead>
                 </table>
-                </div>
+     
             </div>
         </div> 
         <div class="col-xs-offset-9 col-sm-offset-10 col-md-offset-11">
            <a href="abmTurnos.php"> <button class="btn btn-danger">Cancelar</button></a>
         </div>
+<!-- Modal -->
+<div id="aceptarTurnos" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Turnos</h4>
+      </div>
+      <div class="modal-body">
+      <div class="table-responsive">
+      <table id="tablaAceptarTurnos" class="table table-bordered dt-responsive">
+      <thead>
+            <tr class="loginhf">
+              <th > Fecha</th>    
+              <th> Hora </th>
+              <th>Dia</th>
+            </tr>
+      </thead>
+  </table>
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
     </div>
     <?php
         require_once '../inc/footer.php';

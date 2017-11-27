@@ -6,8 +6,7 @@
  $cnn = $conexion->getConexion();
  $sql = "SELECT p.id_paciente,p.nombre,p.apellido,p.dni,p.direccion,p.telefono,o.nombre AS 'Obra_social',p.certificado,p.autorizacion,p.estado
     FROM pacientes P
-    INNER JOIN obras_sociales O ON O.id_obrasocial = P.id_obrasocial 
-    WHERE p.estado = 1";
+    INNER JOIN obras_sociales O ON O.id_obrasocial = P.id_obrasocial";
  $statement = $cnn->prepare($sql);
  $valor = $statement->execute();
  $contar = $statement->rowCount(); 

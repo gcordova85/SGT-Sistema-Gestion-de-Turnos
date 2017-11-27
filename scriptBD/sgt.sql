@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2017 a las 00:22:54
+-- Tiempo de generación: 27-11-2017 a las 03:38:14
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sgt2`
+-- Base de datos: `sgt`
 --
 
 -- --------------------------------------------------------
@@ -33,6 +33,21 @@ CREATE TABLE `consultorios` (
   `ubicacion` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `consultorios`
+--
+
+INSERT INTO `consultorios` (`id_consultorio`, `ubicacion`, `estado`) VALUES
+(1, 'Planta baja', 1),
+(2, 'Planta baja', 1),
+(3, 'Planta baja', 1),
+(4, '1er piso', 1),
+(5, '1er piso', 1),
+(6, '1er piso', 1),
+(7, '2do piso', 1),
+(8, '2do piso', 1),
+(9, '2do piso', 1);
 
 -- --------------------------------------------------------
 
@@ -67,6 +82,17 @@ CREATE TABLE `especialidades` (
   `descripcion` varchar(40) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `especialidades`
+--
+
+INSERT INTO `especialidades` (`id_especialidad`, `descripcion`) VALUES
+(1, 'Psicologo'),
+(2, 'Psicopedagogo'),
+(3, 'Nutricionista'),
+(4, 'Psiquiatra'),
+(5, 'Neurologo');
+
 -- --------------------------------------------------------
 
 --
@@ -98,16 +124,27 @@ INSERT INTO `horarios` (`id_horario`, `hora`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `obra_sociales`
+-- Estructura de tabla para la tabla `obras_sociales`
 --
 
-CREATE TABLE `obra_sociales` (
+CREATE TABLE `obras_sociales` (
   `id_obrasocial` int(11) NOT NULL,
   `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` bigint(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `obras_sociales`
+--
+
+INSERT INTO `obras_sociales` (`id_obrasocial`, `nombre`, `email`, `telefono`, `estado`) VALUES
+(1, 'Osde', 'info@osde.com.ar', 44444444, 1),
+(2, 'Galeno', 'info@galeno.com.ar', 55555555, 1),
+(3, 'Omint', 'info@omint.com.ar', 66666666, 1),
+(4, 'Medife', 'info@medife.com.ar', 77777777, 1),
+(5, 'Osecac', 'info@osecac.com.ar', 88888888, 1);
 
 -- --------------------------------------------------------
 
@@ -127,6 +164,14 @@ CREATE TABLE `pacientes` (
   `autorizacion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pacientes`
+--
+
+INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `direccion`, `telefono`, `id_obrasocial`, `certificado`, `autorizacion`, `estado`) VALUES
+(4, 'Rocio', 'Larcamon', 34587647, 'Calle falsa 1234', 1132960551, 1, '', '', 1),
+(5, 'Virginia', 'Eliggi', 341269853, 'Cantilo 456', 1132960226, 4, '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -149,8 +194,18 @@ CREATE TABLE `pdc` (
   `id_pdc` int(11) NOT NULL,
   `id_profesional` int(11) NOT NULL,
   `id_consultorio` int(11) NOT NULL,
-  `id_dia` int(11) NOT NULL
+  `id_dia` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pdc`
+--
+
+INSERT INTO `pdc` (`id_pdc`, `id_profesional`, `id_consultorio`, `id_dia`, `estado`) VALUES
+(1, 1, 4, 1, 1),
+(2, 2, 6, 3, 1),
+(3, 1, 4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -167,6 +222,14 @@ CREATE TABLE `personas_cargo` (
   `telefono` bigint(11) NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `personas_cargo`
+--
+
+INSERT INTO `personas_cargo` (`id_personaCargo`, `nombre`, `apellido`, `dni`, `direccion`, `telefono`, `estado`) VALUES
+(1, 'Leonardo', 'Marquez', 31656989, 'Origone 789', 1132960960, 1),
+(2, 'Gonzalo', 'Moyano', 31131454, 'Pehuajo 100', 1132960515, 1);
 
 -- --------------------------------------------------------
 
@@ -185,6 +248,15 @@ CREATE TABLE `profesionales` (
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `profesionales`
+--
+
+INSERT INTO `profesionales` (`id_profesional`, `nombre`, `apellido`, `telefono`, `direccion`, `email`, `id_especialidad`, `estado`) VALUES
+(1, 'Veronica', 'Rogliano', 1132960333, 'Calle 50 456', 'vrogliano@gmail.com', 1, 1),
+(2, 'Elias', 'Epelboim', 1132960697, 'Quilmes 789', 'eepelboim@gmail.com', 4, 1),
+(3, 'Braian', 'Portillo', 13123456, 'Escobar 66', 'admin@braian.com.ar', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -196,8 +268,18 @@ CREATE TABLE `turnos` (
   `id_paciente` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `id_pdc` int(11) NOT NULL,
-  `id_hora` int(11) NOT NULL
+  `id_hora` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `turnos`
+--
+
+INSERT INTO `turnos` (`id_turno`, `id_paciente`, `fecha`, `id_pdc`, `id_hora`, `estado`) VALUES
+(1, 4, '2017-12-15', 1, 1, 1),
+(4, 5, '2017-11-25', 2, 2, 1),
+(5, 5, '2017-11-30', 1, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -251,9 +333,9 @@ ALTER TABLE `horarios`
   ADD PRIMARY KEY (`id_horario`);
 
 --
--- Indices de la tabla `obra_sociales`
+-- Indices de la tabla `obras_sociales`
 --
-ALTER TABLE `obra_sociales`
+ALTER TABLE `obras_sociales`
   ADD PRIMARY KEY (`id_obrasocial`);
 
 --
@@ -298,9 +380,9 @@ ALTER TABLE `profesionales`
 --
 ALTER TABLE `turnos`
   ADD PRIMARY KEY (`id_turno`),
-  ADD UNIQUE KEY `id_pdc` (`id_pdc`),
   ADD UNIQUE KEY `id_hora` (`id_hora`),
-  ADD KEY `id_paciente` (`id_paciente`);
+  ADD KEY `id_paciente` (`id_paciente`),
+  ADD KEY `id_pdc` (`id_pdc`) USING BTREE;
 
 --
 -- Indices de la tabla `usuarios`
@@ -316,7 +398,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `consultorios`
 --
 ALTER TABLE `consultorios`
-  MODIFY `id_consultorio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_consultorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `dias`
@@ -328,7 +410,7 @@ ALTER TABLE `dias`
 -- AUTO_INCREMENT de la tabla `especialidades`
 --
 ALTER TABLE `especialidades`
-  MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
@@ -337,40 +419,40 @@ ALTER TABLE `horarios`
   MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de la tabla `obra_sociales`
+-- AUTO_INCREMENT de la tabla `obras_sociales`
 --
-ALTER TABLE `obra_sociales`
-  MODIFY `id_obrasocial` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `obras_sociales`
+  MODIFY `id_obrasocial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `pdc`
 --
 ALTER TABLE `pdc`
-  MODIFY `id_pdc` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pdc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `personas_cargo`
 --
 ALTER TABLE `personas_cargo`
-  MODIFY `id_personaCargo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_personaCargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `profesionales`
 --
 ALTER TABLE `profesionales`
-  MODIFY `id_profesional` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_profesional` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -386,7 +468,7 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`id_obrasocial`) REFERENCES `obra_sociales` (`id_obrasocial`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`id_obrasocial`) REFERENCES `obras_sociales` (`id_obrasocial`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `paciente_personacargo`

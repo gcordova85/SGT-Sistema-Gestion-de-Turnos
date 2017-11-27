@@ -444,15 +444,13 @@ function __ajax(url,data){ //funcion general para enviar o traer datos
 function listar_datos() {
    var tabla= $('#tablaPacientes').DataTable({
         ajax: {
-            url: '../inc/getPaciente.php'
+            url: '../inc/getPacientesTodos.php'
         },
             columns: [
             { data: 'id_paciente' },
             { data: 'nombre' },
             { data: 'apellido' },
-            { data: 'dni' },
-            { data: 'telefono' },
-            { data: 'Obra_social' },
+            { data: 'dni'},
             { data: 'estado'},
             { defaultContent : "<button type='button' class='btnVerMas btn-xs btn btn-info'>Ver mas</button><a href='#modalEliminar' class='btn-xs btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' ></i></a>" },
           ],
@@ -463,14 +461,14 @@ function listar_datos() {
     eliminarRegistros(tabla);
 
     
-    tabla.columns(6).search("1").draw();                          
+    tabla.columns(4).search("1").draw();                          
     
 
     $("#inactivos").on("change",function(){
         if( $(this).is(':checked') ) {
-            tabla.columns(6).search("0").draw();                          
+            tabla.columns(4).search("0").draw();                          
         }else{
-            tabla.columns(6).search("1").draw();                                      
+            tabla.columns(4).search("1").draw();                                      
         }
     })
 
@@ -588,7 +586,7 @@ function enviarDatos(url) {
     function asignarPersona(){
         $("#btnAsignar").on("click",function(){
             var id = $("#lblId").text();       
-            $.redirect( "../mod/personaPaciente.php", { 'id': id} );        
+            $.redirect( "../mod/personaCargo.php");//, { 'id': id} );        
         })
         
     }

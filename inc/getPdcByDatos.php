@@ -4,35 +4,34 @@
 
     $conexion = new Conexion();
     $cnn = $conexion->getConexion();    
-    try {
-        $arrPDC=array();
-        $iCont=0;
-        
-        $sql = "SELECT pdc.id_pdc
-			FROM pdc 
-            INNER JOIN profesionales ON p.id_profesional = pdc.id_profesional
-            INNER JOIN consultorios c ON c.id_consultorio = pdc.id_consultorio
-            INNER JOIN dias D ON d.id_dia = pdc.id_dia
-            WHERE pdc.id_profesional = :id_profesional
-            pdc.id_consultorio = :id_consultorio
-            pdc.id_dia = :id_dia";
+
+        $sql = "SELECT id_pdc
+                FROM pdc 
+                WHERE id_profesional = :id_profesional 
+                and id_consultorio = :id_consultorio 
+                and id_dia = :id_dia 
+                and estado = 1";
+
         $sql = $cnn->prepare($sql);
         $sql->bindParam(':id_profesional', $_REQUEST['idProfesional']);
-        $sql->bindParam(':id_consultorio', $_REQUEST['idDia']);
-        $sql->bindParam(':id_dia', $_REQUEST['idConsultorio']);
+        $sql->bindParam(':id_consultorio', $_REQUEST['idConsultorio']);
+        $sql->bindParam(':id_dia', $_REQUEST['idDia']);
         $sql->execute();
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
+        $registro = $sql->rowCount();
+        if($registro > 0){
+            $idPDC = $row['id_pdc']; 
+            echo trim($idPDC);
+        }
+        else{
+            echo "error";
+        }
+        
 
-        foreach ($sql->fetchAll() as $row) {
-        $arrPDC[$iCont]=array();
-        $arrPDC[$iCont]['id_pdc']=$row['id_pdc'];
-        $iCont++;
-       }
        $cnn = null;
-       echo json_encode($arrPDC);
-    }
-    catch (PDOexception $e) {
-       echo "Error is: " . $e-> etmessage();
-    }
+      
+
+
     
     ?>
             

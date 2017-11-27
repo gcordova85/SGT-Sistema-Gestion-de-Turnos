@@ -53,8 +53,6 @@
                                 <th class="navbar">Nombre</th>
                                 <th class="navbar">Apellido</th>
                                 <th class="navbar">Dni</th>
-                                <th class="navbar">Telefono</th>
-                                <th class="navbar">Obra social</th>
                                 <th class="navbar">Activo</th>
                                 <th class="navbar">Opciones</th>
                             </tr>
@@ -243,29 +241,7 @@
                     </thead>
         
                 <tbody>
-                 <!--   <tr>
-                        <td>1</td>
-                        <td>Zona 1</td>
-                        <td>Perimetro 1</td>
-                        <td>Zona 3</td>
-                        <td>Perimetro 1</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Zona 2</td>
-                        <td>Perimetro 2</td>
-                        <td>Zona 4</td>
-                        <td>Perimetro 1</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Zona 1</td>
-                        <td>Perimetro 1</td>
-                        <td>Zona 3</td>
-                        <td>Perimetro 1</td>
-                    </tr>
-                --> 
-
+                
                 </tbody>
         
             </table>
@@ -302,8 +278,9 @@
             <div class="modal-body">
              
                 <div class="text-right">
-                    <button type="button" id="btnAsignar" class="btn btn-info glyphicon glyphicon-plus"> Asignar</button>
+                    <button type="button" id="btnAsignar" class="btn btn-success glyphicon glyphicon-plus"> Asignar</button>
                 </div>
+                
                 <table id="tablaCargo" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
                         <tr>
@@ -316,21 +293,12 @@
                         </tr>
                     </thead>
         
-                <tbody>
-                 <!-- <tr>
-                        <td>1</td>
-                        <td>Zona 1</td>
-                        <td>Perimetro 1</td>
-                        <td>Zona 3</td>
-                        <td>Perimetro 1</td>
-                        <td>Perimetro 1</td>
-                    </tr>
-                --> 
-
-                </tbody>
+               
         
             </table>
-                
+            <div class="text-left">
+                    <a href="personaCargo.php" id="btnPersonas" class="btn btn-success glyphicon glyphicon-plus"> Gestionar personas a cargo</a>
+             </div>
     
     
             </div>
@@ -381,8 +349,6 @@
                          <button type="button" id="eliminarPaciente" class="btn btn-success btn-block visible" data-dismiss="modal">Si</button>
                     </div>  
             </div>
-        
-                
         </div>
     </div>
 </div>

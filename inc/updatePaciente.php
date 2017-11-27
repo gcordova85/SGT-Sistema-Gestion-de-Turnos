@@ -63,7 +63,7 @@ $fileCert= "certPac".$id.".pdf";
 
 
   if($cert and !$aut){  
-    $sql="UPDATE paciente SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
+    $sql="UPDATE pacientes SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
     telefono = :telefono, id_obrasocial=:os, certificado=:fileCert
     WHERE id_paciente = :id;";
   

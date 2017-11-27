@@ -6,35 +6,63 @@
         $cnn = $conexion->getConexion();
         $diaSemana =date("w"); echo "Devuelve dia semana de hoy ".$diaSemana."<br>";
         $diasSumar=7;
-
-
-        // $idEstado = 1;
-        // $idPaciente = $_REQUEST['idPaciente'];
-        // $idConsultorio = $_REQUEST['idConsultorio'];
-        // $idProfesional = $_REQUEST['idProfesional'];
-        $diaElegido = 6;//$_REQUEST['idDia']; 
-        // $horaElegida = $_REQUEST['idHora']; 
+        $fechasTurnos = array();
+        $diaElegido = $_REQUEST['idDia']; 
+        $horaElegida = $_REQUEST['idHora']; 
         $diaSemana =(date("w"));
         $diaActual = date('Y-m-d');
         $fechaAgregar =  date('Y-m-d');
         $anioActual = date('Y'); 
+        $limite = $anioActual."-12-25";
+        $contador = 0;
+        $indicador = 0;
 
-
-    while($fechaAgregar <= $anioActual."-12-25"){
+    while($fechaAgregar < $limite){
          if($diaElegido == $diaSemana){
-           $fechaAgregar =  date('Y-m-d', strtotime('+'.$diasSumar.' day')) ;
-           $diasSumar += 7;
-           echo "segundo ".$fechaAgregar."<br>" ;
+              switch ($indicador) {
+                case 0:
+                  $fechaAgregar =  date('Y-m-d', strtotime('+'.$diasSumar.' day')) ;
+                  array_push($fechasTurnos,"fecha",$fechaAgregar);                 
+                  $diasSumar += 7;  
+                case 1:
+                    $nuevafecha = strtotime ( '-'.$contador.' day' , strtotime ( $fechaAgregar ) ) ;
+                    $fechaAgregar = date ( 'Y-m-d' , $nuevafecha );
+                    $fechaAgregar =  date('Y-m-d', strtotime('+'.$diasSumar.' day'));
+                    $contador = 0;
+                    $diasSumar += 7;
+                    array_push($fechasTurnos,"fecha",$fechaAgregar);
+                    break;
+                case 2:
+                  $nuevafecha = strtotime ( '+'.$contador.' day' , strtotime ( $fechaAgregar ) ) ;
+                  $fechaAgregar = date ( 'Y-m-d' , $nuevafecha );
+                  $fechaAgregar =  date('Y-m-d', strtotime('+'.$diasSumar.' day'));
+                  array_push($fechasTurnos,"fecha",$fechaAgregar);
+                  $contador = 0;
+                  $diasSumar += 7;
+            }
+
          }
-         else{
-            $fechaAgregar =  date('Y-m-d', strtotime('+'.$diasSumar.' day')) ;
-            $x += 20; 
+         elseif ($diaElegido >= $diaSemana){
+            $indicador = 1;
+            $contador += 1;
+            $fechaAgregar =  date('Y-m-d', strtotime('+1 day'));
+            
          }
+         elseif ($diaElegido <= $diaSemana){
+          $indicador = 2;
+          $contador += 1;
+          $fechaAgregar =  date('Y-m-d', strtotime('+1 day'));          
+         }
+
     }
+echo $fechasTurnos;
 
-
-
-
+function insertTurnos($idPDC,$idPaciente,$fecha,$idHora,$cnn){
+  $sql="INSERT INTO turnos (Id_consultorio, Id_profesional,Id_Paciente,fecha,id_hora,id_estado)
+    VALUES ($idPDC,$idPaciente,$fecha,$idHora,$idEstado)";
+  $query = $cnn->prepare($sql);
+  $query->execute();
+}
 
 
 

@@ -7,12 +7,12 @@
     <title>Centro terapéutico Francoise Dolto</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"> 
     <script src="../js/jquery-3.2.1.js"></script> 
-    <script src="../js/scriptPersonaPaciente.js"></script>  
+    <script src="../js/scriptPersonaCargo.js"></script>  
     <script src="../js/bootstrap.min.js"></script>  
     <link rel="stylesheet" href="../css/styleBase.css">
     <link rel="stylesheet" type="text/css" href="../lib/DataTables/datatables.min.css"/>
     <script type="text/javascript" src="../lib/DataTables/datatables.min.js"></script>
-    <link rel="stylesheet" href="../css/stylePersonaPaciente.css">
+    <link rel="stylesheet" href="../css/stylePersonaCargo.css">
 </head>
 <body >
     <div class="container">
@@ -20,33 +20,6 @@
         require_once '../inc/header.php'; 
         ?>
 
-
-<div class="row">
-    <div class="col-xs-6 col-sm-3 col-md-3">
-            <div class="form-group">
-                <label class="control-label" for="idPaciente"> Nro Paciente:</label>
-                <input class="form-control" type="text" id="idPaciente" name="idPaciente" value= "<?php echo $_REQUEST['id'];?>" disabled>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 col-md-3">
-            <div class="form-group">
-                <label class="control-label" for="nombre"> Nombre:</label>
-                <input class="form-control" type="text" id="nombre" name="nombre" disabled>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 col-md-3">
-            <div class="form-group">
-                <label class="control-label" for="apellido"> Apellido:</label>
-                <input class="form-control" type="text" id="apellido" name="apellido" disabled>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 col-md-3">
-            <div class="form-group">
-                <label class="control-label" for="dni"> DNI</label>
-                <input class="form-control" type="number" id="dni" name="dni" disabled>
-            </div>
-        </div>
-    </div>
 
         <div class="form-group text-right">
             <a href="#cargo" id="btnCargo" class="btn btn-info btnModal" data-toggle="modal">Nueva persona</a>
@@ -70,38 +43,8 @@
             </thead>
    </table>
    </div>
-   <div class="text-center form-group">
-        <button class="btn btn-asignar btn-principal"><img class="img-asignar" src="../iconos/asignar.png" alt="asignar"></button>
-   </div>
-
-   <!-- <table id="tablaPaciente" class="table table-striped table-bordered dt-responsive nowrap">
-    <thead>
-        <tr><th > Tiene las sigientes personas a cargo </th></tr>
-        <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>DNI</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>    
-        </tr>
-    </thead>
-
-<tbody>
-  <tr>
-        <td>1</td>
-        <td>Zona 1</td>
-        <td>Perimetro 1</td>
-        <td>Zona 3</td>
-        <td>Perimetro 1</td>
-        <td>Perimetro 1</td>
-    </tr>
-
-
-</tbody>
-
-</table> -->
-
-<!--ventana modal Persona a cargo-->
+   
+  
 
 <div class="modal fade" id="cargo"> 
     <div class="modal-dialog"> 
