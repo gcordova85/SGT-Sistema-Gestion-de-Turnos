@@ -74,11 +74,34 @@ function validarCampos(){
     
 }
 
+function guardar_datos(urlPHP,datos){
+    $("#frmPdc").on("submit", function(){
+        $.ajax({
+                method: "POST",
+                url: urlPHP,
+                data: datos,
+            }).done(function(info){
+                console.log(info);
+            });
+        });
+};
+
 function agregar() {
     $("#btnAgregar").on("click",function(){
         validarCampos();
-    })
-}
+        var url = '../inc/setPdc.php';
+        var idProfesional = $("#profesionales").val(),
+        idDia = $("#dia").val(),
+        idConsultorio = $("#consultorios").val(),
+        estado = 1
+        var data={'idProfesional':idProfesional,
+        'idDia':idDia,
+        'idConsultorio':idConsultorio,
+        'estado':estado}
+        guardar_datos(url,data);
+    })      
+};
+    
 
 function ocultarMsjError(){ //remueve el mensaje al posicionarse en el campo, solo los mensajes sin remover el error del div
     $("#especialidad").on("click",function() {

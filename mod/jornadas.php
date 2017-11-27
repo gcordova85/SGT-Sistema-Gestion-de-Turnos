@@ -22,7 +22,7 @@
         <?php
             require_once '../inc/header.php';         ?>
 
-            <form>
+            <form id="frmPdc">
                 <div  id="divEspecialidad" class="divInput form-group col-md-3">
                 <label for="espeialidades" class="control-label">Especialidad:</label>
                     <select name="especialidades" id="especialidades" class="form-control">
@@ -61,7 +61,7 @@
             </div>
 
             <div class=""></div>
-                <button  id="btnAgregar" type="button" class="btn btn-success glyphicon glyphicon-plus">Agregar</button>
+                <button  id="btnAgregar" type="submit" class="btn btn-success glyphicon glyphicon-plus">Agregar</button>
             </div>  
         </form>   
             
