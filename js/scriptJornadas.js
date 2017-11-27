@@ -3,7 +3,7 @@ $(document).ready(function(){
         listar_datos();
         agregar();
         ocultarMsjError();
-        obtenerConsultorios();
+        obtenerEspecialidades();
     });
 
 var listar_datos = function(){
@@ -13,13 +13,16 @@ var listar_datos = function(){
             url: '../inc/getPdc.php'
           },
             columns: [
-            { data: 'id_profesional' },
-            { data: 'id_consultorio' },
-            { data: 'id_dia' },
-            
+            { data: 'nombre_profesional' },
+            { data: 'apellido_profesional' },    
+            { data: 'nombre_dia' },
+            { data: 'id_consultorio'}, 
+            { data: 'ubicacion_consultorio'},                       
           ],
             language : idioma_espanol
-    });
+    })
+    var data = tabla.column(0).data().concat(tabla.column(1).data);
+    
 };
 
 var idioma_espanol = {
@@ -63,9 +66,10 @@ function esValidoSelect(valor,texto,div) {
 }
 
 function validarCampos(){
-    esValidoSelect($("#esp").val(),$("#errorEsp"),$("#divEsp"));
-    esValidoSelect($("#prof").val(),$("#errorProf"),$("#divProf"));
-    esValidoSelect($("#cons").val(),$("#errorCons"),$("#divCons"));
+    esValidoSelect($("#especialidades").val(),$("#errorEspecialidad"),$("#divEspecialidad"));    
+    esValidoSelect($("#dia").val(),$("#errorDia"),$("#divDia"));
+    esValidoSelect($("#profesionales").val(),$("#errorProfesional"),$("#divProfesional"));
+    esValidoSelect($("#consutorios").val(),$("#errorConsutorio"),$("#divConsutorio"));
     
     
 }
@@ -77,80 +81,145 @@ function agregar() {
 }
 
 function ocultarMsjError(){ //remueve el mensaje al posicionarse en el campo, solo los mensajes sin remover el error del div
-    $("#esp").on("click",function() {
-        $("#errorEsp").fadeOut(700); 
+    $("#especialidad").on("click",function() {
+        $("#errorEspecialidad").fadeOut(700); 
     })
-    $("#prof").on("click",function() {
-        $("#errorProf").fadeOut(700); 
+    $("#profesional").on("click",function() {
+        $("#errorProfesional").fadeOut(700); 
     })
-    $("#cons").on("click",function() {
-        $("#errorCons").fadeOut(700); 
+    $("#consultorio").on("click",function() {
+        $("#errorConsultorio").fadeOut(700); 
     })
 }
 
-
-// function obtenerEspecialidades() {
-//     $.ajax({
-//         type: "POST",
-//         url: "../inc/getEspecialidad.php",
-//         contentType: "application/json; charset=utf-8",
-//         data: null,
-//         dataType: "json",
-//         success: function (result) {
-//             $.each(result, function () {
-//                $option= $("<option></option>");
-//                $option.attr("value",this.id_especialidad);
-//                $option.text(this.nombre);
-//                $('#esp').append($option);
-//             }); 
-//         },
-//         error: function (xhr, status, error) {
-//             alert("ERROR")
-//         }
-//     });
-//     $("#esp").on('change',function(){    
-//         obtenerProfesionales();    
-//     }); 
-// }
-
-// function obtenerProfesionales() {
-//     var id_especialidad=$("#esp").val();
-//     $.ajax({
-//         type: "POST",
-//         url: "../inc/getProfesionalByEspecialidad.php",
-//         contentType: "application/json; charset=utf-8",
-//         data:  {
-//             "idEspecialidad":idEspecialidad,
-//         },
-//         dataType: "json",
-//         success: function (result) {
-//             $.each(result, function () {
-//                 $option= $("<option></option>");
-//                 $option.attr("value",this.id_profesional);
-//                 $option.text(this.nombre +" "+ this.apellido);
-//                 $('#esp').append($option);           
-//              }); 
-//         },
-//         error: function (xhr, status, error) {
-//             alert("ERROR")
-//         }
-//     });
-// }
-
-
-function obtenerConsultorios() {
+function obtenerEspecialidades() {
     $.ajax({
         type: "POST",
-        url: "../inc/getConsultoriosCombo.php",
+        url: "../inc/getEspecialidades.php",
         contentType: "application/json; charset=utf-8",
         data: null,
         dataType: "json",
         success: function (result) {
+                $('#profesionales').empty();   
+                $option= $("<option></option>");
+                $option.attr("value",'0');
+                $option.text('Seleccione una opcion');
+                $('#especialidades').append($option);
+
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_especialidad);
+               $option.text(this.descripcion);
+               $('#especialidades').append($option);
+            }); 
+            obtenerProfesionales();
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+    $("#especialidades").on('change',function(){
+        $("#idConsultorio").val("");
+        $("#ubicacionConsultorio").val("");
+        obtenerProfesionales();    
+    }); 
+}
+
+
+
+
+function obtenerProfesionales() {
+    var idEspecialidad = $("#especialidades").val();
+    $.ajax({
+        type: "GET",
+        url: "../inc/getProfesionalByEspecialidad.php",
+        contentType: "application/json; charset=utf-8",
+        data: {
+            "idEspecialidad":idEspecialidad,
+        },
+        dataType: "json",
+        success: function (result) {
+            $('#profesionales').empty();
+            $option= $("<option></option>");
+            $option.attr("value",'0');
+            $option.text('Seleccione una opcion');
+            $('#profesionales').append($option);
+
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_profesional);
+               $option.text(this.nombre +" "+ this.apellido);
+               $('#profesionales').append($option);
+            }); 
+            obtenerDias();                
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+    $("#profesionales").on('change',function(){    
+        obtenerDias();    
+    }); 
+}
+
+
+function obtenerDias() {
+    var idProfesional = $("#profesionales").val();
+    $.ajax({
+        type: "GET",
+        url: "../inc/getDiasLibresByProfesional.php",
+        contentType: "application/json; charset=utf-8",
+        data: {
+            "idProfesional":idProfesional,
+        },
+        dataType: "json",
+        success: function (result) {
+            $('#dia').empty();
+            $option= $("<option></option>");
+            $option.attr("value",'0');
+            $option.text('Seleccione una opcion');
+            $('#dia').append($option);
+
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_dia);
+               $option.text(this.nombre);
+               $('#dia').append($option);
+            }); 
+            obtenerConsultorios();                
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+        
+    });
+    $("#dia").on('change',function(){ 
+        obtenerConsultorios();    
+    }); 
+}
+
+function obtenerConsultorios() {
+    var idDia = $("#dia").val();
+
+    $.ajax({
+        type: "GET",
+        url: "../inc/getConsultoriosLibresByDia.php",
+        contentType: "application/json; charset=utf-8",
+        data: {
+            "idDia":idDia,
+        },
+        dataType: "json",
+        success: function (result) {
+            $('#consultorios').empty();
+            $option= $("<option></option>");
+            $option.attr("value",'0');
+            $option.text('Seleccione una opcion');
+            $('#consultorios').append($option);               
             $.each(result, function () {
                $option= $("<option></option>");
                $option.attr("value",this.id_consultorio);
                $option.text(this.id_consultorio +" "+ this.ubicacion);
-               $('#cons').append($option);
+               $('#consultorios').append($option);
             }); 
         },
         error: function (xhr, status, error) {

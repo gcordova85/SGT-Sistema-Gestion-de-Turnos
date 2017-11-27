@@ -19,5 +19,4 @@
     }
     $statement->closeCursor();
     $conexion = null;
-
 ?>

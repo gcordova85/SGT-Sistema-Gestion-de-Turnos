@@ -20,10 +20,6 @@ function listarPaciente(){
             language: idioma_espanol
         });
 };
-<<<<<<< HEAD
-
-=======
->>>>>>> 9aa58320ff65815dab3d51866cb5a5ecce66dc17
 function obtenerID(){
     var table = $('#tablePacienteTurno').DataTable();    
     $('#tablePacienteTurno tbody').on( 'click', 'button', function () {
