@@ -5,7 +5,7 @@
 
     $conexion = new Conexion();
     $cnn = $conexion->getConexion();
-    $sql = "SELECT pr.nombre nombre_profesional, pr.apellido apellido_profesional,
+    $sql = "SELECT CONCAT(CONCAT(pr.nombre,', '), pr.apellido) AS profesional,
      d.nombre nombre_dia, c.id_consultorio id_consultorio, c.ubicacion ubicacion_consultorio 
     FROM pdc p
     INNER JOIN profesionales pr on pr.id_profesional = p.id_profesional

@@ -13,8 +13,7 @@ var listar_datos = function(){
             url: '../inc/getPdc.php'
           },
             columns: [
-            { data: 'nombre_profesional' },
-            { data: 'apellido_profesional' },    
+            { data: 'profesional' },    
             { data: 'nombre_dia' },
             { data: 'id_consultorio'}, 
             { data: 'ubicacion_consultorio'},                       

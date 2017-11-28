@@ -4,7 +4,7 @@
 
  $conexion = new Conexion();
  $cnn = $conexion->getConexion();
- $sql = "SELECT p.id_paciente,p.nombre,p.apellido,p.dni,p.direccion,p.telefono,o.nombre AS 'Obra_social',p.certificado,p.autorizacion,p.estado
+ $sql = "SELECT p.id_paciente,CONCAT(CONCAT(p.nombre,', '),p.apellido)AS paciente,p.dni,p.direccion,p.telefono,o.nombre AS 'Obra_social',p.certificado,p.autorizacion,p.estado
     FROM pacientes P
     INNER JOIN obras_sociales O ON O.id_obrasocial = P.id_obrasocial";
  $statement = $cnn->prepare($sql);

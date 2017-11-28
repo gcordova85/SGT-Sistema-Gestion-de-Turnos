@@ -32,7 +32,7 @@ $fileCert= "certPac".$id.".pdf";
 
   $conexion = new Conexion();
   $cnn = $conexion->getConexion();
-  $sql="INSERT INTO paciente (nombre, apellido, dni, direccion, telefono, id_obrasocial, certificado, autorizacion, estado) 
+  $sql="INSERT INTO pacientes (nombre, apellido, dni, direccion, telefono, id_obrasocial, certificado, autorizacion, estado) 
   values (:nombre, :apellido, :dni, :direccion, :telefono, :os, :fileCert, :fileAut, :estado);";
   $statement = $cnn->prepare($sql);
   $respuesta=false;

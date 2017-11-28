@@ -69,12 +69,10 @@
             <table id="tablaJornadas" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Nombre</th> 
-                        <th>Apellido</th>                                 
+                        <th>Profesional</th>                                 
                         <th>Día</th>
                         <th>Consultorio</th> 
-                        <th>Ubicacion</th>                 
-                               
+                        <th>Ubicacion</th>                                           
                     </tr>
                 </thead>
             </table>
