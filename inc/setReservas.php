@@ -1,48 +1,50 @@
 <?php
     session_start();
-    require_once 'conexion.php';
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
-        $conexion = new Conexion();
-        $cnn = $conexion->getConexion();
-        $diaSemana =date("w");
-        $diasSumar=7;
-        $fechasTurnos = array();
-        $diaElegido = $_REQUEST['idDia']; 
-        $diaSemana =(date("w"));
-        $anioActual = date('Y'); 
-        $limite = $anioActual."/12/25";
+    require_once('conexion.php');
 
-  //Identifico si en la  semana en curso debo o no asignarle turno.
-  $bConsiderarSemanaEnCurso=false;
-  if ($diaElegido > $diaSemana){
-    $bConsiderarSemanaEnCurso=true;
-  }
+    $conexion = new Conexion();
+    $cnn = $conexion->getConexion();    
+// VARIABLES PARA CONSULTA
+    $idEstado = 1;
+    $idPaciente = $_REQUEST['idPaciente'];
+    $idConsultorio = $_REQUEST['idConsultorio'];
+    $idProfesional = $_REQUEST['idProfesional'];
+    $diaElegido = $_REQUEST['idDia']; 
+    $horaElegida = $_REQUEST['idHora']; 
 
-  //Estimar la primera fecha de dia asignado
-  if ($diaElegido > $diaSemana){
-    $intDiferenciaDeDias=$diaElegido-$diaSemana;
-  }
-  elseif ($diaElegido == $diaSemana){  
-    $intDiferenciaDeDias=7;
-  }
-  else{
-    $intDiferenciaDeDias=7-($diaSemana-$diaElegido);
-  }
-  $fechaBase=new DateTime();
-  $fechaBase->modify('+'.$intDiferenciaDeDias.'day');
-  $objLimiteFecha=new DateTime($limite);  
+//VARIABLES PARA CALCULAR FECHAS DEL TURNO
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $diaSemana =date("w");
+    $diasSumar=7;
+    $fechasTurnos = array();
+    $diaElegido = $_REQUEST['idDia']; 
+    $diaSemana =(date("w"));
+    $anioActual = date('Y'); 
+    $limite = $anioActual."/12/26";
 
-  //Estimar todas las fechas
-  while($fechaBase < $objLimiteFecha){
-      $objFecha=new stdClass();
-      $objFecha->fecha=$fechaBase->format('Y-m-d');
-      array_push($fechasTurnos,$objFecha);
-      $fechaBase->modify('+7 day');
+//Estimar la primera fecha de dia asignado
+    if ($diaElegido > $diaSemana){
+        $intDiferenciaDeDias=$diaElegido-$diaSemana;
+        }
+    elseif ($diaElegido == $diaSemana){  
+        $intDiferenciaDeDias=7;
+        }
+    else{
+        $intDiferenciaDeDias=7-($diaSemana-$diaElegido);
+        }
+    $fechaBase=new DateTime();
+    $fechaBase->modify('+'.$intDiferenciaDeDias.'day');
+    $objLimiteFecha=new DateTime($limite);  
+
+    //Estimar todas las fechas
+    while($fechaBase <= $objLimiteFecha){
+        $objFecha=new stdClass();
+        $objFecha->fecha=$fechaBase->format('Y-m-d');
+        array_push($fechasTurnos,$objFecha);
+        $fechaBase->modify('+7 day');
     }
 
 
-//Generar JSON
-echo json_encode($fechasTurnos);
 
 
 

@@ -10,7 +10,7 @@
         $diaElegido = $_REQUEST['idDia']; 
         $diaSemana =(date("w"));
         $anioActual = date('Y'); 
-        $limite = $anioActual."/12/25";
+        $limite = $anioActual."/12/26";
 
   //Identifico si en la  semana en curso debo o no asignarle turno.
   $bConsiderarSemanaEnCurso=false;
@@ -38,7 +38,7 @@
       $objFecha->fecha=$fechaBase->format('Y-m-d');
       array_push($fechasTurnos,$objFecha);
       $fechaBase->modify('+7 day');
-    }
+  }
 
 
 //Generar JSON
