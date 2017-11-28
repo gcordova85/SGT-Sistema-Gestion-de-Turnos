@@ -4,69 +4,45 @@
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $conexion = new Conexion();
         $cnn = $conexion->getConexion();
-        $diaSemana =date("w"); echo "Devuelve dia semana de hoy ".$diaSemana."<br>";
+        $diaSemana =date("w");
         $diasSumar=7;
         $fechasTurnos = array();
         $diaElegido = $_REQUEST['idDia']; 
-        $horaElegida = $_REQUEST['idHora']; 
         $diaSemana =(date("w"));
-        $diaActual = date('Y-m-d');
-        $fechaAgregar =  date('Y-m-d');
         $anioActual = date('Y'); 
-        $limite = $anioActual."-12-25";
-        $contador = 0;
-        $indicador = 0;
+        $limite = $anioActual."/12/25";
 
-    while($fechaAgregar < $limite){
-         if($diaElegido == $diaSemana){
-              switch ($indicador) {
-                case 0:
-                  $fechaAgregar =  date('Y-m-d', strtotime('+'.$diasSumar.' day')) ;
-                  array_push($fechasTurnos,"fecha",$fechaAgregar);                 
-                  $diasSumar += 7;  
-                case 1:
-                    $nuevafecha = strtotime ( '-'.$contador.' day' , strtotime ( $fechaAgregar ) ) ;
-                    $fechaAgregar = date ( 'Y-m-d' , $nuevafecha );
-                    $fechaAgregar =  date('Y-m-d', strtotime('+'.$diasSumar.' day'));
-                    $contador = 0;
-                    $diasSumar += 7;
-                    array_push($fechasTurnos,"fecha",$fechaAgregar);
-                    break;
-                case 2:
-                  $nuevafecha = strtotime ( '+'.$contador.' day' , strtotime ( $fechaAgregar ) ) ;
-                  $fechaAgregar = date ( 'Y-m-d' , $nuevafecha );
-                  $fechaAgregar =  date('Y-m-d', strtotime('+'.$diasSumar.' day'));
-                  array_push($fechasTurnos,"fecha",$fechaAgregar);
-                  $contador = 0;
-                  $diasSumar += 7;
-            }
+  //Identifico si en la  semana en curso debo o no asignarle turno.
+  $bConsiderarSemanaEnCurso=false;
+  if ($diaElegido > $diaSemana){
+    $bConsiderarSemanaEnCurso=true;
+  }
 
-         }
-         elseif ($diaElegido >= $diaSemana){
-            $indicador = 1;
-            $contador += 1;
-            $fechaAgregar =  date('Y-m-d', strtotime('+1 day'));
-            
-         }
-         elseif ($diaElegido <= $diaSemana){
-          $indicador = 2;
-          $contador += 1;
-          $fechaAgregar =  date('Y-m-d', strtotime('+1 day'));          
-         }
+  //Estimar la primera fecha de dia asignado
+  if ($diaElegido > $diaSemana){
+    $intDiferenciaDeDias=$diaElegido-$diaSemana;
+  }
+  elseif ($diaElegido == $diaSemana){  
+    $intDiferenciaDeDias=7;
+  }
+  else{
+    $intDiferenciaDeDias=7-($diaSemana-$diaElegido);
+  }
+  $fechaBase=new DateTime();
+  $fechaBase->modify('+'.$intDiferenciaDeDias.'day');
+  $objLimiteFecha=new DateTime($limite);  
 
+  //Estimar todas las fechas
+  while($fechaBase < $objLimiteFecha){
+      $objFecha=new stdClass();
+      $objFecha->fecha=$fechaBase->format('Y-m-d');
+      array_push($fechasTurnos,$objFecha);
+      $fechaBase->modify('+7 day');
     }
-echo $fechasTurnos;
-
-function insertTurnos($idPDC,$idPaciente,$fecha,$idHora,$cnn){
-  $sql="INSERT INTO turnos (Id_consultorio, Id_profesional,Id_Paciente,fecha,id_hora,id_estado)
-    VALUES ($idPDC,$idPaciente,$fecha,$idHora,$idEstado)";
-  $query = $cnn->prepare($sql);
-  $query->execute();
-}
 
 
-
-
+//Generar JSON
+echo json_encode($fechasTurnos);
 
 
 

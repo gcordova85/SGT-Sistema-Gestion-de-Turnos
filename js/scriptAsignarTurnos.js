@@ -42,25 +42,30 @@ function reservarTurnos(){
     var idProfesional = $("#profesionales").val();
     var idConsultorio = $("#idConsultorio").val();
     var idDia = $("#dias").val();
-    var idHora = 0;
+    var dia = $('#dias option:selected').html()
+    var idHora = 1;
+    var hora = "";
     var tablaH = $('#tablaHorarios').DataTable();
-    $('#tablaHorarios tbody').on( 'click', 'button #btnHora', function () {
+    $('#tablaHorarios tbody').on( 'click', 'button.btnHora', function () {
         var fila = tablaH.row( $(this).parents('tr') ).data();
         idHora = fila.id_horario;
+        hora = fila.hora;
     });
     $.ajax({
-        type : 'POST',
-        url  : '../inc/setReserva.php',
+        type : 'GET',
+        url  : '../inc/getDiasReserva.php',
+        contentType: "application/json; charset=utf-8",
         data : {
                 "idDia":idDia,
                 "idHora"  :idHora,
         },
-        success :  function(result){  
-            $.each(result, function () {
-                $td= $("<td></td>");
-                $td.text(this.fecha);
-                $('#tablaAceptarTurnos').append($td);
-            });             
+        dataType: "json",
+        success :  function(response){ 
+            $('#tablaAceptarTurnos').empty();
+            $.each(response, function () {
+                $fila= $("<tr><td>"+this.fecha+"</td><td>"+dia+"</td><td>"+hora+"</td></tr>");
+                $('#tablaAceptarTurnos').append($fila);
+             });
         },
     });
     
@@ -192,7 +197,7 @@ function obtenerHoraByDia(){
                       columns: [
                         { data: 'id_horario'},
                        { data: 'hora' },
-                       {defaultContent:'<button name="btnHora" onClick="reservarTurnos(" + id_horario + ");" class="btn btn-success btn-asignar" id="btnHora" data-toggle="modal" data-target="#aceptarTurnos">Aceptar</button>'},
+                       {defaultContent:'<button name="btnHora" onClick="reservarTurnos();" class="btn btn-success btnHora " id="btnHora" data-toggle="modal" data-target="#aceptarTurnos">Aceptar</button>'},
                       ],
                      /*columnDefs: [
                         {
