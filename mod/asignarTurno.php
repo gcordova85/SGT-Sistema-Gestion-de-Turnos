@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/styleTurnos.css">
     <link rel="stylesheet" href="../lib/DataTables/datatables.min.css">
 </head>
-<body onload="noVolver();">
+<body>
     <div class="container">
         <?php
             require_once '../inc/header.php';
@@ -125,19 +125,20 @@
       </div>
       <div class="modal-body">
       <div class="table-responsive">
-      <table id="tablaAceptarTurnos" class="table table-bordered dt-responsive">
+      <table id="tablaAceptarTurnos" class="table table-bordered table-responsive">
       <thead>
             <tr class="loginhf">
-              <th > Fecha</th>    
-              <th> Hora </th>
-              <th>Dia</th>
+              <th>Fecha</th>    
+              <th>Dia </th>
+              <th>Hora</th>
             </tr>
       </thead>
   </table>
   </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" id="aceptarTurnos" name="aceptarTurnos">Aceptar</button>
       </div>
     </div>
 
