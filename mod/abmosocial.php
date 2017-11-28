@@ -51,7 +51,7 @@
             </div>
         </div>
         <div id="modalOsociales" class="modal fade">
-            <div class="modal-dialog">
+            <div class="modal-dialog container">
                 <form method="POST" id="nuevaOsocial">
                     <div class="modal-content">
                         <div class="modal-header navbar">
@@ -61,7 +61,7 @@
                         <div class="modal-body">
                         <div id="div-formulario">
                             <div class="row oculto">
-                                <div class="col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div id="div-nOsocial" class="form-group">
                                         <label for="nOsocial" class="control-label col-form-label">N° Obra Social/Prepaga:</label>
                                         <input type="number" name="nOsocial" id="nOsocial" class="form-control">
@@ -69,20 +69,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 container">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="col-md-6">
-                                        <div id="div-nombreOsocial" class="form-group">
+                                        <div id="div-nombreOsocial" class="divInput form-group">
                                             <label for="nombreOsocial" class="control-label col-form-label">Nombre:</label>
-                                            <input type="text" name="nombreOsocial" id="nombreOsocial" class="form-control">
+                                            <input type="text" name="nombreOsocial" id="nombreOsocial" class="form-control" pattern="/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/" required>
                                             <div class="alert alert-danger divError oculto" id="errorNom">
                                                 <p><b>Ingrese un nombre correcto (Uno o dos de al menos 3 letras c/u)</b></p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div id="div-telefonoOsocial" class="form-group">
+                                        <div id="div-telefonoOsocial" class="divInput form-group">
                                             <label for="telefonoOsocial" class="control-label col-form-label">Telefono:</label>
-                                            <input type="number" name="telefonoOsocial" id="telefonoOsocial" class="form-control">
+                                            <input type="number" name="telefonoOsocial" id="telefonoOsocial" class="form-control" min="00000000000" max="99999999999"required>
                                             <div class="alert alert-danger divError oculto" id="errorTel">
                                                 <p><b>Ingrese un teléfono valido, ejemplo: 01142325466</b></p>
                                             </div>
@@ -91,11 +91,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 container">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="col-md-12">
-                                        <div id="div-emailOsocial" class="form-group">
+                                        <div id="div-emailOsocial" class="divInput form-group">
                                             <label for="emailOsocial" class="control-label col-form-label">Email:</label>
-                                            <input type="email" name="emailOsocial" id="emailOsocial" class="form-control">
+                                            <input type="email" name="emailOsocial" id="emailOsocial" class="form-control" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;" required>
                                             <div class="alert alert-danger divError oculto" id="errorMail">
                                                 <p><b>Debe ingresar un E-mail valido</b></p>
                                             </div>
@@ -109,10 +109,12 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" name="agregarNuevo" id="agregarNuevo" class="btn btn-success" value="Agregar Nueva" />
-                            <input type="submit" name="guardarCambios" id="guardarCambios" class="btn btn-warning oculto" value="Guardar" />
-                            <input type="submit" name="eliminarOsocial" id="eliminarOsocial" class="btn btn-warning oculto" value="Eliminar Obra social" />
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <div id="div-botones">
+                                <input type="submit" name="agregarNuevo" id="agregarNuevo" class="btn btn-success" value="Agregar Nueva" />
+                                <input type="submit" name="guardarCambios" id="guardarCambios" class="btn btn-warning oculto" value="Guardar" />
+                                <input type="submit" name="eliminarOsocial" id="eliminarOsocial" class="btn btn-warning oculto" value="Eliminar Obra social" />
+                                <button type="button" name="btnCancelar" id="btnCancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            </div>
                         </div>
                     </div>
                 </form>
