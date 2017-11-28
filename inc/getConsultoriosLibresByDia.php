@@ -10,7 +10,7 @@
         $iCont=0;
 
 
-        $consultaExiste = "SELECT p.id_profesional
+        $consultaExiste = "SELECT DISTINCT p.id_profesional
         FROM pdc p
         INNER JOIN profesionales pr ON pr.id_profesional = p.id_profesional
         WHERE p.id_profesional = :id_profesional";
@@ -20,7 +20,7 @@
         $contar = $consultaExiste->rowCount();
 
         if($contar <> 0){
-            $sql="SELECT c.id_consultorio, c.ubicacion FROM consultorios as c
+            $sql="SELECT DISTINCT c.id_consultorio, c.ubicacion FROM consultorios as c
             INNER JOIN pdc p on p.id_consultorio = c.id_consultorio
             INNER JOIN profesionales pr on pr.id_profesional = p.id_profesional
             WHERE pr.id_profesional = :id_profesional";
@@ -30,7 +30,7 @@
      }
     
      else{
-        $sql = "SELECT c.id_consultorio, c.ubicacion FROM consultorios as c 
+        $sql = "SELECT DISTINCT c.id_consultorio, c.ubicacion FROM consultorios as c 
                 WHERE c.id_consultorio NOT IN
                 (
                     SELECT c.id_consultorio FROM consultorios as c

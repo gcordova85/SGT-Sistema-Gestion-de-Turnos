@@ -126,8 +126,7 @@ function listar(){ //carga los registros en el datatable
         lengthMenu : [ [5, 10, 30, -1], [5, 10, 30, "Todos"] ], //modifica las opciones de la cantidad de registros a mostrar
         columns:[  //obtengo los valores enviados por json y los pongo en las columnas
             {data:"id_personaCargo"},
-            {data:'nombre'},
-            {data:'apellido'},
+            {data:'persona'},
             {data:'dni'},
             {data:'direccion'},
             {data:'telefono'},
@@ -135,8 +134,15 @@ function listar(){ //carga los registros en el datatable
             {defaultContent:'<a href="#cargo" class="btn btn-warning btn-tabla btn-editar glyphicon glyphicon-edit" data-toggle="modal"></a><a href="#modalEliminar" class="btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" ></i></a>'} //aparecerá en todas las filas
            
         ],
+        columnDefs:[
+            {targets: [ 0 ],
+            visible: false,
+            searchable: false},
+            {targets: [ 5 ],
+            visible: false,
+            searchable: true}
+            ],
 
-      //  "columnDefs": [ { "targets": [ 0 ], "visible": false, "searchable": false }], //oculto la columna id
 
         language : idioma_espanol        
     });
@@ -171,14 +177,14 @@ function listar(){ //carga los registros en el datatable
     eliminarRegistros(tabla);
 
     
-    tabla.columns(6).search("1").draw();                          
+    tabla.columns(5).search("1").draw();                          
     
 
     $("#inactivos").on("change",function(){
         if( $(this).is(':checked') ) {
-            tabla.columns(6).search("0").draw();                          
+            tabla.columns(5).search("0").draw();                          
         }else{
-            tabla.columns(6).search("1").draw();                                      
+            tabla.columns(5).search("1").draw();                                      
         }
     })
     

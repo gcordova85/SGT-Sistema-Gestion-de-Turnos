@@ -2,6 +2,10 @@
     width: 60px;
     height: 60px;
 }
+thead{
+    background: #a93957;
+    color: #FFFFFF;
+} 
 
 .btn-asignar{
     width: 83px;

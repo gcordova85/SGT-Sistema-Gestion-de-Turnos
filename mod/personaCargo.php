@@ -20,7 +20,11 @@
         require_once '../inc/header.php'; 
         ?>
 
-
+        <div class="row" id="fila-encabezado">
+            <div class="col-md-12 navbar">
+                <h3 class="text-center">Personas a cargo</h3>
+            </div>
+        </div>
         <div class="form-group text-right">
             <a href="#cargo" id="btnCargo" class="btn btn-info btnModal" data-toggle="modal">Nueva persona</a>
         </div>
@@ -33,7 +37,6 @@
                 <tr>
                     <th>Id</th>                 
                     <th>Nombre</th>
-                    <th>Apellido</th>
                     <th>DNI</th>
                     <th>Dirección</th>
                     <th>Teléfono</th>

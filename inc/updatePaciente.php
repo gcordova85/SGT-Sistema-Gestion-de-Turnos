@@ -41,7 +41,7 @@ $fileCert= "certPac".$id.".pdf";
 
 
   if($cert and $aut){ 
-    $sql="UPDATE paciente SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
+    $sql="UPDATE pacientes SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
     telefono = :telefono, id_obrasocial=:os, certificado=:fileCert, autorizacion=:fileAut
     WHERE id_paciente = :id;";
 
@@ -84,7 +84,7 @@ $fileCert= "certPac".$id.".pdf";
 
 
   if(!$cert and $aut){
-    $sql="UPDATE paciente SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
+    $sql="UPDATE pacientes SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
     telefono = :telefono, id_obrasocial=:os, autorizacion=:fileAut
     WHERE id_paciente = :id;";
   
@@ -102,7 +102,7 @@ $fileCert= "certPac".$id.".pdf";
 
 }
   if(!$cert and !$aut){
-    $sql="UPDATE paciente SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
+    $sql="UPDATE pacientes SET nombre=:nombre, apellido = :apellido, dni = :dni, direccion = :direccion,
     telefono = :telefono, id_obrasocial=:os
     WHERE id_paciente = :id;";
  

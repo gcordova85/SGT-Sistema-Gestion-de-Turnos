@@ -1,4 +1,3 @@
-"use strict";
 
 $(document).ready(function(){
 
@@ -201,6 +200,7 @@ function habilitarEdicion() { //habilita la edicion del formulario
 
 
 function estadoNuevo() {//estados de los botones
+    obtenerOs();
     $("#divEdit").removeClass("visible");
     $("#divEdit").addClass("oculto");
 
@@ -233,6 +233,7 @@ function estadoNuevo() {//estados de los botones
     })
 }
 function estadoEdicion() {
+    obtenerOs();
     $("#divEdit").removeClass("visible");
     $("#divEdit").addClass("oculto");
 
@@ -257,6 +258,7 @@ function estadoEdicion() {
 }
 
 function estadoDetalles() {
+    obtenerOs();
     $("#divEdit").removeClass("oculto");
     $("#divEdit").addClass("visible");
 
@@ -417,7 +419,12 @@ function alternarPantalla(tabla) {
                 $("#linkCert").attr("href",persona.data[0].certificado);
                 $("#fileAutoriz").attr("value",persona.data[0].autorizacion);
                 $("#fileCert").attr("value",persona.data[0].certificado);
-                $("#lblEstado").text("Activo: "+persona.data[0].estado);
+
+                if(persona.data[0].estado==1){
+                    $("#lblEstado").text("Activo");      
+                }else{
+                    $("#lblEstado").text("Inactivo");                          
+                }
                 
             }});
 
@@ -448,27 +455,34 @@ function listar_datos() {
         },
             columns: [
             { data: 'id_paciente' },
-            { data: 'nombre' },
-            { data: 'apellido' },
+            { data: 'paciente'},
             { data: 'dni'},
             { data: 'estado'},
             { defaultContent : "<button type='button' class='btnVerMas btn-xs btn btn-info'>Ver mas</button><a href='#modalEliminar' class='btn-xs btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' ></i></a>" },
           ],
-         languaje: idioma_espanol
+          columnDefs:[
+            {targets: [ 0 ],
+            visible: false,
+            searchable: false},
+            {targets: [ 3 ],
+            visible: false,
+            searchable: true}
+            ],
+         language: idioma_espanol
     });
 
     alternarPantalla(tabla);
     eliminarRegistros(tabla);
 
     
-    tabla.columns(4).search("1").draw();                          
+    tabla.columns(3).search("1").draw();                          
     
 
     $("#inactivos").on("change",function(){
         if( $(this).is(':checked') ) {
-            tabla.columns(4).search("0").draw();                          
+            tabla.columns(3).search("0").draw();                          
         }else{
-            tabla.columns(4).search("1").draw();                                      
+            tabla.columns(3).search("1").draw();                                      
         }
     })
 
@@ -478,9 +492,9 @@ var idioma_espanol = {
     "sLengthMenu":     "Mostrar _MENU_ registros",
     "sZeroRecords":    "No se encontraron resultados",
     "sEmptyTable":     "Ningún dato disponible en esta tabla",
-    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfo":           "Mostrando del _START_ al _END_ de _TOTAL_ registros",
     "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoFiltered":   "",
     "sInfoPostFix":    "",
     "sSearch":         "Buscar:",
     "sUrl":            "",
@@ -500,30 +514,6 @@ var idioma_espanol = {
 
 
 ///*************************carga de datos****************************** */
-
-// function obtenerDatos(){   // obtengo los datos contenidos en los input
-//     var id = $("#lblId").text();
-//     var nombre =$("#nom").val();
-//     var apellido =$("#ape").val();
-//     var dni =$("#dni").val();
-//     var direccion =$("#dir").val();
-//     var telefono =$("#tel").val();
-//     // 
-//     var os=$("#os").val();
-//     var fileCert=$("#fileCert").val();
-//     var fileAutoriz=$("#fileAutoriz").val();
-//     var estado="No";
-//     console.log(fileAutoriz);
-    
-//       var data=[]; //creo un json con los datos
-//       data.push(  
-//           {"id":id,"nombre":nombre,"apellido":apellido,"dni":dni,"direccion":direccion,"telefono":telefono, "os":os,"fileCert":fileCert,"fileAutoriz":fileAutoriz,"estado":estado},
-          
-//       );
-//       var personas={"data":data}; //creo un array con la clave data
-//       console.log(personas);
-//       return personas; 
-// }
 
 
 function nuevoPaciente(){
@@ -611,21 +601,69 @@ function enviarDatos(url) {
 }
 
 function cargarTurnos() {
+    var cargar=true;
     $("#btnTurnos").on("click",function() {
-        var idPac=$("#lblId").text();
+
+       if (cargar)  {
+           var idPac=$("#lblId").text();
         
         var tablaTurnos= $('#tablaTurnos').DataTable({
           ajax: {
               url: "../inc/getTurnoPaciente.php?id="+idPac         
-          },
-          
+          },          
               columns: [
-              { data: 'id_profesional' },
-              { data: 'diaNumero' },        
-              { data: 'id_hora' },
-              { data: 'id_consultorio' },
+              { data: 'fecha' },        
+              { data: 'hora' },
               { data: 'estado' }      
             ],
-      });
+            columnDefs : [
+                 { targets : [2],
+                 render : function (data, type, row) { 
+                     switch(data) {
+                          case '1' : return 'Ausente'; 
+                          break; 
+                          case '2' : return 'Asistió'; 
+                          break;
+                          case '0' : return 'Cancelado'; 
+                          break; 
+                          default : return 'N/A';
+                         } 
+                    } 
+                } 
+            ] 
+      });}
+      cargar=false;
     })
 }
+
+
+function obtenerOs() {
+    $.ajax({
+        type: "POST",
+        url: "../inc/getOsForSelect.php",
+        contentType: "application/json; charset=utf-8",
+        data: null,
+        dataType: "json",
+        success: function (result) {
+                $('#os').empty();   
+                $option= $("<option></option>");
+                $option.attr("value",'0');
+                $option.text('Seleccione una opcion');
+                $('#os').append($option);
+
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_obrasocial);
+               $option.text(this.nombre);
+               $('#os').append($option);
+            }); 
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+    });
+   
+}
+
+
+

@@ -50,8 +50,7 @@
                         <thead>
                             <tr>
                                 <th class="navbar">N° Paciente</th>
-                                <th class="navbar">Nombre</th>
-                                <th class="navbar">Apellido</th>
+                                <th class="navbar">Paciente</th>
                                 <th class="navbar">Dni</th>
                                 <th class="navbar">Activo</th>
                                 <th class="navbar">Opciones</th>
@@ -120,8 +119,6 @@
                  <div  id="divOs" class="divInput form-group col-md-6">   
                         <label for="os" class="control-label col-form-label">Obra social/Prepaga:</label>   
                         <select name="os" id="os" class="form-control inp-paciente" disabled>
-                            <option value="0">Seleccione una opción</option>
-                            <option value="1">Opcion 1</option>
                         </select>
                         
                          <div class="alert alert-danger divError oculto" id="errorOs">
@@ -227,22 +224,15 @@
         <div class="modal-body">
          
 
-            <div>
-                <table id="tablaTurnos" class="table table-striped table-bordered dt-responsive nowrap">
+            <div class="table-responsive">
+                <table id="tablaTurnos" class="table table-bordered table-condensed">
                     <thead>
                         <tr>
-                            <th>Profesional</th>
                             <th>Fecha</th>
                             <th>Hora</th>
-                            <th>Consultorio</th>
-                            <th>Estado del turno</th>
                             <th>Asistió</th>
                         </tr>
                     </thead>
-        
-                <tbody>
-                
-                </tbody>
         
             </table>
         </div>
@@ -281,21 +271,26 @@
                     <button type="button" id="btnAsignar" class="btn btn-success glyphicon glyphicon-plus"> Asignar</button>
                 </div>
                 
+
                 <table id="tablaCargo" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Teléfono</th>
-                            <th>DNI</th>
-                            <th>Dirección</th>
-                            <th>A cargo de</th>
                         </tr>
                     </thead>
-        
-               
-        
-            </table>
+                </table>
+
+                <table id="tablaPacientePersona" class="table table-striped table-bordered dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Teléfono</th>
+                        </tr>
+                    </thead>
+                </table>
             <div class="text-left">
                     <a href="personaCargo.php" id="btnPersonas" class="btn btn-success glyphicon glyphicon-plus"> Gestionar personas a cargo</a>
              </div>

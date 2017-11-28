@@ -7,7 +7,9 @@ $id = $_REQUEST["id"];
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion(); //obtengo conexion
-$sql= "select* from turnos where id_paciente = $id;";
+$sql= "SELECT h.hora as hora, t.fecha as fecha, t.estado as estado from turnos t
+INNER JOIN horarios h on h.id_horario = t.id_hora
+WHERE t.id_paciente = $id;";
 $statement = $cnn->prepare($sql);
 
 $respuesta=false;

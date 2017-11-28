@@ -4,7 +4,7 @@ require_once 'conexion.php';
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion(); //obtengo conexion
-$sql= "SELECT MAX(id_paciente) id_paciente FROM paciente;";
+$sql= "SELECT MAX(id_paciente) id_paciente FROM pacientes;";
 $statement = $cnn->prepare($sql);
 
 $respuesta=false;

@@ -5,7 +5,8 @@
 
     $conexion = new Conexion();
     $cnn = $conexion->getConexion();
-    $sql = "SELECT * FROM personas_cargo";
+    $sql = "SELECT id_personaCargo, CONCAT(CONCAT(nombre,', '),apellido) as persona, dni, direccion, telefono, estado 
+    FROM personas_cargo";
     $statement = $cnn->prepare($sql);
     $valor = $statement->execute();
 
