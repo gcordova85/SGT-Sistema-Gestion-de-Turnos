@@ -50,20 +50,20 @@
                 </div>
             </div>
         </div>
-        <div id="modalOsociales" class="modal fade">
+        <div id="modalUsuarios" class="modal fade">
             <div class="modal-dialog container">
-                <form method="POST" id="nuevaOsocial">
+                <form method="POST" id="nuevoUsuario">
                     <div class="modal-content">
                         <div class="modal-header navbar">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title text-center" id="titulo-modal">Agregar Obra social/Prepaga</h4>
+                            <h4 class="modal-title text-center" id="titulo-modal">Agregar Usuario</h4>
                         </div>
                         <div class="modal-body">
                         <div id="div-formulario">
                             <div class="row oculto">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div id="div-nOsocial" class="form-group">
-                                        <label for="nOsocial" class="control-label col-form-label">N° Obra Social/Prepaga:</label>
+                                        <label for="nOsocial" class="control-label col-form-label">N° Usuario:</label>
                                         <input type="number" name="nOsocial" id="nOsocial" class="form-control">
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="col-md-6">
                                         <div id="div-nombreOsocial" class="divInput form-group">
-                                            <label for="nombreOsocial" class="control-label col-form-label">Nombre:</label>
+                                            <label for="nombreOsocial" class="control-label col-form-label">Nombre de usuario:</label>
                                             <input type="text" name="nombreOsocial" id="nombreOsocial" class="form-control" pattern="/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/" required>
                                             <div class="alert alert-danger divError oculto" id="errorNom">
                                                 <p><b>Ingrese un nombre correcto (Uno o dos de al menos 3 letras c/u)</b></p>

@@ -16,7 +16,7 @@ $cnn = $conexion->getConexion();
 $sql = "INSERT INTO profesionales(nombre,apellido,telefono,direccion,email,id_especialidad,estado) values(:nombre,:apellido,:telefono,:direccion,:email,:id_especialidad,:estado)";
 $stmt = $cnn->prepare($sql);
 
-$stmt->bindparam(':nombre', $nombre);
+$stmt->bindparam(':nombre', $nombre, PDO::PARAM_STR);
 $stmt->bindparam(':apellido', $apellido);
 $stmt->bindparam(':telefono', $telefono);
 $stmt->bindparam(':direccion', $direccion);

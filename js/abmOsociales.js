@@ -234,7 +234,6 @@ function alternar_campos(valor){
     $("#emailOsocial").prop("disabled", valor);
 }
 function removerErroresTodos(){
-    alert("click");
     $("#btnCancelar").on("click",function() {
         $(".divInput").each(function() {
             if($(this).hasClass("has-error")){
