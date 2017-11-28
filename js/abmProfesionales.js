@@ -24,7 +24,7 @@ function listar_datos(){
             { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalProfesionales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalProfesionales' ><i class='fa fa-trash-o'></i></button>" }
             ],
         columnDefs: [
-        {   targets: [ 0, 6 ],
+        {   targets: [ 0,3,4,5,6 ],
             visible: false,
             searchable: false}
         ],

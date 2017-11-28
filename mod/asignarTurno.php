@@ -17,7 +17,7 @@
             require_once '../inc/header.php';
         ?>
 
-    <div class="row">
+<div class="row bloquearDatos">
     <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="form-group">
                 <label class="control-label" for="idPaciente"> Nro Paciente:</label>
@@ -87,24 +87,27 @@
                 </select>
 
             </div>
-        </div>     
-
-
+        </div>   
     </div>
+<div class="row">
+    <div id="divDatosEnviados">
+        <p class="alert alert-success text-center" id="pOk"><strong>"Los datos han sido agregados correctamente" </strong></p>    
+        <p  class="alert alert-danger text-center" id="pError"><strong>"Los datos han sido agregados correctamente" </strong></p>      
+    </div>
+</div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Seleccione un horario
-                </div>
-           
+                </div>           
                     <table id="tablaHorarios" class="table table-bordered dt-responsive table-responsive">
                     <thead>
-                            <tr class="loginhf">
+                        <tr class="loginhf">
                             <th > Codigo de Horario</th>    
                             <th> Horarios disponibles</th>
                             <th></th>
-                            </tr>
+                        </tr>
                     </thead>
                 </table>
      
@@ -113,11 +116,10 @@
         <div class="col-xs-offset-9 col-sm-offset-10 col-md-offset-11">
            <a href="abmTurnos.php"> <button class="btn btn-danger">Cancelar</button></a>
         </div>
-<!-- Modal -->
+<!-- Modal turnos -->
 <div id="aceptarTurnos" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
-    <!-- Modal content-->
+    <!-- Modal fechas-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -134,14 +136,14 @@
             </tr>
       </thead>
   </table>
+    <input type="number" id="inpHora" style="display:none" disabled>
   </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success" id="aceptarTurnos" name="aceptarTurnos">Aceptar</button>
+        <button type="button" class="btn btn-success" id="aceptarTurnos" name="aceptarTurnos" onClick="confirmarTurnos();">Aceptar</button>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -155,5 +157,6 @@
     <script src="../lib/DataTables/datatables.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>     
     <script src="../js/scriptAsignarTurnos.js"></script>
+    <script src="../lib/MomentJS 2.25/momentJS.js"></script>
 </body>
 </html>

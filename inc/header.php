@@ -3,13 +3,13 @@
 ?>
 <header>
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="col-xs-4">
+        <div class="col-sm-4 hidden-xs">
             <h3 "navbar-text">Francoise Dolto</h3>
         </div>
             <div class="dropdown pull-right">
                 <button class="btn btn-barra navbar-btn dropdown-toggle glyphicon glyphicon-user" type="button" data-toggle="dropdown"> 
                     <?php
-                        echo "Hola!,".$_SESSION['usuario'];
+                        echo $_SESSION['usuario'];
                     ?>
 
 

@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    
+    $("#divDatosEnviados #pError").fadeOut();
+    $("#divDatosEnviados #pOk").fadeOut();
     $('#tablaHorarios').DataTable({
         columnDefs: [
             {
@@ -12,7 +13,6 @@ $(document).ready(function(){
     obtenerPaciente();  
     obtenerEspecialidades();
 });
-
 function obtenerPaciente() {
     var id=$("#idPaciente").val();
     var data=[]; //creo un json con los datos
@@ -36,39 +36,68 @@ function obtenerPaciente() {
              }
         });
 }
-
-function reservarTurnos(){
+function confirmarTurnos() {
     var idPaciente=$("#idPaciente").val();
     var idProfesional = $("#profesionales").val();
     var idConsultorio = $("#idConsultorio").val();
     var idDia = $("#dias").val();
-    var dia = $('#dias option:selected').html()
-    var idHora = 1;
+    var idHora = $('#inpHora').val();
+    $("#aceptarTurnos").modal("hide");
+    $('#tablaHorarios').parents('div.dataTables_wrapper').first().hide();
+    $.ajax({
+        type : 'GET',
+        url  : '../inc/setReservas.php',
+        contentType: "application/json; charset=utf-8",
+        data : {
+                "idDia":idDia,
+                "idProfesional":idProfesional,
+                "idConsultorio":idConsultorio,
+                "idPaciente": idPaciente,
+                "idHora"  :idHora,                
+        },
+        dataType: "json",
+        success :  function(response){ 
+            if (response ==1) {
+                $("#divDatosEnviados #pOk").fadeIn("slow");
+            } else {
+                $("#divDatosEnviados #pError").fadeIn("slow");
+            }
+
+        },
+    });
+
+}
+function reservarTurnos(){
+    var idDia = $("#dias").val();
+    var idHora = 0;
     var hora = "";
+    var dia = $('#dias option:selected').html()
     var tablaH = $('#tablaHorarios').DataTable();
     $('#tablaHorarios tbody').on( 'click', 'button.btnHora', function () {
         var fila = tablaH.row( $(this).parents('tr') ).data();
         idHora = fila.id_horario;
         hora = fila.hora;
+        $.ajax({
+            type : 'GET',
+            url  : '../inc/getDiasReserva.php',
+            contentType: "application/json; charset=utf-8",
+            data : {
+                    "idDia":idDia,
+                    "idHora"  :idHora,
+            },
+            dataType: "json",
+            success :  function(response){ 
+                $('#tablaAceptarTurnos').empty();
+                $.each(response, function () {
+                    //var fecha = moment(this.fecha);
+                    moment.locale('es');  
+                    $fila= $("<tr><td>"+dia+"</td><td>"+moment(this.fecha).format('D/M/YYYY')+"</td><td>"+hora+"</td></tr>");
+                    $('#tablaAceptarTurnos').append($fila);
+                 });            
+            },
+        });
+        $('#inpHora').attr("value",idHora) ;
     });
-    $.ajax({
-        type : 'GET',
-        url  : '../inc/getDiasReserva.php',
-        contentType: "application/json; charset=utf-8",
-        data : {
-                "idDia":idDia,
-                "idHora"  :idHora,
-        },
-        dataType: "json",
-        success :  function(response){ 
-            $('#tablaAceptarTurnos').empty();
-            $.each(response, function () {
-                $fila= $("<tr><td>"+this.fecha+"</td><td>"+dia+"</td><td>"+hora+"</td></tr>");
-                $('#tablaAceptarTurnos').append($fila);
-             });
-        },
-    });
-    
 }
 function obtenerProfesionales() {
     var idEspecialidad = $("#especialidades").val();
@@ -95,13 +124,16 @@ function obtenerProfesionales() {
                $('#profesionales').append($option);
             }); 
             obtenerConsultorios();
+            $('#tablaHorarios').DataTable();
         },
         error: function (xhr, status, error) {
             alert("ERROR")
         }
     });
     $("#profesionales").on('change',function(){    
-        obtenerConsultorios();    
+        obtenerConsultorios();
+       var tabla= $('#tablaHorarios').DataTable();
+          tabla.clear();      
     }); 
 }
 function obtenerConsultorios() {
@@ -197,7 +229,7 @@ function obtenerHoraByDia(){
                       columns: [
                         { data: 'id_horario'},
                        { data: 'hora' },
-                       {defaultContent:'<button name="btnHora" onClick="reservarTurnos();" class="btn btn-success btnHora " id="btnHora" data-toggle="modal" data-target="#aceptarTurnos">Aceptar</button>'},
+                       {defaultContent:'<button name="btnHora"  class="btn btn-success btnHora" onClick="reservarTurnos();" id="btnHora" data-toggle="modal" data-target="#aceptarTurnos">Aceptar</button>'},
                       ],
                      /*columnDefs: [
                         {

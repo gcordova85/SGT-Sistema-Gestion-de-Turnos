@@ -1,144 +1,78 @@
 <?php
     session_start();
-    require_once 'conexion.php';
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
-        $conexion = new Conexion();
-        $cnn = $conexion->getConexion();
-        $diaSemana =date("w");
-        $diasSumar=7;
-        $fechasTurnos = array();
-        $diaElegido = $_REQUEST['idDia']; 
-        $diaSemana =(date("w"));
-        $anioActual = date('Y'); 
-        $limite = $anioActual."/12/25";
+    require_once('conexion.php');
+    $conexion = new Conexion();
+    $cnn = $conexion->getConexion();
 
-  //Identifico si en la  semana en curso debo o no asignarle turno.
-  $bConsiderarSemanaEnCurso=false;
-  if ($diaElegido > $diaSemana){
-    $bConsiderarSemanaEnCurso=true;
-  }
+// OBTENER PDC DE LOS DATOS 
+$sql = "SELECT id_pdc
+    FROM pdc 
+    WHERE id_profesional = :id_profesional 
+    and id_consultorio = :id_consultorio 
+    and id_dia = :id_dia 
+    and estado = 1";
 
-  //Estimar la primera fecha de dia asignado
-  if ($diaElegido > $diaSemana){
-    $intDiferenciaDeDias=$diaElegido-$diaSemana;
-  }
-  elseif ($diaElegido == $diaSemana){  
-    $intDiferenciaDeDias=7;
-  }
-  else{
-    $intDiferenciaDeDias=7-($diaSemana-$diaElegido);
-  }
-  $fechaBase=new DateTime();
-  $fechaBase->modify('+'.$intDiferenciaDeDias.'day');
-  $objLimiteFecha=new DateTime($limite);  
+    $sql = $cnn->prepare($sql);
+    $sql->bindParam(':id_profesional', $_REQUEST['idProfesional']);
+    $sql->bindParam(':id_consultorio', $_REQUEST['idConsultorio']);
+    $sql->bindParam(':id_dia', $_REQUEST['idDia']);
+    $sql->execute();
+    $row = $sql->fetch(PDO::FETCH_ASSOC);
+    $idPDC = $row['id_pdc']; 
 
-  //Estimar todas las fechas
-  while($fechaBase < $objLimiteFecha){
-      $objFecha=new stdClass();
-      $objFecha->fecha=$fechaBase->format('Y-m-d');
-      array_push($fechasTurnos,$objFecha);
-      $fechaBase->modify('+7 day');
+// VARIABLES PARA CONSULTA
+    $estado = 1;
+    $idPaciente = $_REQUEST['idPaciente'];
+    $horaElegida =$_REQUEST['idHora']; 
+
+//VARIABLES PARA CALCULAR FECHAS DEL TURNO
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $diaSemana =date("w");
+    $diasSumar=7;
+    $fechasTurnos = array();
+    $diaElegido = $_REQUEST['idDia']; 
+    $diaSemana =(date("w"));
+    $anioActual = date('Y'); 
+    $limite = $anioActual."/12/26";
+
+//Estimar la primera fecha de dia asignado
+    if ($diaElegido > $diaSemana){
+        $intDiferenciaDeDias=$diaElegido-$diaSemana;
+        }
+    elseif ($diaElegido == $diaSemana){  
+        $intDiferenciaDeDias=7;
+        }
+    else{
+        $intDiferenciaDeDias=7-($diaSemana-$diaElegido);
+        }
+    $fechaBase=new DateTime();
+    $fechaBase->modify('+'.$intDiferenciaDeDias.'day');
+    $objLimiteFecha=new DateTime($limite);  
+
+    //Estimar todas las fechas
+    while($fechaBase <= $objLimiteFecha){
+        $objFecha=new stdClass();
+        $objFecha->fecha=$fechaBase->format('Y-m-d');
+        array_push($fechasTurnos,$objFecha);
+        $fechaBase->modify('+7 day');
     }
 
+//CONSULTA INSERT CON LA FECHAS
+foreach($fechasTurnos as $key => $value){
+   foreach($value as $key => $fecha){
+        $sql = "INSERT INTO `turnos` (`id_turno`, `id_paciente`, `fecha`, `id_pdc`, `id_hora`, `estado`) VALUES (NULL, '$idPaciente', '$fecha', '$idPDC', '$horaElegida', '$estado')"; 
+        $query = $cnn->prepare($sql);
+        $query->execute();
+        $registro = $query->rowCount();
 
-//Generar JSON
-echo json_encode($fechasTurnos);
-
-
-
-
-
-
-
-
-
+   }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      //VARIABLES PARA CONSULTA
-//       $idEstado = 1;
-//       $idPaciente = $_REQUEST['idPaciente'];
-//       $idConsultorio = $_REQUEST['idConsultorio'];
-//       $idProfesional = $_REQUEST['idProfesional'];
-//       $diaElegido = $_REQUEST['idDia']; 
-//       $horaElegida = $_REQUEST['idHora']; 
-//       //VARIABLES PARA IDENTIFICAR DIA
-//       $diaSemana = date("w"); 
-//       $diaHoyNum = date("z");
-//       $anioActual = date('Y'); 
-//       $contador = 0;
-//       $indicador = 0;
-
-// function devolverFechaStr($diaHoyNum){
-//   $date = DateTime::createFromFormat('z' , $diaHoyNum);
-//   $date = $date->format("d-m");
-//   return $date;
-// }
-// function consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaElegida,$idEstado,$anioActual,$cnn){
-//   $sql="INSERT INTO turnos (id_consultorio, id_profesional,id_Paciente,fecha,id_hora,estado,anio)
-//     VALUES ($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaElegida,$idEstado,$anioActual)";
-//   $query = $cnn->prepare($sql);
-//   $resultado = $query->execute();
-// }
-// function localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador){
-//   if($diaElegido < $diaSemana){
-//     $indicador = 1;
-//     $diaElegido+=1;
-//     $contador+=1;
-//     echo $indicador.$diaElegido.$contador;
-//     localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
-//     }
-//     if($diaElegido > $diaSemana){
-//     $indicador = 2;
-//     $diaElegido-=1;
-//     $contador+=1;
-//     localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
-//     }
-//     if ($diaElegido == $diaSemana){
-//         if($indicador == 0){
-//             $diaHoyNum+=7; 
-//             return $diaHoyNum;
-            
-//         }
-//         if ($indicador == 1) {
-//           $diaHoyNum = $diaHoyNum - $contador;
-//           $diaHoyNum =  $diaHoyNum + 7; 
-//           $result=$diaHoyNum;
-//           return $result;
-          
-//         }
-//         if ($indicador == 2) {
-//           $diaHoyNum = $diaHoyNum + $contador;
-//           $diaHoyNum+=7; 
-//           return $diaHoyNum;
-          
-//         }
-//     } 
- 
-// }
-//  $prueba=localizarDia($diaElegido,$diaSemana,$diaHoyNum,$contador,$indicador);
-// echo "devolucion num".$prueba;
-// // while($diaAgregar < 358){
-// //   consulta($idConsultorio,$idProfesional,$idPaciente,$diaAgregar,$horaElegida,$idEstado,$anioActual,$cnn);
-// //   $diaAgregar+=7;
-// // }
-$conexion = null;
+if($registro > 0){
+    echo  1 ;
+}
+else{
+    echo 0;
+}
+$cnn = null;

@@ -10,8 +10,8 @@
 }
 body{
     background: #F8E0F7;
-    padding-top:77px;  
-    padding-bottom: 40px  
+    padding-top:100px;  
+    padding-bottom: 70px  
 }
 
 footer,.navbar{
@@ -23,6 +23,6 @@ footer{
     position:fixed;
     left:0px;
     bottom:0px;
-    height:30px;
+    height:40px;
     width:100%;
 }
