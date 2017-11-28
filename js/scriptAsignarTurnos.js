@@ -46,7 +46,7 @@ function confirmarTurnos() {
     $('#tablaHorarios').parents('div.dataTables_wrapper').first().hide();
     $.ajax({
         type : 'GET',
-        url  : '../inc/setReserva.php',
+        url  : '../inc/setReservas.php',
         contentType: "application/json; charset=utf-8",
         data : {
                 "idDia":idDia,
@@ -57,6 +57,11 @@ function confirmarTurnos() {
         },
         dataType: "json",
         success :  function(response){ 
+            if (response ==1) {
+                $("#divDatosEnviados #pOk").fadeIn("slow");
+            } else {
+                $("#divDatosEnviados #pError").fadeIn("slow");
+            }
 
         },
     });

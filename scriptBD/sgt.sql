@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2017 a las 03:38:14
+-- Tiempo de generación: 28-11-2017 a las 23:44:50
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -170,6 +170,7 @@ CREATE TABLE `pacientes` (
 --
 
 INSERT INTO `pacientes` (`id_paciente`, `nombre`, `apellido`, `dni`, `direccion`, `telefono`, `id_obrasocial`, `certificado`, `autorizacion`, `estado`) VALUES
+(1, 'Tania', 'Scortegagna', 35949247, 'Escobar 66', 1234567, 3, '', '', 1),
 (4, 'Rocio', 'Larcamon', 34587647, 'Calle falsa 1234', 1132960551, 1, '', '', 1),
 (5, 'Virginia', 'Eliggi', 341269853, 'Cantilo 456', 1132960226, 4, '', '', 1);
 
@@ -277,9 +278,10 @@ CREATE TABLE `turnos` (
 --
 
 INSERT INTO `turnos` (`id_turno`, `id_paciente`, `fecha`, `id_pdc`, `id_hora`, `estado`) VALUES
-(1, 4, '2017-12-15', 1, 1, 1),
-(4, 5, '2017-11-25', 2, 2, 1),
-(5, 5, '2017-11-30', 1, 7, 1);
+(54, 1, '2017-12-04', 1, 2, 1),
+(55, 1, '2017-12-11', 1, 2, 1),
+(56, 1, '2017-12-18', 1, 2, 1),
+(57, 1, '2017-12-25', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -380,9 +382,9 @@ ALTER TABLE `profesionales`
 --
 ALTER TABLE `turnos`
   ADD PRIMARY KEY (`id_turno`),
-  ADD UNIQUE KEY `id_hora` (`id_hora`),
-  ADD KEY `id_paciente` (`id_paciente`),
-  ADD KEY `id_pdc` (`id_pdc`) USING BTREE;
+  ADD KEY `id_pdc` (`id_pdc`) USING BTREE,
+  ADD KEY `id_hora` (`id_hora`) USING BTREE,
+  ADD KEY `id_paciente` (`id_paciente`) USING BTREE;
 
 --
 -- Indices de la tabla `usuarios`
@@ -452,7 +454,7 @@ ALTER TABLE `profesionales`
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
