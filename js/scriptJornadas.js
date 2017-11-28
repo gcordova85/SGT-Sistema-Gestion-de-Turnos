@@ -241,7 +241,7 @@ function obtenerConsultorios() {
             $.each(result, function () {
                $option= $("<option></option>");
                $option.attr("value",this.id_consultorio);
-               $option.text(this.id_consultorio +" "+ this.ubicacion);
+               $option.text("N° "+this.id_consultorio +" - "+ this.ubicacion);
                $('#consultorios').append($option);
             }); 
         },
