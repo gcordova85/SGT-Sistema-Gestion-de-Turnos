@@ -4,6 +4,8 @@ $(document).ready(function(){
         validarCamposNuevo();
         validarCamposEditar();
         confirmarEliminar();
+        obtenerEspecialidades();
+        removerErroresTodos();
     });
 
 function listar_datos(){
@@ -17,11 +19,12 @@ function listar_datos(){
             { data: 'telefono' },
             { data: 'direccion' },
             { data: 'email' },
-            { data: 'id_especialidad' },
+            { data: 'id_especialidad'},
+            { data: 'especialidad'},
             { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalProfesionales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalProfesionales' ><i class='fa fa-trash-o'></i></button>" }
             ],
         columnDefs: [
-        {   targets: [ 0 ],
+        {   targets: [ 0, 6 ],
             visible: false,
             searchable: false}
         ],
@@ -29,44 +32,7 @@ function listar_datos(){
     });
     editar_registro('#tablaProfesionales tbody',tabla);
     eliminar_registro('#tablaProfesionales tbody',tabla);
-};    
-// function listar_datos(){
-//     $.ajax({
-//         type : 'POST',
-//         url  : '../inc/getProfesionales.php',
-//         data : null,
-//         success :  function(response){         
-//             if(response != "error"){
-//                 $('#tablaProfesionales').DataTable({
-//                     columns: [
-//                         { data: 'id_profesional' },
-//                         { data: 'nombre' },
-//                         { data: 'apellido' },
-//                         { data: 'telefono' },
-//                         { data: 'direccion' },
-//                         { data: 'email' },
-//                         { data: 'id_especialidad' },
-//                         { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalProfesionales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalProfesionales' ><i class='fa fa-trash-o'></i></button>" }
-//                       ],
-//                       columnDefs: [
-//                         {   targets: [ 0 ],
-//                             visible: false,
-//                             searchable: false}
-//                       ],
-//                         language : idioma_espanol
-                    
-//                     })
-//                     editar_registro("#tablaProfesionales tbody",tabla);
-//                     eliminar_registro("#tablaProfesionales tbody",tabla); 
-//             }
-//             else{
-//                 $('#tablaProfesionales').DataTable();
-//             };
-//         },
-//     });
-// }
-
-
+};
 var idioma_espanol = {
     "sProcessing":     "Procesando...",
     "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -202,6 +168,20 @@ function esValidoMail(valor,texto,div){
         return true;            
         }     
 };
+function esValidoSelect(valor,texto,div) {
+    if (valor == 0) {
+        texto.fadeIn(700);
+        div.addClass("has-error");
+        return false;
+    }else{           
+        if (div.hasClass("has-error")) {
+            div.removeClass("has-error");       
+        }  
+        texto.fadeOut(700); 
+        return true;            
+        } 
+    
+}
 function validarCamposNuevo(){
     $("#agregarNuevo").on("click",function(){
         esValidoNomApe($("#nombreProfesional").val(),$("#errorNom"),$("#div-nombreProfesional"));       
@@ -209,6 +189,7 @@ function validarCamposNuevo(){
         esValidoTel($("#telefonoProfesional").val(),$("#errorTel"),$("#div-telfonoProfesional"));
         esValidaDireccion($("#direccionProfesional").val(),$("#errorDir"),$("#div-direccionProfesional"));
         esValidoMail($("#emailProfesional").val(),$("#errorMail"),$("#div-emailProfesional"));
+        esValidoSelect($("#selEspecialidad").val(),$("#errorEspecialidad"),$("#div-selEspecialidad"));  
         var url = '../inc/setProfesionales.php';
         var idprofesional = $("#nProfesional").val(),
         nombre = $("#nombreProfesional").val(),
@@ -225,7 +206,7 @@ function validarCamposNuevo(){
         'direccion':dire,
         'email':mail,
         'id_especialidad':especialidad,
-        'estado':estado}
+        'estado':estado};
         guardar_datos(url,data);
     })      
 };
@@ -236,6 +217,7 @@ function validarCamposEditar(){
         esValidoTel($("#telefonoProfesional").val(),$("#errorTel"),$("#div-telfonoProfesional"));
         esValidaDireccion($("#direccionProfesional").val(),$("#errorDir"),$("#div-direccionProfesional"));
         esValidoMail($("#emailProfesional").val(),$("#errorMail"),$("#div-emailProfesional"));
+        esValidoSelect($("#selEspecialidad").val(),$("#errorEspecialidad"),$("#div-selEspecialidad"));
         var url = '../inc/updateProfesionales.php';
         var idprofesional = $("#nProfesional").val(),
         nombre = $("#nombreProfesional").val(),
@@ -252,8 +234,8 @@ function validarCamposEditar(){
         'direccion':dire,
         'email':mail,
         'id_especialidad':especialidad,
-        'estado':estado}
-        guardar_datos(url,data)
+        'estado':estado};
+        guardar_datos(url,data);
     })      
 };
 function confirmarEliminar(){
@@ -304,4 +286,40 @@ function alternar_campos(valor){
     $("#direccionProfesional").prop("disabled", valor);
     $("#emailProfesional").prop("disabled", valor);
     $("#selEspecialidad").prop("disabled", valor);
+}
+function obtenerEspecialidades() {
+    $.ajax({
+        type: "POST",
+        url: "../inc/getEspecialidades.php",
+        contentType: "application/json; charset=utf-8",
+        data: null,
+        dataType: "json",
+        success: function (result) {
+                $option= $("<option></option>");
+                $option.attr("value",'0');
+                $option.text('Seleccione una opcion');
+                $('#selEspecialidad').append($option);
+
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_especialidad);
+               $option.text(this.descripcion);
+               $('#selEspecialidad').append($option);
+            }); 
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+})};
+function removerErroresTodos(){
+    $("#btnCancelar").on("click",function() {
+        $(".divInput").each(function() {
+            if($(this).hasClass("has-error")){
+                $(this).removeClass("has-error");
+            }
+        })
+        $(".divError").each(function(){
+            $(this).fadeOut(700);
+        })
+    })
 }

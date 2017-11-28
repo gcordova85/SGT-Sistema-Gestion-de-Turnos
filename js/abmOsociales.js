@@ -4,6 +4,7 @@ $(document).ready(function(){
         validarCamposNuevo();
         validarCamposEditar();
         confirmarEliminar();
+        removerErroresTodos();
     });
 
 function listar_datos(){
@@ -231,4 +232,17 @@ function alternar_campos(valor){
     $("#nombreOsocial").prop("disabled", valor);
     $("#telefonoOsocial").prop("disabled", valor);
     $("#emailOsocial").prop("disabled", valor);
+}
+function removerErroresTodos(){
+    alert("click");
+    $("#btnCancelar").on("click",function() {
+        $(".divInput").each(function() {
+            if($(this).hasClass("has-error")){
+                $(this).removeClass("has-error");
+            }
+        })
+        $(".divError").each(function(){
+            $(this).fadeOut(700);
+        })
+    })
 }

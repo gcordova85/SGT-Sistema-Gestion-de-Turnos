@@ -48,13 +48,12 @@ function reservarTurnos(){
     var tablaH = $('#tablaHorarios').DataTable();
     $('#tablaHorarios tbody').on( 'click', 'button.btnHora', function () {
         var fila = tablaH.row( $(this).parents('tr') ).data();
-        console.log(fila);
         idHora = fila.id_horario;
         hora = fila.hora;
     });
     $.ajax({
         type : 'GET',
-        url  : '../inc/setReserva.php',
+        url  : '../inc/getDiasReserva.php',
         contentType: "application/json; charset=utf-8",
         data : {
                 "idDia":idDia,
@@ -62,6 +61,7 @@ function reservarTurnos(){
         },
         dataType: "json",
         success :  function(response){ 
+            $('#tablaAceptarTurnos').empty();
             $.each(response, function () {
                 $fila= $("<tr><td>"+this.fecha+"</td><td>"+dia+"</td><td>"+hora+"</td></tr>");
                 $('#tablaAceptarTurnos').append($fila);
