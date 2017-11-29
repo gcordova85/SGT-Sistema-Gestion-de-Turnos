@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $("#divDatosEnviados #pError").fadeOut();
     $("#divDatosEnviados #pOk").fadeOut();
+    $("#btnAsignarDps").fadeOut();
     $('#tablaHorarios').DataTable({
         columnDefs: [
             {
@@ -59,8 +60,13 @@ function confirmarTurnos() {
         success :  function(response){ 
             if (response ==1) {
                 $("#divDatosEnviados #pOk").fadeIn("slow");
-            } else {
+                $(".ocultarTodo").hide();
+                $("#btnAsignarDps").fadeIn();
+            } 
+            else {
                 $("#divDatosEnviados #pError").fadeIn("slow");
+                $('#tablaHorarios').parents('div.dataTables_wrapper').first().show();
+                $("#divDatosEnviados #pError").fadeOut();
             }
 
         },
