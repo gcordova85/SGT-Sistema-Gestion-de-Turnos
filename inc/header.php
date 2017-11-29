@@ -23,7 +23,7 @@
                 
         ?>
         <div class="pull-right">
-            <button class="btn btn-barra navbar-btn "> Reporte de asistencia</button>
+           <a href="../mod/reporteAsistencia.php"> <button class="btn btn-barra navbar-btn "> Reporte de asistencia</button></a>
         </div>     
         <?php
             }

@@ -5,11 +5,9 @@
     $cnn = $conexion->getConexion();
 
 if($_SESSION['rol'] == 3){
-
+    header("Location:mod/menu.php");
 }
-else {
-    
- 
+else {    
 
 // OBTENER PDC DE LOS DATOS 
 $sql = "SELECT id_pdc
