@@ -66,7 +66,7 @@
         </form>   
             
             <div clas="table-responsive">
-            <table id="tablaJornadas" class="table table-striped table-bordered nowrap">
+            <table id="tablaJornadas" class="table dt-responsive table-striped table-bordered nowrap">
                 <thead>
                     <tr>
                         <th>Profesional</th>                                 

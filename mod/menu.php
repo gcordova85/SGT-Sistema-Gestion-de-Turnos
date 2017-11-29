@@ -26,7 +26,7 @@
                 <a href="abmusuarios.php" class="btn-principal btn"><img src="../iconos/usuario.png" alt="Usuarios"><br>Usuarios</a>
             </div>
             <div class="form-group col-xs-12 col-sm-6">
-                <a href="configDias.php" class="btn-principal btn"><img src="../iconos/configuraciones.png" alt="Configuraciones"><br>Configuraciones</a>
+                <a href="jornadas.php" class="btn-principal btn"><img src="../iconos/configuraciones.png" alt="Configuraciones"><br>Configuraciones</a>
             </div>
         </div>
     <?php
