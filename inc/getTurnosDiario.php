@@ -5,10 +5,15 @@ session_start();
   $conexion = new Conexion();
   $cnn = $conexion->getConexion();
 
-   $sql="SELECT * FROM turnos";
+   $sql="SELECT * FROM turnos WHERE fecha < :fecha"
    $query = $cnn->prepare($sql);
+  $fecha=new DateTime();
+   $fecha = substr(current($fecha), 0, -16);
+   $query->bindParam(':fecha', $fecha);
    $query->execute();
+
    $registro = $query->rowCount();
+
    if($registro >= 1){
       echo 1; 
      }

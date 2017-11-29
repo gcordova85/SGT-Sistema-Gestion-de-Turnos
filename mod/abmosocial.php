@@ -76,7 +76,7 @@
                                         <div class="col-md-6">
                                             <div id="div-nombreOsocial" class="divInput form-group">
                                                 <label for="nombreOsocial" class="control-label col-form-label">Nombre:</label>
-                                                <input type="text" name="nombreOsocial" id="nombreOsocial" class="form-control" pattern="/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/" required>
+                                                <input type="text" name="nombreOsocial" id="nombreOsocial" class="form-control" required>
                                                 <div class="alert alert-danger divError oculto" id="errorNom">
                                                     <p><b>Ingrese un nombre correcto (Uno o dos de al menos 3 letras c/u)</b></p>
                                                 </div>
@@ -85,7 +85,7 @@
                                         <div class="col-md-6">
                                             <div id="div-telefonoOsocial" class="divInput form-group">
                                                 <label for="telefonoOsocial" class="control-label col-form-label">Telefono:</label>
-                                                <input type="number" name="telefonoOsocial" id="telefonoOsocial" class="form-control" min="00000000000" max="99999999999"required>
+                                                <input type="number" name="telefonoOsocial" id="telefonoOsocial" class="form-control" required>
                                                 <div class="alert alert-danger divError oculto" id="errorTel">
                                                     <p><b>Ingrese un teléfono valido, ejemplo: 01142325466</b></p>
                                                 </div>
@@ -98,7 +98,7 @@
                                         <div class="col-md-12">
                                             <div id="div-emailOsocial" class="divInput form-group">
                                                 <label for="emailOsocial" class="control-label col-form-label">Email:</label>
-                                                <input type="email" name="emailOsocial" id="emailOsocial" class="form-control" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;" required>
+                                                <input type="email" name="emailOsocial" id="emailOsocial" class="form-control" required>
                                                 <div class="alert alert-danger divError oculto" id="errorMail">
                                                     <p><b>Debe ingresar un E-mail valido</b></p>
                                                 </div>

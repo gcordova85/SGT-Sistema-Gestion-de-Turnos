@@ -107,7 +107,7 @@ function eliminar_registro(tbody, tabla){
     });
 };
 function esValidoNomApe(valor,texto,div) {
-    var filtro=/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/; 
+    var filtro=/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/;
         if (filtro.test(valor) == false) {
             texto.fadeIn(700);
             div.addClass("has-error");
