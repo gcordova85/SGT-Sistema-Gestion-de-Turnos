@@ -21,7 +21,14 @@
     <div class="container">
         <?php
             require_once '../inc/header.php';         ?>
+            <div class="row" id="fila-botones">
+                <div class="col-md-1"></div>
+                <div class="col-xs-5">
+                    <a href="menu.php" id="btnVolver" class="btn btn-barra" style="margin: 10px">Volver</a>
+                </div>
 
+                <div class="col-md-1 hidden-xs"></div>
+            </div>
             <form id="frmPdc">
                 <div  id="divEspecialidad" class="divInput form-group col-md-3">
                 <label for="espeialidades" class="control-label">Especialidad:</label>
@@ -59,13 +66,13 @@
                     <p><b>Seleccione un consultorio</b></p>
                 </div>
             </div>
-
-            <div class=""></div>
-                <button  id="btnAgregar" type="submit" class="btn btn-success glyphicon glyphicon-plus">Agregar</button>
-            </div>  
+            <div class="col-xs-5 text-right">
+                    <button  id="btnAgregar" type="submit" class="btn btn-barra glyphicon glyphicon-plus">Agregar</button>
+                </div>
+ 
         </form>   
             
-            <div clas="table-responsive">
+            <div class="table-responsive">
             <table id="tablaJornadas" class="table dt-responsive table-striped table-bordered nowrap">
                 <thead>
                     <tr>
