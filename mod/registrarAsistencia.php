@@ -33,8 +33,8 @@
         <div class="col-xs-5">
             <a href="menu.php" id="btnVolver" class="btn btn-barra" style="margin: 10px">Volver</a>
         </div>
-        <div class="table-responsive">
-            <table id="tablaTurnos" class="table table-striped table-bordered nowrap">
+        <div class="">
+            <table id="tablaTurnos" class="table table-striped table-responsivetable-bordered nowrap">
                 <thead>
                     <tr>
                         <th>id</th>
