@@ -10,16 +10,22 @@ $(document).ready(function(){
                 url: '../inc/getTurnosRegistroAsistencia.php'
             },  
             columns: [
+            {data: 'id'},
             { data: 'paciente' },
             { data: 'profesional' },
             { data: 'consultorio' },
             { data: 'fecha' },
             { data: 'hora' },  
-            { defaultContent : "<button type='button' class='btn btn-success btn-xs glyphicon glyphicon-ok'>Asistió</button>" }
+            { defaultContent : "<button type='button' class='btn btn-success btn-asistio btn-xs glyphicon glyphicon-ok'>Asistió</button>" }
             ],
+            columnDefs:[
+                {targets: [ 2 ],
+                visible: false,
+                searchable: false},
+                ],
             language : idioma_espanol
             });
-        
+            asistio(tabla);
 };
 
 var idioma_espanol = {
@@ -46,3 +52,28 @@ var idioma_espanol = {
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
     }
 };
+
+
+function asistio(tabla){
+    $('#tablaTurnos tbody').on( 'click', 'button.btn-asistio', function () { 
+        var data=tabla.row($(this).parents("tr")).data();
+        var id=data.id;
+             __ajax("../inc/setAsistencia.php",{"idTurno":id})
+                .done(function(info) {
+                    console.log(info);
+             })
+             tabla.ajax.reload();
+        
+})
+}
+
+function __ajax(url,data){ //funcion general para enviar o traer datos
+    var ajax = $.ajax({
+        "method":"POST",
+        "url":url,
+         
+        "data":data
+
+    })
+    return ajax;
+}

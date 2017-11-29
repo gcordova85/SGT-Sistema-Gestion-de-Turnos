@@ -30,10 +30,11 @@
                 <h3 class="text-center">Registro de asistencia del paciente</h3>
             </div>
         </div>
-        <div clas="table-responsive">
+        <div class="table-responsive">
             <table id="tablaTurnos" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>Paciente</th>                 
                         <th>Profesional</th>
                         <th>Consultorio</th>

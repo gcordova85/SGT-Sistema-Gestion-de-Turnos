@@ -4,10 +4,9 @@
 
  $conexion = new Conexion();
  $cnn = $conexion->getConexion();
- $fechaHoy= date('Y/m/d');
- $sql = "SELECT CONCAT(CONCAT(pa.nombre,', '), pa.apellido) as paciente, 
+ $sql = "SELECT t.id_turno as id, CONCAT(CONCAT(pa.nombre,', '), CONCAT(pa.apellido,' - '),pa.dni) as paciente, 
  CONCAT(CONCAT(pr.nombre,', '), pr.apellido) as profesional, 
- CONCAT(CONCAT(c.id_consultorio,', '), c.ubicacion) as consultorio, 
+ CONCAT(CONCAT(c.id_consultorio,' - '), c.ubicacion) as consultorio, 
  t.fecha as fecha, h.hora as hora
  FROM turnos t 
  INNER JOIN pacientes pa on pa.id_paciente = t.id_paciente 
@@ -15,8 +14,11 @@
  INNER JOIN consultorios c on c.id_consultorio = pdc.id_consultorio 
  INNER JOIN profesionales pr on pr.id_profesional = pdc.id_profesional 
  INNER JOIN horarios h on t.id_hora = h.id_horario 
- WHERE t.estado=1 and t.fecha ='2017-11-25' #$fechaHoy";#'2017-11-25'
+ WHERE t.estado=1 and t.fecha = :fecha";#'2017-11-25'
+ $fecha=new DateTime();
+ $fecha = substr(current($fecha), 0, -16);
  $statement = $cnn->prepare($sql);
+ $statement->bindParam(':fecha', $fecha);
  $valor = $statement->execute();
  $contar = $statement->rowCount(); 
  if($contar <> 0){
