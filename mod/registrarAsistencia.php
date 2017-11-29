@@ -30,11 +30,11 @@
                 <h3 class="text-center">Registro de asistencia del paciente</h3>
             </div>
         </div>
-        <div class="col-xs-5">
+        <div >
             <a href="menu.php" id="btnVolver" class="btn btn-barra" style="margin: 10px">Volver</a>
         </div>
-        <div class="">
-            <table id="tablaTurnos" class="table table-striped table-responsivetable-bordered nowrap">
+        <div class="table-responsive">
+            <table id="tablaTurnos" class="table table-striped table-bordered nowrap">
                 <thead>
                     <tr>
                         <th>id</th>

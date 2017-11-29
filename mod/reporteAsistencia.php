@@ -29,7 +29,7 @@
             </div>
         </div>
         
-        <div class="col-xs-5">
+        <div class="">
             <a href="menu.php" id="btnVolver" class="btn btn-barra" style="margin: 10px">Volver</a>
         </div>
 <?php
