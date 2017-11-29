@@ -18,12 +18,33 @@ foreach($personas->{"data"} as $persona){
     $pattern='/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/';   
     $success = preg_match($pattern, $persona->{"nombre"});
     if (!$success) {
+        echo "Formato de nombre incorrecto";
+        
         $enviar=false;
         }
+    $success = preg_match($pattern, $persona->{"apellido"});
+    if (!$success) {
+        echo "Formato de apellido incorrecto";      
+        $enviar=false;
+    }
+    if(!filter_var($persona->{"dni"}, FILTER_VALIDATE_INT) === 0 || filter_var($persona->{"apellido"}, FILTER_VALIDATE_INT) === true)
+    {
+        echo "Ingresa solo numeros en dni";
+        $enviar=false;
+    }
+    if(strlen($persona->{"direccion"})<5){
+        echo "La direccion no es valida";
+        $enviar=false;
+    }
+
+    if(!filter_var($persona->{"telefono"}, FILTER_VALIDATE_INT) === 0 || filter_var($persona->{"apellido"}, FILTER_VALIDATE_INT) === true)
+    {
+        echo "Ingresa solo numeros en telefono";
+        $enviar=false;
+    }
 }
 
 foreach($personas->{"data"} as $persona){
-    echo $persona->{"nombre"};  
     $statement->bindParam(1, $persona->{"nombre"},PDO::PARAM_STR); //1,2,3 hacen reperencia a los ? puestos en la consulta
     $statement->bindParam(2, $persona->{"apellido"},PDO::PARAM_STR);
     $statement->bindParam(3, $persona->{"dni"},PDO::PARAM_INT);
