@@ -763,7 +763,7 @@ function obtenerOs() {
         data: null,
         dataType: "json",
         success: function (result) {
-                $('#os').empty();   
+                 $('#os').empty();   
                 $option= $("<option></option>");
                 $option.attr("value",'0');
                 $option.text('Seleccione una opcion');

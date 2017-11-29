@@ -33,12 +33,25 @@
                 <h3 class="text-center">ABM de Pacientes</h3>
             </div>
         </div>
-        <div class="row" id="fila-botones">
+        <!-- <div class="row" id="fila-botones">
             <div class="col-md-1"></div>
             <div class="col-md-8 offset-md-1">
                 <button type="button" id="botonNuevo" class="btn btn-abm">Nuevo</a> </button>
             </div>
+        </div> -->
+
+        <div class="row" id="fila-botones">
+            <div class="col-md-1"></div>
+            <div class="col-xs-5">
+                <a href="menu.php" id="btnVolver" class="btn btn-barra" style="margin: 10px">Volver</a>
+            </div>
+            <div class="col-xs-5 text-right">
+                <button type="button" id="botonNuevo" class="btn btn-barra">Nuevo</button>
+            </div>
+            <div class="col-md-1 hidden-xs"></div>
         </div>
+
+
         <div class="checkbox">
             <label><input id="inactivos" type="checkbox" value="">Inactivos</label>
          </div>
@@ -280,6 +293,8 @@
                         </tr>
                     </thead>
                 </table>
+                <a href="personaCargo.php" id="btnPers" class="btn btn-info" style="margin: 10px">Gestionar personas</a>
+                
                 <button type="button" class="btn btn-danger" id="btnCancelarPersona">Cancelar</button>
 
             </div>

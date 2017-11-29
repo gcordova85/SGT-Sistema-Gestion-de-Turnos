@@ -25,8 +25,20 @@
                 <h3 class="text-center">Personas a cargo</h3>
             </div>
         </div>
-        <div class="form-group text-right">
+        <!-- <div class="form-group text-right">
             <a href="#cargo" id="btnCargo" class="btn btn-info btnModal" data-toggle="modal">Nueva persona</a>
+        </div> -->
+
+        <div class="row" id="fila-botones">
+            <div class="col-md-1"></div>
+            <div class="col-xs-5">
+                <a href="menu.php" id="btnVolver" class="btn btn-barra" style="margin: 10px">Volver</a>
+            </div>
+            <div class="col-xs-5 text-right">
+            <a href="#cargo" id="btnCargo" class="btn  btn-barra" data-toggle="modal">Nueva persona</a>
+
+         </div>
+            <div class="col-md-1 hidden-xs"></div>
         </div>
         <div class="checkbox">
             <label><input id="inactivos" type="checkbox" value="">Inactivos</label>
