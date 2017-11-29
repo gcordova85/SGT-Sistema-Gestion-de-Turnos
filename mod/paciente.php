@@ -267,21 +267,32 @@
                </div> 
             <div class="modal-body">
              
-                <div class="text-right">
-                    <button type="button" id="btnAsignar" class="btn btn-success glyphicon glyphicon-plus"> Asignar</button>
-                </div>
+
+
+
+            <form action="" class="form-inline"> <!-- indica que es un formulario en linea-->
                 
+                    <!-- <div class="form-group"> 
+                        <label class="sr-only" for="nombre">Seleccionar persona:</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre:">
+                    </div> -->
+                    
+                    <div class="form-group">
+                        <div class="input-group"><!--agrupa inputs-->
+                            <select name="persona" id="persona" class="form-control"><option value="">Seleccione una persona</option></select> 
+                            <div class="input-group-addon"><button type="button" id="btnAsignarPersona" class="btn btn-xs btn-success">Asignar</button></div> <!--lo pone al lado-->
+                        </div>
+                    </div>
+        
+    
+                    <a href="personaCargo.php" id="btnPersonas" class="btn  btn-info glyphicon glyphicon-plus"> Gestionar personas a cargo</a>
 
-                <table id="tablaCargo" class="table table-striped table-bordered dt-responsive nowrap">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Teléfono</th>
-                        </tr>
-                    </thead>
-                </table>
+                    <!-- <button class="btn btn-primary">Enviar</button> -->
+                </form>
 
+
+
+           
                 <table id="tablaPacientePersona" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
                         <tr>
@@ -291,10 +302,7 @@
                         </tr>
                     </thead>
                 </table>
-            <div class="text-left">
-                    <a href="personaCargo.php" id="btnPersonas" class="btn btn-success glyphicon glyphicon-plus"> Gestionar personas a cargo</a>
-             </div>
-    
+            
     
             </div>
                 
