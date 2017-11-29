@@ -23,7 +23,11 @@ asignarPersona();
 
 cargarTurnos();
 
-listarPersonaPaciente();
+// listarPersonaPaciente();
+
+// listarPersonas();
+// mostrarPersonas();
+habilitar();
 
 })
 
@@ -450,55 +454,72 @@ function __ajax(url,data){ //funcion general para enviar o traer datos
     return ajax;
 }
 
-
-
-function listarPersonas() {
-    var tabla= $('#tablaPersona').DataTable({
-         ajax: {
-             url: '../inc/getPacientesTodos.php'
-         },
-             columns: [
-             { data: 'persona' },
-             { data: 'dni'},
-             { defaultContent : "<button type='button' class='btnVerMas btn-xs btn btn-success'>Asignar</button>" },
-           ],
-           columnDefs:[
-             {targets: [ 0 ],
-             visible: false,
-             searchable: false},
-             {targets: [ 3 ],
-             visible: false,
-             searchable: true}
-             ],
-          language: idioma_espanol
-     });
- 
- };
-
-
-
- function listarPersonaPaciente() {
+function habilitar() {
+   
+        $("#btnVerMas").on("click",function() {
+            mostrarPersonas();
+        }) 
+}
+function mostrarPersonas() {
     var cargar=true;
-    $("#btnCargo").on("click",function() {
-       if (cargar)  {
-           var idPac=$("#lblId").text();   
-        var tablaTurnos= $('#tablaPacientePersona').DataTable({
-          ajax: {
-              method: "GET",
-              url: "../inc/getPersonaPaciente.php",
-              data: {"idPaciente":idPac},
-          },          
-              columns: [
-              { data: 'persona' }, 
-              { data: 'direccion' },                   
-              { data: 'telefono' }
-            ],
-            
-      });}
-      cargar=false;
-    })
- };
+    
+    if(cargar){
+    var idPac=$("#lblId").text();   
+    var tablaPacientePersona= $('#tablaPacientePersona').DataTable({
+      ajax: {
+          method: "GET",
+          url: "../inc/getPersonaPaciente.php",
+          data: {"idPaciente":idPac},
+      },          
+          columns: [
+          { data: 'persona' }, 
+          { data: 'direccion' },                   
+          { data: 'telefono' }
+        ],
+        "bPaginate": false, 
+        "bLengthChange": false,
+        "bFilter":false,
+        "bInfo":false,
+         
+  });
 
+  var tablaPersona= $('#tablaPersona').DataTable({
+    ajax: {
+        method: "GET",
+        url: "../inc/getPersonaAsignar.php",
+        data: {"idPaciente":idPac},
+    },          
+        columns: [
+        { data: 'persona' }, 
+        { data: 'dni' },  
+        { defaultContent : "<button type='button' class='btnAsignar btn-xs btn btn-success'>Asignar</button>" },
+        
+      ],
+      "bPaginate": false, 
+      "bLengthChange": false,
+      "bFilter":true,
+      "bInfo":false,
+       
+});
+}
+cargar=false;
+    $("#btnCargo").on("click",function() {
+        $("#divPacientePersona").removeClass("hidden");
+        $("#divPersona").addClass("hidden");
+        // tablaPacientePersona.ajax.reload();
+        // tablaPersona.ajax.reload();
+    })
+    $("#btnAsignarNueva").on("click",function() {
+        $("#divPacientePersona").addClass("hidden");
+        $("#divPersona").removeClass("hidden");
+    })
+    $("#btnCancelarPersona").on("click",function() {
+        $("#divPacientePersona").removeClass("hidden");
+        $("#divPersona").addClass("hidden");
+    })
+
+
+}
 
 
 function listar_datos() {
@@ -511,7 +532,7 @@ function listar_datos() {
             { data: 'paciente'},
             { data: 'dni'},
             { data: 'estado'},
-            { defaultContent : "<button type='button' class='btnVerMas btn-xs btn btn-info'>Ver mas</button><a href='#modalEliminar' class='btn-xs btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' ></i></a>" },
+            { defaultContent : "<button type='button' id='btnVerMas' class='btnVerMas btn-xs btn btn-info'>Ver mas</button><a href='#modalEliminar' class='btn-xs btn-tabla btn-eliminar btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' ></i></a>" },
           ],
           columnDefs:[
             {targets: [ 0 ],

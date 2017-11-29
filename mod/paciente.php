@@ -274,20 +274,22 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Apellido</th>
                             <th>DNI</th>
-                            <th>Asignar a paciente</th>
+                            <th></th>
                         </tr>
                     </thead>
                 </table>
+                <button type="button" class="btn btn-danger" id="btnCancelarPersona">Cancelar</button>
+
             </div>
 
-           <div id="divPacientePersona">
-                <table id="tablaPacientePersona" class="table table-striped table-bordered dt-responsive nowrap">
+           <div id="divPacientePersona" class="table-responsive">
+           <button type="button" class="btn btn-info" id="btnAsignarNueva">Asignar nueva</button>
+                <table id="tablaPacientePersona" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Apellido</th>
+                            <th>Direccion</th>
                             <th>Teléfono</th>
                         </tr>
                     </thead>
