@@ -23,6 +23,8 @@ asignarPersona();
 
 cargarTurnos();
 
+listarPersonaPaciente();
+
 })
 
 
@@ -447,6 +449,57 @@ function __ajax(url,data){ //funcion general para enviar o traer datos
     })
     return ajax;
 }
+
+
+
+function listarPersonas() {
+    var tabla= $('#tablaPersona').DataTable({
+         ajax: {
+             url: '../inc/getPacientesTodos.php'
+         },
+             columns: [
+             { data: 'persona' },
+             { data: 'dni'},
+             { defaultContent : "<button type='button' class='btnVerMas btn-xs btn btn-success'>Asignar</button>" },
+           ],
+           columnDefs:[
+             {targets: [ 0 ],
+             visible: false,
+             searchable: false},
+             {targets: [ 3 ],
+             visible: false,
+             searchable: true}
+             ],
+          language: idioma_espanol
+     });
+ 
+ };
+
+
+
+ function listarPersonaPaciente() {
+    var cargar=true;
+    $("#btnCargo").on("click",function() {
+       if (cargar)  {
+           var idPac=$("#lblId").text();   
+        var tablaTurnos= $('#tablaPacientePersona').DataTable({
+          ajax: {
+              method: "GET",
+              url: "../inc/getPersonaPaciente.php",
+              data: {"idPaciente":idPac},
+          },          
+              columns: [
+              { data: 'persona' }, 
+              { data: 'direccion' },                   
+              { data: 'telefono' }
+            ],
+            
+      });}
+      cargar=false;
+    })
+ };
+
+
 
 function listar_datos() {
    var tabla= $('#tablaPacientes').DataTable({

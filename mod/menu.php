@@ -52,14 +52,12 @@
             <a href="abmturnos.php" class="btn-principal btn"><img src="../iconos/turno.png" alt="Turno"><br>Turnos</a>
         </div>
         <?php
-            if($_SESSION['rol'] == 2){
                 
         ?>
         <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <a href="registrarAsistencia.php" class="btn-principal btn"><img src="../iconos/asistencia.png" alt="registro de asistencia"><br>Registrar asistencia</a>
         </div>
         <?php
-            } ;           
         ?>
     </div>
     </div>
