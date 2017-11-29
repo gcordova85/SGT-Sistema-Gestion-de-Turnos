@@ -456,7 +456,7 @@ function __ajax(url,data){ //funcion general para enviar o traer datos
 
 function habilitar() {
    
-        $("#btnVerMas").on("click",function() {
+        $("#btnCargo").on("click",function() {
             mostrarPersonas();
         }) 
 }
