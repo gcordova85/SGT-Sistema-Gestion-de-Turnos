@@ -11,7 +11,17 @@ $sql= "insert into personas_cargo(nombre, apellido, dni, direccion, telefono, es
 $statement = $cnn->prepare($sql);
 
 $respuesta=false;
-//var_dump($personas->{"data"}); 
+
+$enviar=true;
+
+foreach($personas->{"data"} as $persona){
+    $pattern='/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/';   
+    $success = preg_match($pattern, $persona->{"nombre"});
+    if (!$success) {
+        $enviar=false;
+        }
+}
+
 foreach($personas->{"data"} as $persona){
     echo $persona->{"nombre"};  
     $statement->bindParam(1, $persona->{"nombre"},PDO::PARAM_STR); //1,2,3 hacen reperencia a los ? puestos en la consulta
@@ -22,8 +32,12 @@ foreach($personas->{"data"} as $persona){
     $statement->bindParam(6, $persona->{"estado"},PDO::PARAM_INT);
     }
 
-    $respuesta=$statement->execute();
+    if ($enviar){
+        $respuesta=$statement->execute();
+        echo $respuesta;        
+    }else{
+        return "Error";
+    }
     
 
-echo $respuesta;
 
