@@ -19,8 +19,6 @@ guardar();
 
 guardarCambios();
 
-asignarPersona();
-
 cargarTurnos();
 
 // listarPersonaPaciente();
@@ -396,7 +394,7 @@ function alternarPantalla(tabla) {
     $("#btnAcep").on("click",function(){
         mostrarTabla();  
     });
-
+    var motrarPersonas=true;
     $('#tablaPacientes tbody').on( 'click', 'button.btnVerMas',function(){
         mostrarForm(); 
         estadoDetalles();
@@ -426,6 +424,9 @@ function alternarPantalla(tabla) {
                 $("#fileAutoriz").attr("value",persona.data[0].autorizacion);
                 $("#fileCert").attr("value",persona.data[0].certificado);
 
+
+                mostrarPersonas(persona.data[0].id_paciente);    
+
                 if(persona.data[0].estado==1){
                     $("#lblEstado").text("Activo");      
                 }else{
@@ -439,6 +440,18 @@ function alternarPantalla(tabla) {
     
 }
 
+
+
+
+function asignarPersona(tabla){
+    $('#tablaPersona tbody').on( 'click', 'button.btnAsignar', function () { 
+        var data=tabla.row($(this).parents("tr")).data();
+        var id=data.id;
+             setPersonaPaciente("../inc/setPersonaPaciente.php",id);
+             tabla.ajax.reload();
+        })
+
+}
 //********************************************ajax************************************* */
 
 
@@ -457,14 +470,13 @@ function __ajax(url,data){ //funcion general para enviar o traer datos
 function habilitar() {
    
         $("#btnCargo").on("click",function() {
-            mostrarPersonas();
+            // mostrarPersonas();
         }) 
 }
-function mostrarPersonas() {
+function mostrarPersonas(idPac) {
     var cargar=true;
     
     if(cargar){
-    var idPac=$("#lblId").text();   
     var tablaPacientePersona= $('#tablaPacientePersona').DataTable({
       ajax: {
           method: "GET",
@@ -490,24 +502,33 @@ function mostrarPersonas() {
         data: {"idPaciente":idPac},
     },          
         columns: [
+        {data: 'id'},
         { data: 'persona' }, 
         { data: 'dni' },  
         { defaultContent : "<button type='button' class='btnAsignar btn-xs btn btn-success'>Asignar</button>" },
         
       ],
-      "bPaginate": false, 
-      "bLengthChange": false,
+      columnDefs:[
+        {targets: [ 0 ],
+        visible: false,
+        searchable: false},
+        ],
+        language: idioma_espanol,
+        
+      "bPaginate": true, 
+      "bLengthChange": true,
       "bFilter":true,
       "bInfo":false,
        
 });
+asignarPersona(tablaPersona);
 }
 cargar=false;
     $("#btnCargo").on("click",function() {
         $("#divPacientePersona").removeClass("hidden");
         $("#divPersona").addClass("hidden");
-        // tablaPacientePersona.ajax.reload();
-        // tablaPersona.ajax.reload();
+         tablaPacientePersona.ajax.reload();
+         tablaPersona.ajax.reload();
     })
     $("#btnAsignarNueva").on("click",function() {
         $("#divPacientePersona").addClass("hidden");
@@ -647,13 +668,6 @@ function enviarDatos(url) {
 }
 
 
-    function asignarPersona(){
-        $("#btnAsignar").on("click",function(){
-            var id = $("#lblId").text();       
-            $.redirect( "../mod/personaCargo.php");//, { 'id': id} );        
-        })
-        
-    }
 
 
     function bajaPaciente(url,id) {
@@ -672,6 +686,30 @@ function enviarDatos(url) {
     
             // }
             });
+}
+
+
+
+
+
+function setPersonaPaciente(url,idPersona) {
+    var idPac=$("#lblId").text();
+    var data=[]; //creo un json con los datos
+    data.push(  
+        {"idPersona":idPersona,
+        "idPaciente":idPac
+    },
+    );
+    var datos={"data":data};
+    var json= JSON.stringify(datos); //convierto el array de objetos en una cadena json
+    __ajax(url,{"json":json})
+
+     .done(function(info) {
+    //     if(info){//si hay respuesta
+             console.log(info);
+
+        // }
+        });
 }
 
 function cargarTurnos() {
@@ -704,7 +742,13 @@ function cargarTurnos() {
                          } 
                     } 
                 } 
-            ] 
+            ],
+            language: idioma_espanol,
+            
+            "bPaginate": true, 
+            "bLengthChange": true,
+            "bFilter":true,
+            "bInfo":false, 
       });}
       cargar=false;
     })

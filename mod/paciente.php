@@ -273,6 +273,7 @@
                 <table id="tablaPersona" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
                         <tr>
+                            <th>id</th>
                             <th>Nombre</th>
                             <th>DNI</th>
                             <th></th>

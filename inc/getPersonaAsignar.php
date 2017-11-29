@@ -7,7 +7,7 @@ $id = $_REQUEST["idPaciente"];
 
 $conexion = new Conexion();
 $cnn = $conexion->getConexion(); //obtengo conexion
-$sql= "SELECT CONCAT(CONCAT(pc.nombre,', '),pc.apellido) AS persona,pc.dni FROM personas_cargo pc
+$sql= "SELECT pc.id_personaCargo as id, CONCAT(CONCAT(pc.nombre,', '),pc.apellido) AS persona,pc.dni FROM personas_cargo pc
 WHERE pc.id_personaCargo NOT IN (
 SELECT pc.id_personaCargo FROM personas_cargo pc
     INNER JOIN paciente_personacargo pp on pp.id_personaCargo = pc.id_personaCargo
