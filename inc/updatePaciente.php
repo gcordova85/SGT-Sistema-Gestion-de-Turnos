@@ -19,21 +19,55 @@ $fileCert= "certPac".$id.".pdf";
  $cert=false;
  $aut=false;
 
-//  if($_FILES["fileCert"]){
-//     $cert=true;
-//  }
+$enviar=false;
+
+$pattern='/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/';   
+$success = preg_match($pattern, $nombre);
+if (!$success) {
+    echo "Formato de nombre incorrecto";
+    
+    $enviar=false;
+    }
+$success = preg_match($pattern, $apellido);
+if (!$success) {
+    echo "Formato de apellido incorrecto";      
+    $enviar=false;
+}
+if(!filter_var($dni, FILTER_VALIDATE_INT) === 0 || filter_var($dni, FILTER_VALIDATE_INT) === true)
+{
+    echo "Ingresa solo numeros en dni";
+    $enviar=false;
+}
+if(strlen($direccion)<5){
+    echo "La direccion no es valida";
+    $enviar=false;
+}
+
+if(!filter_var($telefono, FILTER_VALIDATE_INT) === 0 || filter_var($telefono, FILTER_VALIDATE_INT) === true)
+{
+    echo "Ingresa solo numeros en telefono";
+    $enviar=false;
+}
+
+
 
  if($_FILES["fileCert"]["type"]=="application/pdf"){
-    // if(file_exists($rutaCert)){
-    //     unlink($rutaCert);
-    // }
+  
     move_uploaded_file($_FILES["fileCert"]["tmp_name"],$rutaCert);
     $cert=true;
+ }else{
+   echo "el archivo no es valido";
+   $enviar=false;
+   
  }
 
  if($_FILES["fileAutoriz"]["type"]=="application/pdf"){
     move_uploaded_file($_FILES["fileAutoriz"]["tmp_name"],$rutaAut);
     $aut=true;
+ }else{
+  echo "el archivo no es valido";
+  $enviar=false;  
+  
  }
 
   $conexion = new Conexion();
@@ -118,9 +152,9 @@ $fileCert= "certPac".$id.".pdf";
     $statement->bindParam(":os",$os, PDO::PARAM_INT);
 }
   
-  $respuesta=$statement->execute();
-  
-  
+if($enviar){
+  $respuesta=$statement->execute();  
+}
   
   echo $respuesta;
    

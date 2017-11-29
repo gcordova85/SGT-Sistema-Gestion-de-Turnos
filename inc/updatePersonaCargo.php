@@ -27,7 +27,7 @@ foreach($personas->{"data"} as $persona){
         echo "Formato de apellido incorrecto";      
         $enviar=false;
     }
-    if(!filter_var($persona->{"dni"}, FILTER_VALIDATE_INT) === 0 || filter_var($persona->{"apellido"}, FILTER_VALIDATE_INT) === true)
+    if(!filter_var($persona->{"dni"}, FILTER_VALIDATE_INT) === 0 || filter_var($persona->{"dni"}, FILTER_VALIDATE_INT) === true)
     {
         echo "Ingresa solo numeros en dni";
         $enviar=false;
@@ -37,7 +37,7 @@ foreach($personas->{"data"} as $persona){
         $enviar=false;
     }
 
-    if(!filter_var($persona->{"telefono"}, FILTER_VALIDATE_INT) === 0 || filter_var($persona->{"apellido"}, FILTER_VALIDATE_INT) === true)
+    if(!filter_var($persona->{"telefono"}, FILTER_VALIDATE_INT) === 0 || filter_var($persona->{"telefono"}, FILTER_VALIDATE_INT) === true)
     {
         echo "Ingresa solo numeros en telefono";
         $enviar=false;

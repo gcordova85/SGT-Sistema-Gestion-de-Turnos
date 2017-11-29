@@ -54,52 +54,52 @@
         <div class="modal-content"> 
 
             <div class="modal-header"> 
-               <button type="button" class="close" data-dismiss="modal" aria-hidden="modal">
+               <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="modal">
                    <span class="glyphicon glyphicon-remove"></span>
-               </button> 
+               </button>  -->
                <h4 class="modal-title text-center">Persona a cargo</h4>
            </div> 
 
           <div class="modal-body">
                <form id="frmModal" action="" method="POST">
 
-                  <div id="divNombrePersona" class="form-group  col-md-6"> 
+                  <div id="divNombrePersona" class="form-group divInput col-md-6"> 
                       <label class="sr-only" for="nombrePersona">Nombre:</label> 
                       <input type="text" class="form-control" id="nombrePersona" placeholder="Nombre:" required>
-                      <div class="alert alert-danger oculto" id="errorNombrePersona">
+                      <div class="alert divError alert-danger oculto" id="errorNombrePersona">
                             <p><b>Ingrese un nombre válido</b></p>
                     </div>
                 </div>
 
-            <div id="divApellidoPersona" class="form-group  col-md-6"> 
+            <div id="divApellidoPersona" class="form-group  divInput col-md-6"> 
                 <label class="sr-only" for="apellidoPersona">Apellido:</label> 
                 <input type="text" class="form-control" id="apellidoPersona" placeholder="Apellido:" required>
-                <div class="alert alert-danger oculto" id="errorApellidoPersona">
+                <div class="alert divError alert-danger oculto" id="errorApellidoPersona">
                         <p><b>Ingrese un apellido válido</b></p>
                 </div>
             </div>
 
-            <div id="divDniPersona" class="form-group  col-md-6"> 
+            <div id="divDniPersona" class="form-group divInput col-md-6"> 
                 <label class="sr-only" for="dniPersona">DNI:</label> 
                 <input type="number" class="form-control" id="dniPersona" placeholder="DNI:" required>
-                <div class="alert alert-danger oculto" id="errorDniPersona">
+                <div class="alert divError alert-danger oculto" id="errorDniPersona">
                         <p><b>Ingrese un DNI válido</b></p>
                  </div>
             </div>
 
 
-            <div id="divTelPersona" class="form-group  col-md-6"> 
-                <label class="sr-only" for="telPersona">DNI:</label> 
+            <div id="divTelPersona" class="form-group divInput col-md-6"> 
+                <label class="sr-only" for="telPersona">Telefono:</label> 
                 <input type="number" class="form-control" id="telPersona" placeholder="Teléfono:" required>
-                <div class="alert alert-danger oculto" id="errorTelPersona">
+                <div class="alert divError alert-danger oculto" id="errorTelPersona">
                         <p><b>Ingrese un teléfono válido</b></p>
                 </div>
             </div>
 
-            <div id="divDireccionPersona" class="form-group  col-md-12"> 
+            <div id="divDireccionPersona" class="form-group divInput col-md-12"> 
                     <label class="sr-only" for="direccionPersona">Dirección:</label> 
                     <input type="text" class="form-control" id="direccionPersona" placeholder="Dirección:" required>
-                    <div class="alert alert-danger oculto" id="errorDireccionPersona">
+                    <div class="alert divError alert-danger oculto" id="errorDireccionPersona">
                             <p><b>Ingrese una dirección</b></p>
                     </div>
             </div>
@@ -110,7 +110,7 @@
             
              <div class="modal-footer">
                     <div class="col-xs-6">
-                            <button type="button" class="btn btn-danger btn-block visible" data-dismiss="modal">Cancelar</button>                           
+                            <button type="button" id="btnCancelar" class="btn btn-danger btn-block visible" data-dismiss="modal">Cancelar</button>                           
                         </div>
                     <div class="col-xs-6">
                          <button type="submit" id="guardarPersona" class="btn btn-success btn-block visible">Guardar</button>

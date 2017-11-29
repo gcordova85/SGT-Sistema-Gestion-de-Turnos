@@ -4,8 +4,145 @@ $(document).ready(function(){
     //guardar();  
     listar();  
     nuevaPersona(); 
+    comprobarForm();  
+    ocultarMsjError();
+    removerErroresTodos();
+    
     
 });
+
+function esValidoNomApe(valor,texto,div) {
+    var filtro=/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/; 
+        if (filtro.test(valor) == false) {
+            texto.fadeIn(700);
+            div.addClass("has-error");
+            return false;
+        }else{           
+            if (div.hasClass("has-error")) {
+                div.removeClass("has-error");       
+            }  
+            //texto.fadeOut(700); 
+            return true;            
+            }                    
+        }
+
+
+/**funcion para validar DNI */
+function esValidoDni(valor,texto,div){
+    if (isNaN(valor) || valor.length < 8 || valor.length > 8) {
+        texto.fadeIn(700);
+        div.addClass("has-error");
+        return false;
+    }else{           
+        if (div.hasClass("has-error")) {
+            div.removeClass("has-error");       
+        }  
+        texto.fadeOut(700); 
+        return true;            
+        }                    
+}
+
+function esValidaDireccion(valor,texto,div){
+    if (valor.length < 10) {
+        texto.fadeIn(700);
+        div.addClass("has-error");
+        return false;
+    }else{           
+        if (div.hasClass("has-error")) {
+            div.removeClass("has-error");       
+        }  
+        texto.fadeOut(700); 
+        return true;            
+        }                    
+}
+
+function esValidoTel(valor,texto,div){
+    if (isNaN(valor) || valor.length < 11 || valor.length > 11) {
+        texto.fadeIn(700);
+        div.addClass("has-error");
+        return false;
+    }else{           
+        if (div.hasClass("has-error")) {
+            div.removeClass("has-error");       
+        }  
+        texto.fadeOut(700); 
+        return true;            
+        }                    
+}
+
+
+function comprobarForm() {
+    $("#guardarPersona").on("click",function(){
+        validarCampos();
+        
+    })
+    $("#cambiosPersona").on("click",function(){
+        validarCampos();
+            
+        
+    })
+}
+
+function removerErroresTodos(){ //remueve todos los mensajes de errores al cancelar la edicion
+    $("#btnCancelar").on("click",function() {
+        $(".divInput").each(function() {
+            if($(this).hasClass("has-error")){
+                $(this).removeClass("has-error");
+            }
+        })
+        $(".divError").each(function(){
+            $(this).fadeOut(700);
+        })
+    })
+}
+
+
+function validarCampos(){
+    var enviar = false;
+    if (
+        esValidoNomApe($("#nombrePersona").val(),$("#errorNombrePersona"),$("#divNombrePersona"))       
+        &&
+        esValidoNomApe($("#apellidoPersona").val(),$("#errorApellidoPersona"),$("#divApellidoPersona"))
+        && 
+        esValidoDni($("#dniPersona").val(),$("#errorDni"),$("#divDniPersona"))
+         && 
+        esValidaDireccion($("#direccionPersona").val(),$("#errorDireccionPersona"),$("#divDireccionPersona"))
+         && 
+        esValidoTel($("#telPersona").val(),$("#errorTelPersona"),$("#divTelPersona"))
+    ){
+        // $("#frmModal").submit(function () {
+        //     return true;            
+        // });    
+     }else{
+        // $("#frmModal").submit(function () {
+        //     return false;            
+        // });         
+    }
+    
+}
+
+function ocultarMsjError(){ //remueve el mensaje al posicionarse en el campo, solo los mensajes sin remover el error del div
+    $("#nombrePersona").on("click",function() {
+        $("#errorNombrePersona").fadeOut(700); 
+    })
+        
+    $("#apellidoPersona").on("click",function() {
+        $("#errorApelidoPersona").fadeOut(700); 
+    })
+ 
+    $("#dniPersona").on("click",function() {
+        $("#errorDniPersona").fadeOut(700); 
+    })
+
+    $("#direccionPersona").on("click",function() {
+        $("#errorDireccionPersona").fadeOut(700); 
+    })
+
+    $("#telPersona").on("click",function() {
+        $("#errorTelPersona").fadeOut(700); 
+    })
+              
+}
 
 
 
@@ -198,6 +335,8 @@ function datos(id){   // obtengo los datos contenidos en los input
 }
 
 function guardarDatos(url){  //al enviar el formulario
+    if(url != ""){  
+        
     $("#frmModal").on("submit",function(){
     var json= JSON.stringify(datos("")); //convierto el array de objetos en una cadena json
     console.log(json);
@@ -214,8 +353,10 @@ function guardarDatos(url){  //al enviar el formulario
      })
 })
 }
+}
 
-function actualizarDatos(url,id){  
+function actualizarDatos(url,id){
+    if(url != ""){  
     $("#frmModal").on("submit",function(){
     var json= JSON.stringify(datos(id)); 
     console.log(json);
@@ -232,6 +373,7 @@ function actualizarDatos(url,id){
     //     }
      })
 })
+}
 }
 
 

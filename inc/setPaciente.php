@@ -37,22 +37,59 @@ $fileCert= "certPac".$id.".pdf";
   $statement = $cnn->prepare($sql);
   $respuesta=false;
   
-  $statement->bindParam(":nombre",$nombre, PDO::PARAM_STR);
-  $statement->bindParam(":apellido",$apellido, PDO::PARAM_STR);
-  $statement->bindParam(":dni",$dni, PDO::PARAM_INT);
-  $statement->bindParam(":direccion",$direccion, PDO::PARAM_STR);
-  $statement->bindParam(":telefono",$telefono);
-  $statement->bindParam(":os",$os, PDO::PARAM_INT);
-  $statement->bindParam(":fileAut",$rutaAut, PDO::PARAM_STR);
-  $statement->bindParam(":fileCert",$rutaCert, PDO::PARAM_STR);
-  $statement->bindParam(":estado",$estado, PDO::PARAM_INT);
-  
 
-  $respuesta=$statement->execute();
+
+  $enviar=false;
   
+  $pattern='/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/';   
+  $success = preg_match($pattern, $nombre);
+  if (!$success) {
+      echo "Formato de nombre incorrecto";
+      
+      $enviar=false;
+      }
+  $success = preg_match($pattern, $apellido);
+  if (!$success) {
+      echo "Formato de apellido incorrecto";      
+      $enviar=false;
+  }
+  if(!filter_var($dni, FILTER_VALIDATE_INT) === 0 || filter_var($dni, FILTER_VALIDATE_INT) === true)
+  {
+      echo "Ingresa solo numeros en dni";
+      $enviar=false;
+  }
+  if(strlen($direccion)<5){
+      echo "La direccion no es valida";
+      $enviar=false;
+  }
   
+  if(!filter_var($telefono, FILTER_VALIDATE_INT) === 0 || filter_var($telefono, FILTER_VALIDATE_INT) === true)
+  {
+      echo "Ingresa solo numeros en telefono";
+      $enviar=false;
+  }
   
-  echo $respuesta;
+  if ($enviar){
+    $statement->bindParam(":nombre",$nombre, PDO::PARAM_STR);
+    $statement->bindParam(":apellido",$apellido, PDO::PARAM_STR);
+    $statement->bindParam(":dni",$dni, PDO::PARAM_INT);
+    $statement->bindParam(":direccion",$direccion, PDO::PARAM_STR);
+    $statement->bindParam(":telefono",$telefono);
+    $statement->bindParam(":os",$os, PDO::PARAM_INT);
+    $statement->bindParam(":fileAut",$rutaAut, PDO::PARAM_STR);
+    $statement->bindParam(":fileCert",$rutaCert, PDO::PARAM_STR);
+    $statement->bindParam(":estado",$estado, PDO::PARAM_INT);
+    
+  
+    $respuesta=$statement->execute();
+    
+    
+    
+    echo $respuesta;
+  }else {
+      echo "error";
+  }
+  
    
    $statement->closeCursor();
    $conexion = null;
