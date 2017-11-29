@@ -19,7 +19,7 @@ $fileCert= "certPac".$id.".pdf";
  $cert=false;
  $aut=false;
 
-$enviar=false;
+$enviar=true;
 
 $pattern='/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/';   
 $success = preg_match($pattern, $nombre);
@@ -55,19 +55,11 @@ if(!filter_var($telefono, FILTER_VALIDATE_INT) === 0 || filter_var($telefono, FI
   
     move_uploaded_file($_FILES["fileCert"]["tmp_name"],$rutaCert);
     $cert=true;
- }else{
-   echo "el archivo no es valido";
-   $enviar=false;
-   
  }
 
  if($_FILES["fileAutoriz"]["type"]=="application/pdf"){
     move_uploaded_file($_FILES["fileAutoriz"]["tmp_name"],$rutaAut);
     $aut=true;
- }else{
-  echo "el archivo no es valido";
-  $enviar=false;  
-  
  }
 
   $conexion = new Conexion();

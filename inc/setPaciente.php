@@ -15,17 +15,23 @@ $fileCert= "certPac".$id.".pdf";
 
  $rutaCert="../data/discapacidad/".$fileCert;
  $rutaAut="../data/autorizacion/".$fileAut;
+
+ $enviar=true;
+ 
  
  if($_FILES["fileCert"]["type"]=="application/pdf"){
     move_uploaded_file($_FILES["fileCert"]["tmp_name"],$rutaCert);    
  }else{
      echo "El certificado de discapacidad ser un archivo pdf";
+     $enviar=false;
  }
 
  if($_FILES["fileAutoriz"]["type"]=="application/pdf"){
     move_uploaded_file($_FILES["fileAutoriz"]["tmp_name"],$rutaAut);    
  }else{
     echo "La autorizacion ser un archivo pdf";
+    $enviar=false;
+    
 }
  
 
@@ -39,7 +45,6 @@ $fileCert= "certPac".$id.".pdf";
   
 
 
-  $enviar=false;
   
   $pattern='/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/';   
   $success = preg_match($pattern, $nombre);

@@ -25,7 +25,7 @@
 
         <div class="row" id="fila-encabezado">
             <div class="col-md-12 navbar">
-                <h3 class="text-center">Reporte de asistencia del dia</h3>
+                <h3 class="text-center">Reporte de asistencia</h3>
             </div>
         </div>
         <?php
