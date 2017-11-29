@@ -16,10 +16,11 @@
 
 </head>
 <body >
-    <div class="container">
+ 
 
     <?php  require_once '../inc/header.php'; 
         ?>
+    <div class="container">
 
 
         <div class="row" id="fila-encabezado">
@@ -32,17 +33,16 @@
     if($_SESSION['rol'] == 2){
         
         ?>
-        <div clas="table-responsive">
-            <table id="tablaReportes" class="table table-striped table-bordered nowrap">
+        <div class="table-responsive">
+            <table id="tablaReportes" class="table table-striped dt-responsive table-bordered nowrap">
                 <thead>
                     <tr>
-                        <th>Nombre</th>    
-                        <th>Apellido</th>
+                        <th>Paciente</th>    
                         <th>Fecha</th>            
                         <th>Profesional</th>
                         <th>Consultorio</th>
                         <th>Hora</th>
-                        <th>Dia</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
             </table>

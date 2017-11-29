@@ -12,18 +12,34 @@ function obtenerAsistencias() {
                         destroy: true,
                         ajax: {
                             type:'POST',
-                            url: '../inc/getTurnosHOY.php',
+                            url: '../inc/getTurnosReporte.php',
                             data:null,
                           },
                           columns: [
-                            { data: 'nombre'},
-                           { data: 'apellido' },
+                            { data: 'paciente'},
                            { data: 'fecha' },
                            { data: 'profesional' },
                            { data: 'consultorio' },
                            { data: 'hora' },
-                           { data: 'dia' },
+                           { data: 'estado' },
                           ],
+                          columnDefs : [
+                            { targets : [5],
+                            render : function (data, type, row) { 
+                                switch(data) {
+                                     case '1' : return 'Ausente'; 
+                                     break; 
+                                     case '2' : return 'Asistió'; 
+                                     break;
+                                     case '0' : return 'Cancelado'; 
+                                     break; 
+                                     default : return 'N/A';
+                                    } 
+                               } 
+                           } 
+                       ], 
+                       language: idioma_espanol
+                       
                         }); 
                 }
                 else{
@@ -37,3 +53,27 @@ function obtenerAsistencias() {
             }
         });
 }
+var idioma_espanol = {
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+};
