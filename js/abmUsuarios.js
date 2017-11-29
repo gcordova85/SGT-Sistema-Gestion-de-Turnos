@@ -168,7 +168,7 @@ function esValidoUsername(valor,texto,div) {
             }                    
 };
 function esValidoPass(valor,texto,div) {
-    var filtro="";
+    var filtro=/[a-zA-Z0-9]{8,}/;
         if (filtro.test(valor) == false) {
             texto.fadeIn(700);
             div.addClass("has-error");
@@ -189,11 +189,11 @@ function alternar_campos(valor){
 }
 function validarCamposNuevo(){
     $("#agregarNuevo").on("click",function(){
-        esValidoNomApe($("#nombreUsuario").val(),$("#errorNom"),$("#div-nombreUsuario"));
-        esValidoNomApe($("#passUsuario").val(),$("#errorPass"),$("#div-passUsuario"));
+        esValidoUsername($("#nombreUsuario").val(),$("#errorNom"),$("#div-nombreUsuario"));
+        // esValidoPass($("#passUsuario").val(),$("#errorPass"),$("#div-passUsuario"));
         esValidoSelect($("#selTipoUsuario").val(),$("#errorTipoUsuario"),$("#div-TipoUsuario"));  
         var url = '../inc/setUsuario.php',
-        id_usuario = $("#nProfesional").val(),
+        id_usuario = $("#nUsuario").val(),
         usuario = $("#nombreUsuario").val(),
         clave = $("#passUsuario").val(),
         tipo_usuario = $("#selTipoUsuario").val(),
@@ -207,12 +207,12 @@ function validarCamposNuevo(){
     })      
 };
 function validarCamposEditar(){
-    $("#agregarNuevo").on("click",function(){
-        esValidoNomApe($("#nombreUsuario").val(),$("#errorNom"),$("#div-nombreUsuario"));
-        esValidoNomApe($("#passUsuario").val(),$("#errorPass"),$("#div-passUsuario"));
+    $("#guardarCambios").on("click",function(){
+        esValidoUsername($("#nombreUsuario").val(),$("#errorNom"),$("#div-nombreUsuario"));
+        // esValidoPass($("#passUsuario").val(),$("#errorPass"),$("#div-passUsuario"));
         esValidoSelect($("#selTipoUsuario").val(),$("#errorTipoUsuario"),$("#div-TipoUsuario"));  
         var url = '../inc/updateUsuario.php',
-        id_usuario = $("#nProfesional").val(),
+        id_usuario = $("#nUsuario").val(),
         usuario = $("#nombreUsuario").val(),
         clave = $("#passUsuario").val(),
         tipo_usuario = $("#selTipoUsuario").val(),
@@ -245,27 +245,4 @@ function removerErroresTodos(){
         })
     })
 }
-function obtenerTiposUsuario() {
-    $.ajax({
-        type: "POST",
-        url: "../inc/getEspecialidades.php",
-        contentType: "application/json; charset=utf-8",
-        data: null,
-        dataType: "json",
-        success: function (result) {
-                $option= $("<option></option>");
-                $option.attr("value",'0');
-                $option.text('Seleccione una opcion');
-                $('#selEspecialidad').append($option);
 
-            $.each(result, function () {
-               $option= $("<option></option>");
-               $option.attr("value",this.id_especialidad);
-               $option.text(this.descripcion);
-               $('#selEspecialidad').append($option);
-            }); 
-        },
-        error: function (xhr, status, error) {
-            alert("ERROR")
-        }
-})};

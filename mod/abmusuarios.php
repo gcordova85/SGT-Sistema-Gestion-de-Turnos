@@ -99,6 +99,10 @@
                                             <div id="div-selTipoUsuario" class="divInput form-group">
                                                 <label for="selTipoUsuario" class="control-label col-form-label">Tipo de usuario:</label>
                                                 <select name="selTipoUsuario" id="selTipoUsuario" class="form-control" required>
+                                                    <option value="">Seleccione tipo</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
                                                 </select>
                                                 <div class="alert alert-danger divError oculto" id="errorTipoUsuario">
                                                     <p><b>Debe seleccionar un tipo de usuario</b></p>
