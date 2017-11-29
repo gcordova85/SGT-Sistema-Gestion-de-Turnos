@@ -43,7 +43,9 @@ function obtenerAsistencias() {
                         }); 
                 }
                 else{
-                    $('#tablaReportes').DataTable();
+                    $('#tablaReportes').DataTable(
+                        {language: idioma_espanol}
+                    );
                 }   
     
             },
