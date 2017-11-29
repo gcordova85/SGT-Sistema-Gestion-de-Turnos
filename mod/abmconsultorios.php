@@ -31,7 +31,7 @@
                 <a href="menu.php" id="btnVolver" class="btn btn-barra" style="margin: 10px">Volver</a>
             </div>
             <div class="col-xs-5 text-right">
-                <button type="button" id="botonNuevo" class="btn btn-barra" data-toggle="modal" data-target="#modalProfesionales" style="margin: 10px">Nuevo</button>
+                <button type="button" id="botonNuevo" class="btn btn-barra" data-toggle="modal" data-target="#modalConsultorios" style="margin: 10px">Nuevo</button>
             </div>
             <div class="col-md-1 hidden-xs"></div>
         </div>

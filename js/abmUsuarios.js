@@ -1,10 +1,10 @@
 $(document).ready(function(){
         listar_datos();
-        // boton_nuevo();
-        // validarCamposNuevo();
-        // validarCamposEditar();
-        // confirmarEliminar();
-        // removerErroresTodos();
+        boton_nuevo();
+        validarCamposNuevo();
+        validarCamposEditar();
+        confirmarEliminar();
+        removerErroresTodos();
     });
 
     function listar_datos(){
@@ -18,12 +18,17 @@ $(document).ready(function(){
             { data: 'usuario' },
             { data: 'clave' },
             { data: 'tipo_usuario' },
-            { defaultContent : "<button type='button' class='editar btn btn-xs btn-warning' data-toggle='modal' data-target='#modalConsultorios'><i class='fa fa-pencil'></i></button>	<button type='button' class='eliminar btn btn-xs btn-danger' data-toggle='modal' data-target='#modalConsultorios' ><i class='fa fa-times'></i></button>" }
+            { defaultContent : "<button type='button' class='editar btn btn-xs btn-warning' data-toggle='modal' data-target='#modalUsuarios'><i class='fa fa-pencil'></i></button>	<button type='button' class='eliminar btn btn-xs btn-danger' data-toggle='modal' data-target='#modalUsuarios' ><i class='fa fa-times'></i></button>" }
             ],
+            columnDefs: [
+                {   targets: [ 0,2],
+                    visible: false,
+                    searchable: false}
+                ],
             language : idioma_espanol
             });
-        // editar_registro('#tablaConsultorios tbody',tabla);
-        // eliminar_registro('#tablaConsultorios tbody',tabla);
+        editar_registro('#tablaUsuarios tbody',tabla);
+        eliminar_registro('#tablaUsuarios tbody',tabla);
 };
 
 var idioma_espanol = {
@@ -50,142 +55,217 @@ var idioma_espanol = {
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
     }
 };
-// function boton_nuevo(){
-//     $("#botonNuevo").on("click", function(){
-//         var b1=$("#agregarNuevo");
-//         var b2=$("#guardarCambios");
-//         var b3=$("#eliminarConsultorio");
-//         var divForm=$("#div-formulario");
-//         var divDel=$("#div-eliminar");
-//         alternar_botones(b1,b2,b3);
-//         alternar_divs(divForm,divDel);
-//         $("#nuevoConsultorio")[0].reset();
-//         $("#titulo-modal").text("Agregar Nuevo Consultorio");
-//     });
-// };
-// function guardar_datos(urlPHP,datos){
-//     $("#nuevoConsultorio").on("submit", function(){
-//         $.ajax({
-//                 method: "POST",
-//                 url: urlPHP,
-//                 data: datos,
-//             }).done(function(info){
-//                 console.log("hola",info);
-//             });
-//         });
-// };
-// function editar_registro(tbody, tabla){
-//     var b1=$("#agregarNuevo");
-//     var b2=$("#guardarCambios");
-//     var b3=$("#eliminarConsultorio");
-//     var divForm=$("#div-formulario");
-//     var divDel=$("#div-eliminar");
-//     $(tbody).on("click", "button.editar", function(){
-//         alternar_campos(false);
-//         alternar_botones(b2,b1,b3);
-//         alternar_divs(divForm,divDel);
-//         $("#nuevoConsultorio")[0].reset();
-//         $("#titulo-modal").text("Editar Consultorio");
-//         var data = tabla.row($(this).parents("tr")).data();
-//         $("#nConsultorio").val(data.id_consultorio);
-//         $("#selUbicacion").val(data.ubicacion);
-//     });
-// };
-// function eliminar_registro(tbody, tabla){
-//     $(tbody).on("click", "button.eliminar", function(){
-//         var b1=$("#agregarNuevo");
-//         var b2=$("#guardarCambios");
-//         var b3=$("#eliminarConsultorio");
-//         var divForm=$("#div-formulario");
-//         var divDel=$("#div-eliminar");
-//         var data = tabla.row($(this).parents("tr")).data();
-//         $("#nuevoConsultorio")[0].reset();
-//         $("#titulo-modal").text("Eliminar Consultorio");
-//         alternar_botones(b3,b1,b2);
-//         if(divDel.hasClass("oculto")){
-//             divDel.removeClass("oculto")
-//         }
-//         $("#nConsultorio").val(data.id_consultorio),
-//         $("#selUbicacion").val(data.ubicacion),
-//         alternar_campos(true);
-//     });
-// };
-// function alternar_botones(boton1,boton2,boton3){
-//     if (boton1.hasClass("oculto")){
-//         boton1.removeClass("oculto")
-//     }
-//     if(!boton2.hasClass("oculto")){
-//         boton2.addClass("oculto")
-//     }
-//     if(!boton3.hasClass("oculto")){
-//         boton3.addClass("oculto")
-//     }
-// };
-// function alternar_divs(div1,div2){
-//     if (div1.hasClass("oculto")){
-//         div1.removeClass("oculto")
-//     }
-//     if (!div2.hasClass("oculto")){
-//         div2.addClass("oculto")
-//     }
-// };
-// function esValidoSelect(valor,texto,div) {
-//     if (valor == "") {
-//         texto.fadeIn(700);
-//         div.addClass("has-error");
-//         return false;
-//     }else{           
-//         if (div.hasClass("has-error")) {
-//             div.removeClass("has-error");       
-//         }  
-//         texto.fadeOut(700); 
-//         return true;            
-//         } 
+function boton_nuevo(){
+    $("#botonNuevo").on("click", function(){
+        var b1=$("#agregarNuevo");
+        var b2=$("#guardarCambios");
+        var b3=$("#eliminarUsuario");
+        var divForm=$("#div-formulario");
+        var divDel=$("#div-eliminar");
+        alternar_botones(b1,b2,b3);
+        alternar_divs(divForm,divDel);
+        $("#nuevoUsuario")[0].reset();
+        $("#titulo-modal").text("Agregar Nuevo Usuario");
+    });
+};
+function guardar_datos(urlPHP,datos){
+    $("#nuevoUsuario").on("submit", function(){
+        $.ajax({
+                method: "POST",
+                url: urlPHP,
+                data: datos,
+            }).done(function(info){
+                console.log("hola",info);
+            });
+        });
+};
+function editar_registro(tbody, tabla){
+    var b1=$("#agregarNuevo");
+    var b2=$("#guardarCambios");
+    var b3=$("#eliminarUsuario");
+    var divForm=$("#div-formulario");
+    var divDel=$("#div-eliminar");
+    $(tbody).on("click", "button.editar", function(){
+        alternar_campos(false);
+        alternar_botones(b2,b1,b3);
+        alternar_divs(divForm,divDel);
+        $("#nuevoUsuario")[0].reset();
+        $("#titulo-modal").text("Editar Usuario");
+        var data = tabla.row($(this).parents("tr")).data();
+        $("#nUsuario").val(data.id_usuario);
+        $("#nombreUsuario").val(data.usuario);
+        $("#passUsuario").val(data.clave);
+        $("#selTipoUsuario").val(data.tipo_usuario);
+
+    });
+};
+function eliminar_registro(tbody, tabla){
+    $(tbody).on("click", "button.eliminar", function(){
+        var b1=$("#agregarNuevo");
+        var b2=$("#guardarCambios");
+        var b3=$("#eliminarUsuario");
+        var divForm=$("#div-formulario");
+        var divDel=$("#div-eliminar");
+        var data = tabla.row($(this).parents("tr")).data();
+        $("#nuevoUsuario")[0].reset();
+        $("#titulo-modal").text("Eliminar Usuario");
+        alternar_botones(b3,b1,b2);
+        if(divDel.hasClass("oculto")){
+            divDel.removeClass("oculto")
+        }
+        $("#nUsuario").val(data.id_usuario);
+        $("#nombreUsuario").val(data.usuario);
+        $("#passUsuario").val(data.clave);
+        $("#selTipoUsuario").val(data.tipo_usuario);
+        alternar_campos(true);
+    });
+};
+function alternar_botones(boton1,boton2,boton3){
+    if (boton1.hasClass("oculto")){
+        boton1.removeClass("oculto")
+    }
+    if(!boton2.hasClass("oculto")){
+        boton2.addClass("oculto")
+    }
+    if(!boton3.hasClass("oculto")){
+        boton3.addClass("oculto")
+    }
+};
+function alternar_divs(div1,div2){
+    if (div1.hasClass("oculto")){
+        div1.removeClass("oculto")
+    }
+    if (!div2.hasClass("oculto")){
+        div2.addClass("oculto")
+    }
+};
+function esValidoSelect(valor,texto,div) {
+    if (valor == "") {
+        texto.fadeIn(700);
+        div.addClass("has-error");
+        return false;
+    }else{           
+        if (div.hasClass("has-error")) {
+            div.removeClass("has-error");       
+        }  
+        texto.fadeOut(700); 
+        return true;            
+        } 
     
-// }
-// function alternar_campos(valor){
-//     $("#selUbicacion").prop("disabled", valor);
-// }
-// function validarCamposNuevo(){
-//     $("#agregarNuevo").on("click",function(){
-//         esValidoSelect($("#selUbicacion").val(),$("#errorUbicacion"),$("#div-ubicacionConsultorio"));  
-//         var url = '../inc/setConsultorios.php',
-//         ubicacion= $("#selUbicacion").val(),
-//         estado = 1
-//         var data={'ubicacion':ubicacion,
-//         'estado':estado};
-//         guardar_datos(url,data);
-//     })      
-// };
-// function validarCamposEditar(){
-//     $("#guardarCambios").on("click",function(){
-//         esValidoSelect($("#selUbicacion").val(),$("#errorUbicacion"),$("#div-ubicacionConsultorio"));  
-//         var url = '../inc/updateConsultorio.php',
-//         id_consultorio = $("#nConsultorio").val(),
-//         ubicacion= $("#selUbicacion").val(),
-//         estado = 1
-//         var data={'id_consultorio':id_consultorio,'ubicacion':ubicacion,
-//         'estado':estado};
-//         guardar_datos(url,data);
-//     })      
-// };
-// function confirmarEliminar(){
-//     $("#eliminarConsultorio").on("click", function(){
-//         var id_consultorio = $("#nConsultorio").val();
-//         var url = '../inc/deleteConsultorio.php',
-//             data={'id_consultorio':id_consultorio}
-//         guardar_datos(url,data)
-//     })
-// }
-// function removerErroresTodos(){
-//     $("#btnCancelar").on("click",function() {
-//         $(".divInput").each(function() {
-//             if($(this).hasClass("has-error")){
-//                 $(this).removeClass("has-error");
-//             }
-//         })
-//         $(".divError").each(function(){
-//             $(this).fadeOut(700);
-//         })
-//     })
-// }
+};
+function esValidoUsername(valor,texto,div) {
+    var filtro=/([A-Za-zñáéíóú]{3,})\s*(([A-Za-zñáéíóú]{3,})){0,1}$/;
+        if (filtro.test(valor) == false) {
+            texto.fadeIn(700);
+            div.addClass("has-error");
+            return false;
+        }else{           
+            if (div.hasClass("has-error")) {
+                div.removeClass("has-error");       
+            }  
+            //texto.fadeOut(700); 
+            return true;            
+            }                    
+};
+function esValidoPass(valor,texto,div) {
+    var filtro="";
+        if (filtro.test(valor) == false) {
+            texto.fadeIn(700);
+            div.addClass("has-error");
+            return false;
+        }else{           
+            if (div.hasClass("has-error")) {
+                div.removeClass("has-error");       
+            }  
+            //texto.fadeOut(700); 
+            return true;            
+            }                    
+};
+function alternar_campos(valor){
+    $("#nUsuario").prop("disabled", valor);
+    $("#nombreUsuario").prop("disabled", valor);
+    $("#passUsuario").prop("disabled", valor);
+    $("#selTipoUsuario").prop("disabled", valor);
+}
+function validarCamposNuevo(){
+    $("#agregarNuevo").on("click",function(){
+        esValidoNomApe($("#nombreUsuario").val(),$("#errorNom"),$("#div-nombreUsuario"));
+        esValidoNomApe($("#passUsuario").val(),$("#errorPass"),$("#div-passUsuario"));
+        esValidoSelect($("#selTipoUsuario").val(),$("#errorTipoUsuario"),$("#div-TipoUsuario"));  
+        var url = '../inc/setUsuario.php',
+        id_usuario = $("#nProfesional").val(),
+        usuario = $("#nombreUsuario").val(),
+        clave = $("#passUsuario").val(),
+        tipo_usuario = $("#selTipoUsuario").val(),
+        estado = 1
+        var data={'id_usuario':id_usuario,
+                    'usuario':usuario,
+                    'clave':clave,
+                    'tipo_usuario':tipo_usuario,
+                    'estado':estado};
+        guardar_datos(url,data);
+    })      
+};
+function validarCamposEditar(){
+    $("#agregarNuevo").on("click",function(){
+        esValidoNomApe($("#nombreUsuario").val(),$("#errorNom"),$("#div-nombreUsuario"));
+        esValidoNomApe($("#passUsuario").val(),$("#errorPass"),$("#div-passUsuario"));
+        esValidoSelect($("#selTipoUsuario").val(),$("#errorTipoUsuario"),$("#div-TipoUsuario"));  
+        var url = '../inc/updateUsuario.php',
+        id_usuario = $("#nProfesional").val(),
+        usuario = $("#nombreUsuario").val(),
+        clave = $("#passUsuario").val(),
+        tipo_usuario = $("#selTipoUsuario").val(),
+        estado = 1
+        var data={'id_usuario':id_usuario,
+                    'usuario':usuario,
+                    'clave':clave,
+                    'tipo_usuario':tipo_usuario,
+                    'estado':estado};
+        guardar_datos(url,data);
+    })    
+};
+function confirmarEliminar(){
+    $("#eliminarUsuario").on("click", function(){
+        var id_usuario = $("#nUsuario").val();
+        var url = '../inc/deleteUsuario.php',
+            data={'id_usuario':id_usuario}
+        guardar_datos(url,data)
+    })
+}
+function removerErroresTodos(){
+    $("#btnCancelar").on("click",function() {
+        $(".divInput").each(function() {
+            if($(this).hasClass("has-error")){
+                $(this).removeClass("has-error");
+            }
+        })
+        $(".divError").each(function(){
+            $(this).fadeOut(700);
+        })
+    })
+}
+function obtenerTiposUsuario() {
+    $.ajax({
+        type: "POST",
+        url: "../inc/getEspecialidades.php",
+        contentType: "application/json; charset=utf-8",
+        data: null,
+        dataType: "json",
+        success: function (result) {
+                $option= $("<option></option>");
+                $option.attr("value",'0');
+                $option.text('Seleccione una opcion');
+                $('#selEspecialidad').append($option);
+
+            $.each(result, function () {
+               $option= $("<option></option>");
+               $option.attr("value",this.id_especialidad);
+               $option.text(this.descripcion);
+               $('#selEspecialidad').append($option);
+            }); 
+        },
+        error: function (xhr, status, error) {
+            alert("ERROR")
+        }
+})};
