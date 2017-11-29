@@ -18,7 +18,7 @@ $(document).ready(function(){
             { data: 'usuario' },
             { data: 'clave' },
             { data: 'tipo_usuario' },
-            { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalConsultorios'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalConsultorios' ><i class='fa fa-trash-o'></i></button>" }
+            { defaultContent : "<button type='button' class='editar btn btn-xs btn-warning' data-toggle='modal' data-target='#modalConsultorios'><i class='fa fa-pencil'></i></button>	<button type='button' class='eliminar btn btn-xs btn-danger' data-toggle='modal' data-target='#modalConsultorios' ><i class='fa fa-times'></i></button>" }
             ],
             language : idioma_espanol
             });

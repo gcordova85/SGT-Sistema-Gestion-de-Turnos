@@ -19,8 +19,7 @@
         <div class="container">
             <?php
                 require_once '../inc/header.php';
-            ?>
-            
+            ?>     
             <div class="row" id="fila-encabezado">
                 <div class="col-md-12 navbar">
                     <h3 class="text-center">ABM de Profesionales</h3>
@@ -29,10 +28,10 @@
             <div class="row" id="fila-botones">
                 <div class="col-md-1"></div>
                 <div class="col-xs-5">
-                    <button type="button" id="botonNuevo" class="btn btn-abm" data-toggle="modal" data-target="#modalProfesionales" style="margin: 10px">Volver</button>
+                    <a href="menu.php" id="btnVolver" class="btn btn-barra" style="margin: 10px">Volver</a>
                 </div>
                 <div class="col-xs-5 text-right">
-                    <button type="button" id="botonNuevo" class="btn btn-abm" data-toggle="modal" data-target="#modalProfesionales" style="margin: 10px">Nuevo</button>
+                    <button type="button" id="botonNuevo" class="btn btn-barra" data-toggle="modal" data-target="#modalProfesionales" style="margin: 10px">Nuevo</button>
                 </div>
                 <div class="col-md-1 hidden-xs"></div>
             </div>
@@ -43,15 +42,15 @@
                         <table id="tablaProfesionales" class="table table-bordered table-condensed">
                             <thead>
                                 <tr>
-                                    <th class="navbar">N° Profesional</th>
-                                    <th class="navbar">Nombre</th>
-                                    <th class="navbar">Apellido</th>
-                                    <th class="navbar">Telefono</th>
-                                    <th class="navbar">Direccion</th>
-                                    <th class="navbar">E-Mail</th>
-                                    <th class="navbar">id_especialidad</th>
-                                    <th class="navbar">Especialidad</th>
-                                    <th class="navbar">Opciones</th>
+                                    <th class="navbar block">N° Profesional</th>
+                                    <th class="navbar block">Nombre</th>
+                                    <th class="navbar block">Apellido</th>
+                                    <th class="navbar block">Telefono</th>
+                                    <th class="navbar block">Direccion</th>
+                                    <th class="navbar block">E-Mail</th>
+                                    <th class="navbar block">id_especialidad</th>
+                                    <th class="navbar block">Especialidad</th>
+                                    <th class="navbar block">Opciones</th>
                                 </tr>
                             </thead>
                         </table>
