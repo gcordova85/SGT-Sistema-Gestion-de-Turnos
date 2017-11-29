@@ -18,12 +18,13 @@ function listar_datos(){
         { data: 'nombre' },
         { data: 'email' },
         { data: 'telefono' },
-        { defaultContent : "<button type='button' class='editar btn btn-primary' data-toggle='modal' data-target='#modalOsociales'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalOsociales' ><i class='fa fa-trash-o'></i></button>" }
+        { defaultContent : "<button type='button' class='editar btn btn-xs btn-warning' data-toggle='modal' data-target='#modalOsociales'><i class='fa fa-pencil'></i></button>	<button type='button' class='eliminar btn btn-xs btn-danger' data-toggle='modal' data-target='#modalOsociales' ><i class='fa fa-times'></i></button>" }
         ],
         columnDefs:[
         {targets: [ 0 ],
         visible: false,
-        searchable: false}
+        searchable: false},
+        { className: "hidden-xs", targets: [ 2,3 ] }
         ],
         language : idioma_espanol
         });
