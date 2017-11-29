@@ -244,7 +244,7 @@ function obtenerHoraByDia(){
                             searchable: false,
 
                         }],*/
-                      languaje: idioma_espanol
+                      language: idioma_espanol
                     }); 
             }
             else{
